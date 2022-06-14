@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://popochiu/Book/sprites/overlay.png" type="Texture" id=1]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform vec4 color1: hint_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform vec4 color2: hint_color = vec4(1.0, 1.0, 1.0, 1.0);
+
+vec4 color_burn(vec4 base, vec4 blend){
+	return 1.0 - (1.0 - base) / blend;
+}
+
+vec4 color_dodge(vec4 base, vec4 blend){
+	return base / (1.0 - blend);
+}
+
+vec4 hard_light(vec4 base, vec4 blend){
+	vec4 limit = step(0.5, blend);
+	return mix(2.0 * base * blend, 1.0 - 2.0 * (1.0 - base) * (1.0 - blend), limit);
+}
+
+
+void fragment()
+{
+	COLOR = color_burn(texture(SCREEN_TEXTURE, SCREEN_UV), color1);
+}
+"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/color1 = Color( 1, 1, 1, 1 )
+shader_param/color2 = Color( 1, 1, 1, 1 )
+
+[node name="ColorBurn" type="TextureRect"]
+material = SubResource( 2 )
+margin_left = -320.0
+margin_top = -180.0
+margin_right = 320.0
+margin_bottom = 180.0
+texture = ExtResource( 1 )

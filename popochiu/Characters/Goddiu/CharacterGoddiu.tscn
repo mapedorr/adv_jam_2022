@@ -1,0 +1,93 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://popochiu/Characters/Goddiu/CharacterGoddiu.gd" type="Script" id=1]
+[ext_resource path="res://popochiu/Characters/Goddiu/sprites/goddiu.png" type="Texture" id=2]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "walk"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 3, 4, 5 ]
+}
+
+[node name="CharacterGoddiu" type="Area2D"]
+scale = Vector2( 2, 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+description = "Goddiu"
+cursor = 8
+script_name = "Goddiu"
+text_color = Color( 0.619608, 0.329412, 0.462745, 1 )
+walk_speed = 100.0
+flips_when = 2
+voices = [ {
+"cue": "vo_goddiu",
+"emotion": "",
+"variations": 3
+} ]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -17, -16, -13, -19, -8, -21, -2, -22, 3, -22, 9, -21, 15, -18, 17, -15, 17, -6, 14, -4, -12, -4, -17, -6 )
+
+[node name="BaselineHelper" type="Line2D" parent="."]
+visible = false
+points = PoolVector2Array( -10000, 0, 10000, 0 )
+width = 1.0
+
+[node name="WalkToHelper" type="Position2D" parent="."]
+visible = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="WalkToHelper"]
+margin_left = -2.5
+margin_top = -2.5
+margin_right = 2.5
+margin_bottom = 2.5
+color = Color( 0, 1, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -14 )
+texture = ExtResource( 2 )
+hframes = 6
+frame = 2
+
+[node name="DialogPos" type="Position2D" parent="."]
+visible = false
+position = Vector2( 0, -25 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../CollisionPolygon2D")
+anims/RESET = SubResource( 1 )
+anims/walk = SubResource( 2 )

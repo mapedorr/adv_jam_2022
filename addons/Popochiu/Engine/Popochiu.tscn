@@ -1,27 +1,32 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://addons/Popochiu/Engine/Objects/TransitionLayer/TransitionLayer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/Popochiu/Engine/Objects/GraphicInterface/GraphicInterface.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/Popochiu/Engine/Popochiu.gd" type="Script" id=3]
-[ext_resource path="res://addons/Popochiu/Engine/Objects/TransitionLayer/TransitionLayer.gd" type="Script" id=4]
-[ext_resource path="res://addons/Popochiu/Engine/Objects/GraphicInterface/GraphicInterface.gd" type="Script" id=5]
 [ext_resource path="res://popochiu/Rooms/Splash/RoomSplash.tres" type="Resource" id=6]
+[ext_resource path="res://popochiu/Rooms/CasaPopochiu/RoomCasaPopochiu.tres" type="Resource" id=7]
+[ext_resource path="res://popochiu/Characters/Goddiu/CharacterGoddiu.tres" type="Resource" id=8]
+[ext_resource path="res://popochiu/InventoryItems/Book/InventoryBook.tres" type="Resource" id=9]
 
 [node name="Popochiu" type="Node"]
 script = ExtResource( 3 )
-rooms = [ ExtResource( 6 ) ]
+rooms = [ ExtResource( 6 ), ExtResource( 7 ) ]
+characters = [ ExtResource( 8 ) ]
+inventory_items = [ ExtResource( 9 ) ]
 skip_cutscene_time = 0.25
 text_speeds = [ 0.05, 0.01, 0.0 ]
+items_on_start = [ "Book" ]
 inventory_limit = 3
+inventory_always_visible = true
 
 [node name="Tween" type="Tween" parent="."]
 
 [node name="MainCamera" type="Camera2D" parent="."]
 current = true
-limit_left = -160
-limit_top = -90
-limit_right = 160
-limit_bottom = 90
+limit_left = -320
+limit_top = -180
+limit_right = 320
+limit_bottom = 180
 limit_smoothed = true
 smoothing_enabled = true
 smoothing_speed = 10.0
@@ -35,11 +40,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="GraphicInterface" type="CanvasLayer" parent="." instance=ExtResource( 2 )]
-layer = 10
-script = ExtResource( 5 )
+[node name="GraphicInterface" parent="." instance=ExtResource( 2 )]
 
-[node name="TransitionLayer" type="CanvasLayer" parent="." instance=ExtResource( 1 )]
-layer = 15
-script = ExtResource( 4 )
+[node name="TransitionLayer" parent="." instance=ExtResource( 1 )]
 fade_color = Color( 0.0808421, 0.075943, 0.0820313, 1 )

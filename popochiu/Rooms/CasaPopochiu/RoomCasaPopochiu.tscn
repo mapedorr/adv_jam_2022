@@ -1,0 +1,103 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://popochiu/Rooms/CasaPopochiu/RoomCasaPopochiu.gd" type="Script" id=1]
+[ext_resource path="res://popochiu/Rooms/CasaPopochiu/Props/Drawer/PropDrawer.gd" type="Script" id=2]
+[ext_resource path="res://addons/Popochiu/Engine/Objects/Prop/PopochiuProp.tscn" type="PackedScene" id=3]
+[ext_resource path="res://popochiu/Rooms/CasaPopochiu/Props/bg.png" type="Texture" id=4]
+[ext_resource path="res://popochiu/Rooms/CasaPopochiu/Props/Book/PropBook.gd" type="Script" id=5]
+[ext_resource path="res://popochiu/Rooms/CasaPopochiu/Props/Book/book.png" type="Texture" id=6]
+[ext_resource path="res://popochiu/Rooms/CasaPopochiu/Props/Book/crystal.png" type="Texture" id=7]
+[ext_resource path="res://popochiu/Characters/Goddiu/CharacterGoddiu.tscn" type="PackedScene" id=8]
+[ext_resource path="res://popochiu/Rooms/CasaPopochiu/Props/Drawer/drawer.png" type="Texture" id=9]
+[ext_resource path="res://popochiu/Rooms/CasaPopochiu/Props/Door/PropDoor.gd" type="Script" id=10]
+[ext_resource path="res://popochiu/Rooms/CasaPopochiu/Props/Door/door.png" type="Texture" id=11]
+[ext_resource path="res://popochiu/Book/Book.tscn" type="PackedScene" id=12]
+
+[sub_resource type="NavigationPolygon" id=1]
+vertices = PoolVector2Array( -170, 115, -229, 53, -206, 43, -146, 62, 123, 127, -68, 59, -65, 38, 171, 48, 209, 94 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 0, 3, 5 ), PoolIntArray( 6, 7, 8, 4, 5 ) ]
+outlines = [ PoolVector2Array( -229, 53, -206, 43, -146, 62, -68, 59, -65, 38, 171, 48, 209, 94, 123, 127, -170, 115 ) ]
+
+[node name="RoomCasaPopochiu" type="Node2D"]
+script = ExtResource( 1 )
+script_name = "CasaPopochiu"
+limit_left = 0.0
+limit_right = 0.0
+limit_top = 0.0
+limit_bottom = 0.0
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="Bg" parent="Props" instance=ExtResource( 3 )]
+scale = Vector2( 2, 2 )
+description = "Bg"
+clickable = false
+cursor = 1
+script_name = "Bg"
+texture = ExtResource( 4 )
+
+[node name="Book" parent="Props" instance=ExtResource( 3 )]
+position = Vector2( -217, -22 )
+scale = Vector2( 2, 2 )
+script = ExtResource( 5 )
+description = "Book"
+walk_to_point = Vector2( 30, 50 )
+cursor = 1
+script_name = "Book"
+texture = ExtResource( 6 )
+
+[node name="Crystal" type="Sprite" parent="Props/Book"]
+position = Vector2( 2.5, -1 )
+texture = ExtResource( 7 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Book"]
+polygon = PoolVector2Array( -1.5, 9, 1.5, 9, 6.5, 3, 4.5, -8, 0.5, -8, -3.5, -3 )
+
+[node name="Drawer" parent="Props" instance=ExtResource( 3 )]
+position = Vector2( -111, 27 )
+scale = Vector2( 2, 2 )
+script = ExtResource( 2 )
+description = "Drawer"
+cursor = 1
+script_name = "Drawer"
+texture = ExtResource( 9 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Drawer"]
+polygon = PoolVector2Array( -16, 15, -19, 12.5, -20, -12.5, 14.5, -16, 16.5, -14, 19, 12.5 )
+
+[node name="Door" parent="Props" instance=ExtResource( 3 )]
+position = Vector2( 167, -6 )
+scale = Vector2( 2, 2 )
+script = ExtResource( 10 )
+description = "Exit"
+cursor = 1
+script_name = "Door"
+texture = ExtResource( 11 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Door"]
+polygon = PoolVector2Array( -15.5, 20.5, -13.5, -23.5, 14.5, -22.5, 16.5, 22.5 )
+
+[node name="Hotspots" type="Node2D" parent="."]
+
+[node name="Regions" type="Node2D" parent="."]
+
+[node name="Points" type="Node2D" parent="."]
+
+[node name="WalkableAreas" type="Node2D" parent="."]
+
+[node name="Navigation2D" type="Navigation2D" parent="WalkableAreas"]
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="WalkableAreas/Navigation2D"]
+navpoly = SubResource( 1 )
+
+[node name="Characters" type="Node2D" parent="."]
+
+[node name="CharacterGoddiu" parent="Characters" instance=ExtResource( 8 )]
+position = Vector2( -5, 96 )
+voices = [ {
+"cue": "vo_goddiu",
+"emotion": "",
+"variations": 3
+} ]
+
+[node name="Book" parent="." instance=ExtResource( 12 )]

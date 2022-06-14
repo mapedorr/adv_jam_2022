@@ -1,9 +1,18 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://addons/Popochiu/Engine/AudioManager/AudioManager.gd" type="Script" id=1]
+[ext_resource path="res://popochiu/Characters/Goddiu/audio/VoGoddiu01.tres" type="Resource" id=2]
+[ext_resource path="res://popochiu/Characters/Goddiu/audio/VoGoddiu02.tres" type="Resource" id=3]
+[ext_resource path="res://popochiu/Characters/Goddiu/audio/VoGoddiu03.tres" type="Resource" id=4]
+[ext_resource path="res://popochiu/Book/audio/SfxCloseBook.tres" type="Resource" id=5]
+[ext_resource path="res://popochiu/Book/audio/SfxTurnPage01.tres" type="Resource" id=6]
+[ext_resource path="res://popochiu/Book/audio/SfxTurnPage02.tres" type="Resource" id=7]
+[ext_resource path="res://popochiu/Book/audio/SfxTurnPage03.tres" type="Resource" id=8]
 
 [node name="AudioManager" type="Node"]
 script = ExtResource( 1 )
+sfx_cues = [ ExtResource( 5 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 7 ), ExtResource( 8 ) ]
+vo_cues = [ ExtResource( 2 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ]
 
 [node name="Positional" type="Node" parent="."]
 

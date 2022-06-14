@@ -225,12 +225,12 @@ anims/pass_down_out = SubResource( 4 )
 [node name="Fade" type="Sprite" parent="Transitions"]
 visible = false
 modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 160, 90 )
-scale = Vector2( 10, 10 )
+position = Vector2( 320, 180 )
+scale = Vector2( 20, 20 )
 texture = ExtResource( 2 )
 
 [node name="Pass" type="Sprite" parent="Transitions"]
 visible = false
-position = Vector2( 160, 90 )
-scale = Vector2( 10, 10 )
+position = Vector2( 320, 180 )
+scale = Vector2( 20, 20 )
 texture = ExtResource( 2 )
