@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://addons/Popochiu/Engine/Objects/GraphicInterface/GraphicInterface.gd" type="Script" id=1]
 [ext_resource path="res://addons/Popochiu/Engine/Objects/GraphicInterface/Resources/PopochiuTheme.tres" type="Theme" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://addons/Popochiu/Engine/Objects/GraphicInterface/DialogMenu/DialogMenu.tscn" type="PackedScene" id=5]
 [ext_resource path="res://addons/Popochiu/Engine/Objects/GraphicInterface/Toolbar/Toolbar.tscn" type="PackedScene" id=6]
 [ext_resource path="res://addons/Popochiu/Engine/Objects/GraphicInterface/History/History.tscn" type="PackedScene" id=7]
+[ext_resource path="res://popochiu/Book/Book.tscn" type="PackedScene" id=8]
 [ext_resource path="res://addons/Popochiu/Engine/Objects/GraphicInterface/InfoBar/InfoBar.tscn" type="PackedScene" id=9]
 [ext_resource path="res://addons/Popochiu/Engine/Objects/GraphicInterface/DisplayBox/DisplayBox.tscn" type="PackedScene" id=11]
 
@@ -70,3 +71,5 @@ __meta__ = {
 }
 
 [node name="History" parent="." instance=ExtResource( 7 )]
+
+[node name="Book" parent="." instance=ExtResource( 8 )]

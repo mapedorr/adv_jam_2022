@@ -1,0 +1,122 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://popochiu/Rooms/LightRoom/RoomLightRoom.gd" type="Script" id=1]
+[ext_resource path="res://addons/Popochiu/Engine/Objects/Prop/PopochiuProp.tscn" type="PackedScene" id=3]
+[ext_resource path="res://popochiu/Rooms/LightRoom/Props/bg.png" type="Texture" id=4]
+[ext_resource path="res://popochiu/Rooms/LightRoom/Props/Switch/PropSwitch.gd" type="Script" id=5]
+[ext_resource path="res://popochiu/Rooms/LightRoom/Props/Switch/switch.png" type="Texture" id=6]
+[ext_resource path="res://popochiu/Rooms/LightRoom/Props/Lamp/PropLamp.gd" type="Script" id=7]
+[ext_resource path="res://popochiu/Rooms/LightRoom/Props/Lamp/lamp.png" type="Texture" id=8]
+[ext_resource path="res://popochiu/Rooms/LightRoom/Props/Exit/PropExit.gd" type="Script" id=9]
+[ext_resource path="res://popochiu/Rooms/LightRoom/Props/Exit/exit.png" type="Texture" id=10]
+
+[sub_resource type="NavigationPolygon" id=1]
+vertices = PoolVector2Array( -3, 8, 48, 17, -4, 94, -102, 65 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( -102, 65, -4, 94, 48, 17, -3, 8 ) ]
+
+[node name="RoomLightRoom" type="Node2D"]
+script = ExtResource( 1 )
+script_name = "LightRoom"
+limit_left = 0.0
+limit_right = 0.0
+limit_top = 0.0
+limit_bottom = 0.0
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="Bg" parent="Props" instance=ExtResource( 3 )]
+scale = Vector2( 2, 2 )
+description = "Bg"
+clickable = false
+baseline = -90
+cursor = 1
+script_name = "Bg"
+texture = ExtResource( 4 )
+
+[node name="Switch" parent="Props" instance=ExtResource( 3 )]
+position = Vector2( 38, -11 )
+scale = Vector2( 2, 2 )
+script = ExtResource( 5 )
+description = "Switch"
+baseline = -90
+walk_to_point = Vector2( -12, 18 )
+cursor = 1
+script_name = "Switch"
+texture = ExtResource( 6 )
+
+[node name="BaselineHelper" parent="Props/Switch" index="0"]
+visible = false
+position = Vector2( 0, -90 )
+
+[node name="WalkToHelper" parent="Props/Switch" index="1"]
+visible = false
+position = Vector2( -12, 18 )
+
+[node name="Sprite" parent="Props/Switch" index="2"]
+texture = ExtResource( 6 )
+hframes = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Switch"]
+polygon = PoolVector2Array( -4, 2.5, 0, 4.5, 3, 4.5, 4, 3.5, 4, -2.5, 3, -3.5, 0, -4.5, -3, -4.5, -4, -3.5 )
+
+[node name="Lamp" parent="Props" instance=ExtResource( 3 )]
+position = Vector2( 7, 3 )
+scale = Vector2( 2, 2 )
+script = ExtResource( 7 )
+description = "Lamp"
+baseline = 16
+walk_to_point = Vector2( -20, 16 )
+cursor = 1
+script_name = "Lamp"
+texture = ExtResource( 8 )
+
+[node name="BaselineHelper" parent="Props/Lamp" index="0"]
+visible = false
+position = Vector2( 0, 16 )
+
+[node name="WalkToHelper" parent="Props/Lamp" index="1"]
+visible = false
+position = Vector2( -20, 16 )
+
+[node name="Sprite" parent="Props/Lamp" index="2"]
+texture = ExtResource( 8 )
+hframes = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Lamp"]
+polygon = PoolVector2Array( -6.5, 18, 2.5, 20, 6.5, 17, 5.5, 15, 1.5, 14, 1.5, -11, 0.5, -12, -1.5, -12, -2.5, -11, -2.5, 14, -3.5, 14 )
+
+[node name="Exit" parent="Props" instance=ExtResource( 3 )]
+modulate = Color( 1, 1, 1, 0.247059 )
+position = Vector2( -63, 31 )
+scale = Vector2( 2, 2 )
+script = ExtResource( 9 )
+description = "Exit"
+cursor = 1
+script_name = "Exit"
+always_on_top = true
+texture = ExtResource( 10 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Exit"]
+polygon = PoolVector2Array( -15.5, 23.5, -16.5, -33.5, 17.5, -25.5, 19, 35 )
+
+[node name="Hotspots" type="Node2D" parent="."]
+
+[node name="Regions" type="Node2D" parent="."]
+
+[node name="Points" type="Node2D" parent="."]
+
+[node name="Entrance" type="Position2D" parent="Points"]
+position = Vector2( -24, 66 )
+
+[node name="WalkableAreas" type="Node2D" parent="."]
+
+[node name="Navigation2D" type="Navigation2D" parent="WalkableAreas"]
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="WalkableAreas/Navigation2D"]
+navpoly = SubResource( 1 )
+
+[node name="Characters" type="Node2D" parent="."]
+
+[editable path="Props/Switch"]
+[editable path="Props/Lamp"]

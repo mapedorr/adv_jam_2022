@@ -1,0 +1,140 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://popochiu/Rooms/Toyshop/RoomToyshop.gd" type="Script" id=1]
+[ext_resource path="res://addons/Popochiu/Engine/Objects/Prop/PopochiuProp.tscn" type="PackedScene" id=3]
+[ext_resource path="res://popochiu/Rooms/Toyshop/Props/bg.png" type="Texture" id=4]
+[ext_resource path="res://popochiu/Rooms/Toyshop/Props/Arcade/PropArcade.gd" type="Script" id=5]
+[ext_resource path="res://popochiu/Rooms/Toyshop/Props/Arcade/arcade.png" type="Texture" id=6]
+[ext_resource path="res://popochiu/Rooms/Toyshop/Props/FreeItems/PropFreeItems.gd" type="Script" id=7]
+[ext_resource path="res://popochiu/Rooms/Toyshop/Props/FreeItems/free_items.png" type="Texture" id=8]
+[ext_resource path="res://popochiu/Rooms/Toyshop/Props/Shelf/PropShelf.gd" type="Script" id=9]
+[ext_resource path="res://popochiu/Rooms/Toyshop/Props/Shelf/shelf.png" type="Texture" id=10]
+[ext_resource path="res://addons/Popochiu/Engine/Objects/Hotspot/PopochiuHotspot.tscn" type="PackedScene" id=11]
+[ext_resource path="res://popochiu/Rooms/Toyshop/Hotspots/Exit/HotspotExit.gd" type="Script" id=12]
+[ext_resource path="res://popochiu/Rooms/Toyshop/Hotspots/Curtain/HotspotCurtain.gd" type="Script" id=13]
+
+[sub_resource type="NavigationPolygon" id=1]
+vertices = PoolVector2Array( -10, 147, 228, 169, -246, 167, -206, 146, 137, 72, 187, 33, 304, 76, 115, 114, -202, 34, 42, 69, 19, 111, -21, 101, -196, 100, -255, 99, -235, 52 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 6, 1, 7 ), PoolIntArray( 8, 5, 4, 9 ), PoolIntArray( 8, 9, 10, 11 ), PoolIntArray( 12, 3, 2, 13, 14, 8 ), PoolIntArray( 7, 1, 0, 10 ), PoolIntArray( 10, 0, 11 ), PoolIntArray( 8, 11, 12 ) ]
+outlines = [ PoolVector2Array( -202, 34, -235, 52, -255, 99, -246, 167, 228, 169, 304, 76, 187, 33 ), PoolVector2Array( -206, 146, -10, 147, -21, 101, -196, 100 ), PoolVector2Array( 19, 111, 115, 114, 137, 72, 42, 69 ) ]
+
+[node name="RoomToyshop" type="Node2D"]
+script = ExtResource( 1 )
+script_name = "Toyshop"
+limit_left = 0.0
+limit_right = 0.0
+limit_top = 0.0
+limit_bottom = 0.0
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="Bg" parent="Props" instance=ExtResource( 3 )]
+scale = Vector2( 2, 2 )
+description = "Bg"
+clickable = false
+baseline = -90
+cursor = 1
+script_name = "Bg"
+texture = ExtResource( 4 )
+
+[node name="Arcade" parent="Props" instance=ExtResource( 3 )]
+position = Vector2( -253, -6 )
+scale = Vector2( 2, 2 )
+script = ExtResource( 5 )
+description = "Arcade"
+walk_to_point = Vector2( 18, 32 )
+cursor = 1
+script_name = "Arcade"
+texture = ExtResource( 6 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Arcade"]
+polygon = PoolVector2Array( -13, 25, -15.5, -1, -10.5, -5.5, -10.5, -14, -13.5, -18.5, -13.5, -25, -2.5, -30, 20.5, -30, 19.5, 19, 10.5, 25 )
+
+[node name="FreeItems" parent="Props" instance=ExtResource( 3 )]
+position = Vector2( 81, 59 )
+scale = Vector2( 2, 2 )
+script = ExtResource( 7 )
+description = "Free items"
+baseline = 15
+walk_to_point = Vector2( 16, 32 )
+cursor = 1
+script_name = "FreeItems"
+texture = ExtResource( 8 )
+
+[node name="BaselineHelper" parent="Props/FreeItems" index="0"]
+visible = false
+position = Vector2( 0, 15 )
+
+[node name="WalkToHelper" parent="Props/FreeItems" index="1"]
+visible = false
+position = Vector2( 16, 32 )
+
+[node name="Sprite" parent="Props/FreeItems" index="2"]
+texture = ExtResource( 8 )
+hframes = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/FreeItems"]
+polygon = PoolVector2Array( -19, 20.5, -24, -21, -16, -24, -5, -17, -3, -21, -1, -21, 4, -11, 6, -10, 6, -14, 7, -16, 9, -16, 10, -12, 10, -10, 17, -10, 18, 14, 14, 22, -3, 22 )
+
+[node name="Shelf" parent="Props" instance=ExtResource( 3 )]
+position = Vector2( -109, 95 )
+scale = Vector2( 2, 2 )
+script = ExtResource( 9 )
+description = "Shelf"
+baseline = 11
+cursor = 1
+script_name = "Shelf"
+texture = ExtResource( 10 )
+
+[node name="MemoryViewer" type="CollisionPolygon2D" parent="Props/Shelf"]
+polygon = PoolVector2Array( -32, -8.5, -31, -7.5, -22, -7.5, -21, -8.5, -21, -15.5, -22, -16.5, -24, -16.5, -25, -17.5, -23, -21.5, -30, -21.5, -28, -17.5, -29, -16.5, -31, -16.5, -32, -15.5 )
+
+[node name="Holomap" type="CollisionPolygon2D" parent="Props/Shelf"]
+polygon = PoolVector2Array( -4, -7.5, -5, -8.5, -5, -11.5, -4, -13.5, -7, -17.5, -5, -22.5, -2, -24.5, 2, -24.5, 5, -22.5, 7, -24.5, 9, -24.5, 10, -22.5, 9, -15.5, 5, -12.5, 5, -8.5, 4, -7.5 )
+
+[node name="GarllicAcid" type="CollisionPolygon2D" parent="Props/Shelf"]
+polygon = PoolVector2Array( 25, -8.5, 22, -11.5, 22, -18.5, 24, -23.5, 27, -26.5, 28, -26.5, 31, -23.5, 33, -18.5, 33, -11.5, 30, -8.5 )
+
+[node name="Hotspots" type="Node2D" parent="."]
+
+[node name="Exit" parent="Hotspots" instance=ExtResource( 11 )]
+script = ExtResource( 12 )
+description = "Exit"
+walk_to_point = Vector2( 0, 45 )
+cursor = 1
+script_name = "Exit"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hotspots/Exit"]
+polygon = PoolVector2Array( -174, 32, -174, -78, 92, -78, 92, 32 )
+
+[node name="Curtain" parent="Hotspots" instance=ExtResource( 11 )]
+position = Vector2( 249, -5 )
+script = ExtResource( 13 )
+description = "Light room"
+walk_to_point = Vector2( -24, 66 )
+cursor = 1
+script_name = "Curtain"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hotspots/Curtain"]
+polygon = PoolVector2Array( -29, -65, -27, 49, 41, 73, 37, -50 )
+
+[node name="Regions" type="Node2D" parent="."]
+
+[node name="Points" type="Node2D" parent="."]
+
+[node name="Entrance" type="Position2D" parent="Points"]
+position = Vector2( -14, 49 )
+
+[node name="LightRoom" type="Position2D" parent="Points"]
+position = Vector2( 225, 61 )
+
+[node name="WalkableAreas" type="Node2D" parent="."]
+
+[node name="Navigation2D" type="Navigation2D" parent="WalkableAreas"]
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="WalkableAreas/Navigation2D"]
+navpoly = SubResource( 1 )
+
+[node name="Characters" type="Node2D" parent="."]
+
+[editable path="Props/FreeItems"]

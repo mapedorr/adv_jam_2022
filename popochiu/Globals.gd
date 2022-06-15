@@ -16,6 +16,10 @@ enum PAGE_CODES {
 	LOCATIONS
 }
 
+const STATE := {
+	LAIR_DISCOVERED = false # false
+}
+
 var found_pages := {
 	0: true, # true
 	1: false, # false

@@ -1,6 +1,8 @@
 tool
 extends PopochiuRoom
 
+const COLOR_BURN := Color('9e5476')
+
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ GODOT ░░░░
 # TODO: Overwrite Godot's methods
@@ -10,7 +12,8 @@ extends PopochiuRoom
 # What happens when Popochiu loads the room. At this point the room is in the
 # tree but it is not visible
 func on_room_entered() -> void:
-	yield(E.run([]), 'completed')
+	if not Globals.STATE.LAIR_DISCOVERED:
+		get_prop('Lair').disable(false)
 
 
 # What happens when the room changing transition finishes. At this point the room

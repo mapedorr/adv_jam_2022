@@ -1,13 +1,15 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://popochiu/Rooms/Map/RoomMap.gd" type="Script" id=1]
-[ext_resource path="res://addons/Popochiu/Engine/Objects/Prop/PopochiuProp.gd" type="Script" id=2]
+[ext_resource path="res://popochiu/Rooms/Map/Hotspots/Toyshop/HotspotToyshop.gd" type="Script" id=2]
 [ext_resource path="res://addons/Popochiu/Engine/Objects/Prop/PopochiuProp.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/Popochiu/Engine/Objects/Hotspot/PopochiuHotspot.tscn" type="PackedScene" id=4]
 [ext_resource path="res://popochiu/Rooms/Map/Hotspots/CasaPopochiu/HotspotCasaPopochiu.gd" type="Script" id=5]
 [ext_resource path="res://popochiu/Rooms/Map/Props/bg.png" type="Texture" id=6]
 [ext_resource path="res://popochiu/Rooms/Map/Hotspots/Drugstore/HotspotDrugstore.gd" type="Script" id=7]
 [ext_resource path="res://popochiu/Rooms/Map/Hotspots/Cave/HotspotCave.gd" type="Script" id=8]
+[ext_resource path="res://popochiu/Rooms/Map/Props/Lair/PropLair.gd" type="Script" id=9]
+[ext_resource path="res://popochiu/Rooms/Map/Props/Lair/lair.png" type="Texture" id=10]
 
 [node name="RoomMap" type="Node2D"]
 script = ExtResource( 1 )
@@ -20,21 +22,29 @@ limit_bottom = 0.0
 
 [node name="Props" type="Node2D" parent="."]
 
-[node name="Bg" type="Area2D" parent="Props" instance=ExtResource( 3 )]
+[node name="Bg" parent="Props" instance=ExtResource( 3 )]
 scale = Vector2( 2, 2 )
-script = ExtResource( 2 )
-__meta__ = {
-"_editor_description_": ""
-}
 description = "Bg"
 clickable = false
 cursor = 1
 script_name = "Bg"
 texture = ExtResource( 6 )
 
+[node name="Lair" parent="Props" instance=ExtResource( 3 )]
+position = Vector2( 169, -111 )
+scale = Vector2( 2, 2 )
+script = ExtResource( 9 )
+description = "Roberto's lair"
+cursor = 1
+script_name = "Lair"
+texture = ExtResource( 10 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Lair"]
+polygon = PoolVector2Array( -8, 10, -8, 2, -9, 2, -9, -6, -1, -10, 1, -10, 9, -6, 9, 2, 8, 2, 8, 10 )
+
 [node name="Hotspots" type="Node2D" parent="."]
 
-[node name="CasaPopochiu" type="Area2D" parent="Hotspots" instance=ExtResource( 4 )]
+[node name="CasaPopochiu" parent="Hotspots" instance=ExtResource( 4 )]
 position = Vector2( -226, 59 )
 script = ExtResource( 5 )
 description = "CasaPopochiu"
@@ -44,8 +54,8 @@ script_name = "CasaPopochiu"
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hotspots/CasaPopochiu"]
 polygon = PoolVector2Array( -20, 31, -20, -49, 20, -49, 20, 31 )
 
-[node name="Drugstore" type="Area2D" parent="Hotspots" instance=ExtResource( 4 )]
-position = Vector2( -82, 70 )
+[node name="Drugstore" parent="Hotspots" instance=ExtResource( 4 )]
+position = Vector2( 146, 8 )
 script = ExtResource( 7 )
 description = "Drugstore"
 cursor = 1
@@ -54,7 +64,7 @@ script_name = "Drugstore"
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hotspots/Drugstore"]
 polygon = PoolVector2Array( -16, 20, -16, -24, 14, -24, 14, -10, 24, -4, 24, 8, 14, 20 )
 
-[node name="Cave" type="Area2D" parent="Hotspots" instance=ExtResource( 4 )]
+[node name="Cave" parent="Hotspots" instance=ExtResource( 4 )]
 position = Vector2( -199, -152 )
 script = ExtResource( 8 )
 description = "Cave"
@@ -63,6 +73,15 @@ script_name = "Cave"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hotspots/Cave"]
 polygon = PoolVector2Array( -9, 6, -9, -8, 7, -8, 7, 6 )
+
+[node name="Toyshop" parent="Hotspots" instance=ExtResource( 4 )]
+script = ExtResource( 2 )
+description = "Toyshop"
+cursor = 1
+script_name = "Toyshop"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hotspots/Toyshop"]
+polygon = PoolVector2Array( -98, 90, -97, 4, -52, 4, -52, 90 )
 
 [node name="Regions" type="Node2D" parent="."]
 

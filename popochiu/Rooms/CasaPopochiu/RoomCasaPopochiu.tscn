@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://popochiu/Rooms/CasaPopochiu/RoomCasaPopochiu.gd" type="Script" id=1]
 [ext_resource path="res://popochiu/Rooms/CasaPopochiu/Props/Drawer/PropDrawer.gd" type="Script" id=2]
@@ -11,7 +11,6 @@
 [ext_resource path="res://popochiu/Rooms/CasaPopochiu/Props/Drawer/drawer.png" type="Texture" id=9]
 [ext_resource path="res://popochiu/Rooms/CasaPopochiu/Props/Door/PropDoor.gd" type="Script" id=10]
 [ext_resource path="res://popochiu/Rooms/CasaPopochiu/Props/Door/door.png" type="Texture" id=11]
-[ext_resource path="res://popochiu/Book/Book.tscn" type="PackedScene" id=12]
 [ext_resource path="res://popochiu/Characters/Popsy/CharacterPopsy.tscn" type="PackedScene" id=13]
 [ext_resource path="res://popochiu/Characters/Trapusinsiu/CharacterTrapusinsiu.tscn" type="PackedScene" id=14]
 
@@ -39,10 +38,8 @@ script_name = "Bg"
 texture = ExtResource( 4 )
 
 [node name="Book" parent="Props" instance=ExtResource( 3 )]
-visible = false
 position = Vector2( -217, -22 )
 scale = Vector2( 2, 2 )
-input_pickable = false
 script = ExtResource( 5 )
 description = "Book"
 walk_to_point = Vector2( 30, 50 )
@@ -115,5 +112,3 @@ position = Vector2( 94, 86 )
 
 [node name="CharacterTrapusinsiu" parent="Characters" instance=ExtResource( 14 )]
 position = Vector2( -1, 52 )
-
-[node name="Book" parent="." instance=ExtResource( 12 )]
