@@ -1,0 +1,143 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://popochiu/Rooms/Office/RoomOffice.gd" type="Script" id=1]
+[ext_resource path="res://addons/Popochiu/Engine/Objects/Prop/PopochiuProp.gd" type="Script" id=2]
+[ext_resource path="res://addons/Popochiu/Engine/Objects/Prop/PopochiuProp.tscn" type="PackedScene" id=3]
+[ext_resource path="res://popochiu/Rooms/Office/Props/bg.png" type="Texture" id=4]
+[ext_resource path="res://popochiu/Rooms/Office/Props/Freezer/PropFreezer.gd" type="Script" id=5]
+[ext_resource path="res://popochiu/Rooms/Office/Props/Freezer/freezer.png" type="Texture" id=6]
+[ext_resource path="res://popochiu/Rooms/Office/Props/Translator/PropTranslator.gd" type="Script" id=7]
+[ext_resource path="res://popochiu/Rooms/Office/Props/Translator/translator.png" type="Texture" id=8]
+[ext_resource path="res://popochiu/Rooms/Office/Props/Desk/PropDesk.gd" type="Script" id=9]
+[ext_resource path="res://popochiu/Rooms/Office/Props/Desk/desk.png" type="Texture" id=10]
+[ext_resource path="res://popochiu/Rooms/Office/Props/Note/PropNote.gd" type="Script" id=11]
+[ext_resource path="res://addons/Popochiu/Engine/Objects/Hotspot/PopochiuHotspot.tscn" type="PackedScene" id=12]
+[ext_resource path="res://popochiu/Rooms/Office/Props/Note/note.png" type="Texture" id=13]
+[ext_resource path="res://popochiu/Rooms/Office/Hotspots/Exit/HotspotExit.gd" type="Script" id=14]
+
+[sub_resource type="NavigationPolygon" id=1]
+vertices = PoolVector2Array( 144, 112, 176, 120, 9, 162, 9, 139, -78, -24, -42, -21, -54, 9, 113, -7, 172, -1, 78, 87, 51, 26, -53, 114, -229, 108, -271, 6 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 6 ), PoolIntArray( 7, 8, 1, 0, 9, 10 ), PoolIntArray( 11, 12, 13, 4, 6 ), PoolIntArray( 3, 2, 12, 11 ), PoolIntArray( 9, 11, 6, 10 ) ]
+outlines = [ PoolVector2Array( -271, 6, -78, -24, -42, -21, -54, 9, 51, 26, 113, -7, 172, -1, 176, 120, 9, 162, -229, 108 ), PoolVector2Array( -53, 114, 9, 139, 144, 112, 78, 87 ) ]
+
+[node name="RoomOffice" type="Node2D"]
+script = ExtResource( 1 )
+script_name = "Office"
+limit_left = 0.0
+limit_right = 0.0
+limit_top = 0.0
+limit_bottom = 0.0
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="Bg" type="Area2D" parent="Props" instance=ExtResource( 3 )]
+scale = Vector2( 2, 2 )
+script = ExtResource( 2 )
+__meta__ = {
+"_editor_description_": ""
+}
+description = "Bg"
+clickable = false
+baseline = -90
+cursor = 1
+script_name = "Bg"
+texture = ExtResource( 4 )
+
+[node name="Freezer" type="Area2D" parent="Props" instance=ExtResource( 3 )]
+position = Vector2( 16, -29 )
+scale = Vector2( 2, 2 )
+script = ExtResource( 5 )
+__meta__ = {
+"_editor_description_": ""
+}
+description = "New model"
+baseline = 19
+walk_to_point = Vector2( 34, 22 )
+cursor = 1
+script_name = "Freezer"
+texture = ExtResource( 6 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Freezer"]
+polygon = PoolVector2Array( -26, 17, -28, -17, -24, -24, -16, -24, 21, -18, 25, -11, 27, 19, 17, 24 )
+
+[node name="Translator" type="Area2D" parent="Props" instance=ExtResource( 3 )]
+visible = false
+position = Vector2( 19, 106 )
+scale = Vector2( 2, 2 )
+input_pickable = false
+script = ExtResource( 7 )
+__meta__ = {
+"_editor_description_": ""
+}
+description = "Translator"
+walk_to_point = Vector2( 0, -10 )
+cursor = 1
+script_name = "Translator"
+texture = ExtResource( 8 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Translator"]
+polygon = PoolVector2Array( -7, 1, -7, -2, -3, -5, 3, -5, 7, -2, 7, 1, 4, 3, -4, 3 )
+
+[node name="Desk" type="Area2D" parent="Props" instance=ExtResource( 3 )]
+position = Vector2( 34, 88 )
+scale = Vector2( 2, 2 )
+script = ExtResource( 9 )
+__meta__ = {
+"_editor_description_": ""
+}
+description = "Desk"
+baseline = 11
+walk_to_point = Vector2( 20, 20 )
+cursor = 1
+script_name = "Desk"
+texture = ExtResource( 10 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Desk"]
+polygon = PoolVector2Array( -33, 13.5, -35, -10.5, 13, -19.5, 35, -11.5, 34, 11.5, -12, 19.5, -18, 19.5 )
+
+[node name="Note" type="Area2D" parent="Props" instance=ExtResource( 3 )]
+position = Vector2( 37, 66 )
+scale = Vector2( 2, 2 )
+script = ExtResource( 11 )
+__meta__ = {
+"_editor_description_": ""
+}
+description = "Note"
+baseline = 22
+walk_to_point = Vector2( 19, 31 )
+cursor = 1
+script_name = "Note"
+always_on_top = true
+texture = ExtResource( 13 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Note"]
+polygon = PoolVector2Array( -8, -0.5, -2, 2.5, 8, 0.5, 8, -0.5, 2, -3.5, -8, -1.5 )
+
+[node name="Hotspots" type="Node2D" parent="."]
+
+[node name="Exit" type="Area2D" parent="Hotspots" instance=ExtResource( 12 )]
+position = Vector2( -196, -56 )
+script = ExtResource( 14 )
+description = "Exit"
+walk_to_point = Vector2( 30, 56 )
+cursor = 1
+script_name = "Exit"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hotspots/Exit"]
+polygon = PoolVector2Array( -30, 46, -36, -24, -20, -48, -10, -52, 12, -52, 26, -42, 32, -16, 34, 38 )
+
+[node name="Regions" type="Node2D" parent="."]
+
+[node name="Points" type="Node2D" parent="."]
+
+[node name="Entrance" type="Position2D" parent="Points"]
+position = Vector2( -85, 42 )
+
+[node name="WalkableAreas" type="Node2D" parent="."]
+
+[node name="Navigation2D" type="Navigation2D" parent="WalkableAreas"]
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="WalkableAreas/Navigation2D"]
+navpoly = SubResource( 1 )
+
+[node name="Characters" type="Node2D" parent="."]

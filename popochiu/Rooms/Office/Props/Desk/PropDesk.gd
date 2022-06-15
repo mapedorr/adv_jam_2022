@@ -1,5 +1,5 @@
 tool
-extends PopochiuHotspot
+extends PopochiuProp
 # You can use E.run([]) to trigger a sequence of events.
 # Use yield(E.run([]), 'completed') if you want to pause the excecution of
 # the function until the sequence of events finishes.
@@ -8,8 +8,9 @@ extends PopochiuHotspot
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ VIRTUAL ░░░░
 # When the node is clicked
 func on_interact() -> void:
-	yield(C.walk_to_clicked(false), 'completed')
-	E.goto_room('Map')
+	# Replace the call to .on_interact() to implement your code. This only makes
+	# the default behavior to happen.
+	.on_interact()
 
 
 # When the node is right clicked
