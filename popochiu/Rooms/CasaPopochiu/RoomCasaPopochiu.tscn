@@ -39,8 +39,10 @@ script_name = "Bg"
 texture = ExtResource( 4 )
 
 [node name="Book" parent="Props" instance=ExtResource( 3 )]
+visible = false
 position = Vector2( -217, -22 )
 scale = Vector2( 2, 2 )
+input_pickable = false
 script = ExtResource( 5 )
 description = "Book"
 walk_to_point = Vector2( 30, 50 )
@@ -101,7 +103,7 @@ navpoly = SubResource( 1 )
 [node name="Characters" type="Node2D" parent="."]
 
 [node name="CharacterGoddiu" parent="Characters" instance=ExtResource( 8 )]
-position = Vector2( 58, 102 )
+position = Vector2( -94, 101 )
 voices = [ {
 "cue": "vo_goddiu",
 "emotion": "",

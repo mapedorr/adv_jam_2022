@@ -308,18 +308,18 @@ func _check_z_indexes(chr: PopochiuCharacter) -> void:
 	
 	# Compare the character Y position with each Prop's baseline
 	var z_index_update := 0
-	if chr.is_moving:
-#		for prop in $Props.get_children():
-		for pair in _props_baselines:
-			var prop: PopochiuProp = pair[0]
-			if not prop.visible or not prop.is_in_group('PopochiuClickable'):
-				continue
-			if prop.always_on_top:
-				prop.z_index = 4
-				continue
-			elif _is_in_front_of(prop, y_pos):
-				z_index_update += chr.z_index + 1
-			prop.z_index = z_index_update
+#	if chr.is_moving:
+#	for prop in $Props.get_children():
+	for pair in _props_baselines:
+		var prop: PopochiuProp = pair[0]
+		if not prop.visible or not prop.is_in_group('PopochiuClickable'):
+			continue
+		if prop.always_on_top:
+			prop.z_index = 4
+			continue
+		elif _is_in_front_of(prop, y_pos):
+			z_index_update += chr.z_index + 1
+		prop.z_index = z_index_update
 
 
 func _check_characters_zindex(chr: PopochiuCharacter) -> void:

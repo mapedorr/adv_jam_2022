@@ -11,6 +11,10 @@ extends PopochiuRoom
 # tree but it is not visible
 func on_room_entered() -> void:
 	C.player.position = get_hotspot('Exit').position
+	$Characters.move_child(
+		C.get_character('Marcianiu'), $Characters.get_child_count()
+	)
+	C.get_character('Marcianiu').disable(false)
 
 
 # What happens when the room changing transition finishes. At this point the room
