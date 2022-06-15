@@ -12,7 +12,8 @@ const COLOR_BURN := Color('BD6868')
 # What happens when Popochiu loads the room. At this point the room is in the
 # tree but it is not visible
 func on_room_entered() -> void:
-	yield(E.run([]), 'completed')
+	if C.player.last_room == 'Map':
+		C.player.position = get_point('Entrance')
 
 
 # What happens when the room changing transition finishes. At this point the room

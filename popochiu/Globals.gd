@@ -32,6 +32,7 @@ var found_pages := {
 }
 var read_pages := []
 var last_page := -1
+var packed_popochius := []
 
 # Cave: 8BBDE6
 

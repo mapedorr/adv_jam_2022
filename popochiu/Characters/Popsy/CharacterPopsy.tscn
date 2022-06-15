@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://popochiu/Characters/Popsy/CharacterPopsy.gd" type="Script" id=1]
+[ext_resource path="res://popochiu/Characters/Popsy/popsy.png" type="Texture" id=2]
+
+[node name="CharacterPopsy" type="Area2D"]
+scale = Vector2( 2, 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+description = "Popsy"
+cursor = 8
+script_name = "Popsy"
+text_color = Color( 0.388235, 0.486275, 0.560784, 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -6, -19, -1.5, -22, 2, -22, 6, -19, 12, -15, 13, -9, 9, -5, 5, -4, -5, -4, -9, -5, -13, -9, -12, -15 )
+
+[node name="BaselineHelper" type="Line2D" parent="."]
+visible = false
+points = PoolVector2Array( -10000, 0, 10000, 0 )
+width = 1.0
+
+[node name="WalkToHelper" type="Position2D" parent="."]
+visible = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="WalkToHelper"]
+margin_left = -2.5
+margin_top = -2.5
+margin_right = 2.5
+margin_bottom = 2.5
+color = Color( 0, 1, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -11 )
+texture = ExtResource( 2 )
+
+[node name="DialogPos" type="Position2D" parent="."]
+visible = false

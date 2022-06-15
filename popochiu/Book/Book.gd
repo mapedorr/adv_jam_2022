@@ -65,7 +65,7 @@ func appear() -> void:
 	if Globals.last_page == -1 else Globals.last_page
 	
 	$Control.show()
-	
+	A.play('sfx_close_book', false, false)
 	$Tween.interpolate_method(
 		self, '_burn',
 		Color.white, target_color,
@@ -115,7 +115,9 @@ func set_current_page(value: int) -> void:
 	if not Globals.read_pages.has(_current_page):
 		Globals.read_pages.append(_current_page)
 	
-	A.play('sfx_turn_page_' + str(randi() % 3 + 1).pad_zeros(2), false, false)
+	if $Control.visible:
+		randomize()
+		A.play('sfx_turn_page_' + str(randi() % 2 + 1).pad_zeros(2), false, false)
 	
 	_enable_buttons()
 	

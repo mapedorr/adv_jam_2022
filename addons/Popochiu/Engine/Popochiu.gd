@@ -235,6 +235,8 @@ func room_readied(room: PopochiuRoom) -> void:
 		
 		yield(C.player.idle(false), 'completed')
 	
+	room.sort_characters()
+	
 	for c in get_tree().get_nodes_in_group('PopochiuClickable'):
 		c.room = room
 	

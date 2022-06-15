@@ -24,7 +24,8 @@ var characters_cfg := [] # Array of Dictionary
 
 var _path := []
 var _moving_character: PopochiuCharacter = null
-var _baselines_order := []
+var _props_baselines := []
+var _characters_baselines := []
 
 onready var _nav_path: Navigation2D = $WalkableAreas.get_child(0)
 
@@ -47,10 +48,12 @@ func _enter_tree() -> void:
 func _ready():
 	set_process_unhandled_input(false)
 	
+#	C.connect('player_changed', self, '_setup_characters_node')
+	
 	# Store the Props based on their baseline (from lowest to highest)
 	for p in $Props.get_children():
-		_baselines_order.append([p, p.baseline + p.position.y])
-	_baselines_order.sort_custom(self, '_sort_by_baseline')
+		_props_baselines.append([p, p.baseline + p.position.y])
+	_props_baselines.sort_custom(self, '_sort_by_baseline')
 	
 	if limit_left != 0.0:
 		E.main_camera.limit_left = limit_left
@@ -66,8 +69,11 @@ func _ready():
 
 
 func _process(delta):
-	if Engine.editor_hint or not is_instance_valid(C.player):
+	if Engine.editor_hint or not is_instance_valid(C.player) or not has_player:
 		return
+	
+	sort_characters()
+	_check_characters_zindex(C.player)
 	
 	for c in $Characters.get_children():
 		if c.visible:
@@ -157,6 +163,8 @@ func add_character(chr: PopochiuCharacter) -> void:
 
 
 func remove_character(chr: PopochiuCharacter) -> void:
+	chr.disconnect('started_walk_to', self, '_update_navigation_path')
+	chr.disconnect('stoped_walk', self, '_clear_navigation_path')
 	$Characters.remove_child(chr)
 
 
@@ -230,6 +238,14 @@ func has_character(character_name: String) -> bool:
 	return result
 
 
+func sort_characters() -> void:
+	_characters_baselines.clear()
+	for c in $Characters.get_children():
+		if c.get_instance_id() != C.player.get_instance_id():
+			_characters_baselines.append([c, c.baseline + c.position.y])
+	_characters_baselines.sort_custom(self, '_sort_by_baseline')
+
+
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ PRIVATE ░░░░
 func _move_along_path(distance):
 	var last_point = _moving_character.position
@@ -294,7 +310,7 @@ func _check_z_indexes(chr: PopochiuCharacter) -> void:
 	var z_index_update := 0
 	if chr.is_moving:
 #		for prop in $Props.get_children():
-		for pair in _baselines_order:
+		for pair in _props_baselines:
 			var prop: PopochiuProp = pair[0]
 			if not prop.visible or not prop.is_in_group('PopochiuClickable'):
 				continue
@@ -302,17 +318,28 @@ func _check_z_indexes(chr: PopochiuCharacter) -> void:
 				prop.z_index = 4
 				continue
 			elif _is_in_front_of(prop, y_pos):
-				z_index_update += 1
+				z_index_update += chr.z_index + 1
 			prop.z_index = z_index_update
-	
+
+
+func _check_characters_zindex(chr: PopochiuCharacter) -> void:
+	var y_pos := chr.global_position.y
+#	chr.z_index = 0
+
 	# Compare the character Y position with each other character's baseline
-	z_index_update = 0
-	for character in $Characters.get_children():
-		if character.get_instance_id() != chr.get_instance_id():
-			if character.always_on_top: character.z_index = 4
-			elif _is_in_front_of(character, y_pos):
-				z_index_update += 1
-			character.z_index = z_index_update
+	var z_index_update = 0
+#	for character in $Characters.get_children():
+	for pair in _characters_baselines:
+		var character: PopochiuCharacter = pair[0]
+#		if character.get_instance_id() != chr.get_instance_id():
+		if character.always_on_top:
+			character.z_index = 4
+			continue
+		elif _is_in_front_of(character, y_pos):
+			z_index_update += chr.z_index + 1
+		elif chr.z_index == character.z_index:
+			chr.z_index += 1
+		character.z_index = z_index_update
 
 
 func _is_in_front_of(nde: Node, chr_y_pos: float) -> bool:

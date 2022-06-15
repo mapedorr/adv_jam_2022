@@ -22,16 +22,17 @@ func on_interact() -> void:
 
 # When the node is right clicked
 func on_look() -> void:
-	# Replace the call to .on_look() to implement your code. This only makes
-	# the default behavior to happen.
-	.on_look()
+	C.player = self
 
 
 # When the node is clicked and there is an inventory item selected
 func on_item_used(item: PopochiuInventoryItem) -> void:
-	# Replace the call to .on_item_used(item) to implement your code. This only
-	# makes the default behavior to happen.
-	.on_item_used(item)
+	if item.script_name == 'Backpack' and C.player != self:
+		Globals.packed_popochius.append(self.script_name)
+		self.room.remove_character(self)
+#		disable(false)
+	else:
+		.on_item_used(item)
 
 
 # Use it to play the idle animation for the character

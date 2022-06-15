@@ -6,6 +6,7 @@ extends Node
 signal character_move_ended(character)
 signal character_spoke(character, message)
 signal character_grab_done(character)
+signal player_changed
 
 var player: PopochiuCharacter = null setget set_player
 var characters := []
@@ -146,3 +147,5 @@ chr_name: String, emotion: String, is_in_queue := true) -> void:
 func set_player(value: PopochiuCharacter) -> void:
 	player = value
 	camera_owner = value
+	
+	emit_signal('player_changed')

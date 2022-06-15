@@ -1,0 +1,176 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://popochiu/Rooms/Cave/RoomCave.gd" type="Script" id=1]
+[ext_resource path="res://addons/Popochiu/Engine/Objects/Prop/PopochiuProp.gd" type="Script" id=2]
+[ext_resource path="res://addons/Popochiu/Engine/Objects/Prop/PopochiuProp.tscn" type="PackedScene" id=3]
+[ext_resource path="res://popochiu/Rooms/Cave/Props/bg.png" type="Texture" id=4]
+[ext_resource path="res://popochiu/Rooms/Cave/Props/Keyhole/PropKeyhole.gd" type="Script" id=5]
+[ext_resource path="res://popochiu/Rooms/Cave/Props/Keyhole/keyhole.png" type="Texture" id=6]
+[ext_resource path="res://popochiu/Rooms/Cave/Props/Symbol/PropSymbol.gd" type="Script" id=7]
+[ext_resource path="res://popochiu/Rooms/Cave/Props/Symbol/symbol.png" type="Texture" id=8]
+[ext_resource path="res://popochiu/Rooms/Cave/Props/Hideout/PropHideout.gd" type="Script" id=9]
+[ext_resource path="res://popochiu/Rooms/Cave/Props/Hideout/hideout.png" type="Texture" id=10]
+[ext_resource path="res://popochiu/Rooms/Cave/Props/Hideout/hideout_door.png" type="Texture" id=11]
+[ext_resource path="res://addons/Popochiu/Engine/Objects/Hotspot/PopochiuHotspot.tscn" type="PackedScene" id=12]
+[ext_resource path="res://popochiu/Rooms/Cave/Hotspots/Exit/HotspotExit.gd" type="Script" id=13]
+
+[sub_resource type="NavigationPolygon" id=1]
+vertices = PoolVector2Array( 142, 97, 213, 175, 77, 176, 91, 111, 55, 67, -98, 44, -156, 10, -79, -15, -31, 8, 126, 22, 193, 20, 62, 8 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 6, 7, 8 ), PoolIntArray( 4, 9, 10, 0, 3 ), PoolIntArray( 4, 8, 11, 9 ) ]
+outlines = [ PoolVector2Array( 77, 176, 91, 111, 55, 67, -98, 44, -156, 10, -79, -15, -31, 8, 62, 8, 126, 22, 193, 20, 142, 97, 213, 175 ) ]
+
+[node name="RoomCave" type="Node2D"]
+script = ExtResource( 1 )
+script_name = "Cave"
+limit_left = 0.0
+limit_right = 0.0
+limit_top = 0.0
+limit_bottom = 0.0
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="Bg" type="Area2D" parent="Props" instance=ExtResource( 3 )]
+scale = Vector2( 2, 2 )
+script = ExtResource( 2 )
+__meta__ = {
+"_editor_description_": ""
+}
+description = "Bg"
+clickable = false
+baseline = -90
+cursor = 1
+script_name = "Bg"
+texture = ExtResource( 4 )
+
+[node name="Keyhole" parent="Props" instance=ExtResource( 3 )]
+position = Vector2( -58, 47 )
+scale = Vector2( 2, 2 )
+script = ExtResource( 5 )
+__meta__ = {
+"_editor_description_": ""
+}
+description = "Rock with hole"
+baseline = 9
+walk_to_point = Vector2( 8, -8 )
+cursor = 1
+script_name = "Keyhole"
+texture = ExtResource( 6 )
+
+[node name="BaselineHelper" parent="Props/Keyhole" index="0"]
+visible = false
+position = Vector2( 0, 9 )
+points = PoolVector2Array( -10000, 0, 10000, 0 )
+width = 1.0
+
+[node name="WalkToHelper" parent="Props/Keyhole" index="1"]
+visible = false
+position = Vector2( 8, -8 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ColorRect" parent="Props/Keyhole/WalkToHelper" index="0"]
+margin_left = -2.5
+margin_top = -2.5
+margin_right = 2.5
+margin_bottom = 2.5
+color = Color( 0, 1, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" parent="Props/Keyhole" index="2"]
+texture = ExtResource( 6 )
+hframes = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Keyhole"]
+polygon = PoolVector2Array( -21, 11, -17, 2, -15, -7, -10, -12, 12, -6, 21, 9, 21, 12, 11, 20, -5, 20, -19, 18 )
+
+[node name="Symbol" parent="Props" instance=ExtResource( 3 )]
+position = Vector2( 139, -36 )
+scale = Vector2( 2, 2 )
+script = ExtResource( 7 )
+__meta__ = {
+"_editor_description_": ""
+}
+description = "Rock with symbol"
+walk_to_point = Vector2( 20, 32 )
+cursor = 1
+script_name = "Symbol"
+texture = ExtResource( 8 )
+
+[node name="BaselineHelper" parent="Props/Symbol" index="0"]
+visible = false
+points = PoolVector2Array( -10000, 0, 10000, 0 )
+width = 1.0
+
+[node name="WalkToHelper" parent="Props/Symbol" index="1"]
+visible = false
+position = Vector2( 20, 32 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ColorRect" parent="Props/Symbol/WalkToHelper" index="0"]
+margin_left = -2.5
+margin_top = -2.5
+margin_right = 2.5
+margin_bottom = 2.5
+color = Color( 0, 1, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" parent="Props/Symbol" index="2"]
+texture = ExtResource( 8 )
+hframes = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Symbol"]
+polygon = PoolVector2Array( -30.5, 18, -26, -16, -17.5, -24.5, -5, -27.5, 2.5, -27.5, 10, -24.5, 20.5, -16.5, 27.5, 8, 27.5, 19.5, 23.5, 23.5, -11.5, 23.5 )
+
+[node name="Hideout" type="Area2D" parent="Props" instance=ExtResource( 3 )]
+position = Vector2( -131, -47 )
+scale = Vector2( 2, 2 )
+script = ExtResource( 9 )
+__meta__ = {
+"_editor_description_": ""
+}
+description = "Hideout"
+clickable = false
+baseline = -90
+cursor = 1
+script_name = "Hideout"
+texture = ExtResource( 10 )
+
+[node name="Door" type="Sprite" parent="Props/Hideout"]
+position = Vector2( 2.5, -0.5 )
+texture = ExtResource( 11 )
+hframes = 2
+
+[node name="Hotspots" type="Node2D" parent="."]
+
+[node name="Exit" type="Area2D" parent="Hotspots" instance=ExtResource( 12 )]
+position = Vector2( 137, 161 )
+script = ExtResource( 13 )
+description = "Exit"
+cursor = 1
+script_name = "Exit"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hotspots/Exit"]
+polygon = PoolVector2Array( -58, 18, -54, 9, -42, 3, -40, -8, -34, -13, -24, -13, -20, -19, 1, -23, 13, -23, 18, -13, 38, -11, 47, -15, 54, -5, 71, 4, 82, 18 )
+
+[node name="Regions" type="Node2D" parent="."]
+
+[node name="Points" type="Node2D" parent="."]
+
+[node name="WalkableAreas" type="Node2D" parent="."]
+
+[node name="Navigation2D" type="Navigation2D" parent="WalkableAreas"]
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="WalkableAreas/Navigation2D"]
+navpoly = SubResource( 1 )
+
+[node name="Characters" type="Node2D" parent="."]
+
+[editable path="Props/Keyhole"]
+[editable path="Props/Symbol"]

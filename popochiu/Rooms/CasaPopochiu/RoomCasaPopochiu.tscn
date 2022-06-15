@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://popochiu/Rooms/CasaPopochiu/RoomCasaPopochiu.gd" type="Script" id=1]
 [ext_resource path="res://popochiu/Rooms/CasaPopochiu/Props/Drawer/PropDrawer.gd" type="Script" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://popochiu/Rooms/CasaPopochiu/Props/Door/PropDoor.gd" type="Script" id=10]
 [ext_resource path="res://popochiu/Rooms/CasaPopochiu/Props/Door/door.png" type="Texture" id=11]
 [ext_resource path="res://popochiu/Book/Book.tscn" type="PackedScene" id=12]
+[ext_resource path="res://popochiu/Characters/Popsy/CharacterPopsy.tscn" type="PackedScene" id=13]
+[ext_resource path="res://popochiu/Characters/Trapusinsiu/CharacterTrapusinsiu.tscn" type="PackedScene" id=14]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( -170, 115, -229, 53, -206, 43, -146, 62, 123, 127, -68, 59, -65, 38, 171, 48, 209, 94 )
@@ -58,6 +60,8 @@ position = Vector2( -111, 27 )
 scale = Vector2( 2, 2 )
 script = ExtResource( 2 )
 description = "Drawer"
+baseline = 13
+walk_to_point = Vector2( 20, 22 )
 cursor = 1
 script_name = "Drawer"
 texture = ExtResource( 9 )
@@ -70,6 +74,7 @@ position = Vector2( 167, -6 )
 scale = Vector2( 2, 2 )
 script = ExtResource( 10 )
 description = "Exit"
+walk_to_point = Vector2( -6, 31 )
 cursor = 1
 script_name = "Door"
 texture = ExtResource( 11 )
@@ -83,6 +88,9 @@ polygon = PoolVector2Array( -15.5, 20.5, -13.5, -23.5, 14.5, -22.5, 16.5, 22.5 )
 
 [node name="Points" type="Node2D" parent="."]
 
+[node name="Entrance" type="Position2D" parent="Points"]
+position = Vector2( 155, 56 )
+
 [node name="WalkableAreas" type="Node2D" parent="."]
 
 [node name="Navigation2D" type="Navigation2D" parent="WalkableAreas"]
@@ -93,11 +101,17 @@ navpoly = SubResource( 1 )
 [node name="Characters" type="Node2D" parent="."]
 
 [node name="CharacterGoddiu" parent="Characters" instance=ExtResource( 8 )]
-position = Vector2( -5, 96 )
+position = Vector2( 58, 102 )
 voices = [ {
 "cue": "vo_goddiu",
 "emotion": "",
 "variations": 3
 } ]
+
+[node name="CharacterPopsy" parent="Characters" instance=ExtResource( 13 )]
+position = Vector2( 94, 86 )
+
+[node name="CharacterTrapusinsiu" parent="Characters" instance=ExtResource( 14 )]
+position = Vector2( -1, 52 )
 
 [node name="Book" parent="." instance=ExtResource( 12 )]
