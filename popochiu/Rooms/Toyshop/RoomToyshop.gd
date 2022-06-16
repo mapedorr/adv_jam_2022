@@ -16,12 +16,20 @@ func on_room_entered() -> void:
 		C.player.position = get_point('LightRoom')
 	else:
 		C.player.position = get_point('Entrance')
+	
+	if Globals.playable_popochius.has('Gonorrein'):
+		remove_character(C.get_character('Gonorrein'))
 
 
 # What happens when the room changing transition finishes. At this point the room
 # is visible.
 func on_room_transition_finished() -> void:
-	yield(E.run([]), 'completed')
+	if not Globals.playable_popochius.has('Gonorrein'):
+		yield(E.run([
+			C.player.face_left(),
+			'Player: Oh! There is Gonorreín!',
+			'Player: Playing in the arcade... as usual.'
+		]), 'completed')
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ PUBLIC ░░░░

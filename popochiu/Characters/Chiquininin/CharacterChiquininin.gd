@@ -20,7 +20,8 @@ func _ready() -> void:
 func _exit_tree() -> void:
 	if Engine.editor_hint: return
 	
-	if C.player.script_name != script_name:
+	if C.player.script_name != script_name\
+	and Globals.playable_popochius.has(script_name):
 		Globals.packed_popochius.append(script_name)
 
 
@@ -51,9 +52,14 @@ func on_look() -> void:
 
 # When the node is clicked and there is an inventory item selected
 func on_item_used(item: PopochiuInventoryItem) -> void:
-	# Replace the call to .on_item_used(item) to implement your code. This only
-	# makes the default behavior to happen.
-	.on_item_used(item)
+	if item.script_name == 'Backpack' and C.player != self:
+		if Globals.playable_popochius.has(script_name):
+			Globals.packed_popochius.append(self.script_name)
+			self.room.remove_character(self)
+		else:
+			C.character_say(script_name, '~~~~~~~~~~~~~!', false)
+	else:
+		C.character_say(script_name, 'Ouch!', false)
 
 
 # Use it to play the idle animation for the character

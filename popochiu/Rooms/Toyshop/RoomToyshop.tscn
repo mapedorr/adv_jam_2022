@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://popochiu/Rooms/Toyshop/RoomToyshop.gd" type="Script" id=1]
+[ext_resource path="res://popochiu/Rooms/Cave/Props/Page/page.png" type="Texture" id=2]
 [ext_resource path="res://addons/Popochiu/Engine/Objects/Prop/PopochiuProp.tscn" type="PackedScene" id=3]
 [ext_resource path="res://popochiu/Rooms/Toyshop/Props/bg.png" type="Texture" id=4]
 [ext_resource path="res://popochiu/Rooms/Toyshop/Props/Arcade/PropArcade.gd" type="Script" id=5]
@@ -12,6 +13,8 @@
 [ext_resource path="res://addons/Popochiu/Engine/Objects/Hotspot/PopochiuHotspot.tscn" type="PackedScene" id=11]
 [ext_resource path="res://popochiu/Rooms/Toyshop/Hotspots/Exit/HotspotExit.gd" type="Script" id=12]
 [ext_resource path="res://popochiu/Rooms/Toyshop/Hotspots/Curtain/HotspotCurtain.gd" type="Script" id=13]
+[ext_resource path="res://popochiu/Rooms/Cave/Props/Page/PropPage.gd" type="Script" id=14]
+[ext_resource path="res://popochiu/Characters/Gonorrein/CharacterGonorrein.tscn" type="PackedScene" id=15]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( -10, 147, 228, 169, -246, 167, -206, 146, 137, 72, 187, 33, 304, 76, 115, 114, -202, 34, 42, 69, 19, 111, -21, 101, -196, 100, -255, 99, -235, 52 )
@@ -95,6 +98,20 @@ polygon = PoolVector2Array( -4, -7.5, -5, -8.5, -5, -11.5, -4, -13.5, -7, -17.5,
 [node name="GarllicAcid" type="CollisionPolygon2D" parent="Props/Shelf"]
 polygon = PoolVector2Array( 25, -8.5, 22, -11.5, 22, -18.5, 24, -23.5, 27, -26.5, 28, -26.5, 31, -23.5, 33, -18.5, 33, -11.5, 30, -8.5 )
 
+[node name="Page" parent="Props" instance=ExtResource( 3 )]
+position = Vector2( -245, -62 )
+script = ExtResource( 14 )
+description = "Page"
+walk_to_point = Vector2( 40, 0 )
+cursor = 1
+script_name = "Page"
+always_on_top = true
+texture = ExtResource( 2 )
+target = 6
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Page"]
+polygon = PoolVector2Array( 0, -4, 2, -4, 8, -1, 8, 0, 0, 4, -2, 4, -8, 1, -8, 0 )
+
 [node name="Hotspots" type="Node2D" parent="."]
 
 [node name="Exit" parent="Hotspots" instance=ExtResource( 11 )]
@@ -128,6 +145,9 @@ position = Vector2( -14, 49 )
 [node name="LightRoom" type="Position2D" parent="Points"]
 position = Vector2( 225, 61 )
 
+[node name="ArcadeJump" type="Position2D" parent="Points"]
+position = Vector2( -225, 64 )
+
 [node name="WalkableAreas" type="Node2D" parent="."]
 
 [node name="Navigation2D" type="Navigation2D" parent="WalkableAreas"]
@@ -136,5 +156,13 @@ position = Vector2( 225, 61 )
 navpoly = SubResource( 1 )
 
 [node name="Characters" type="Node2D" parent="."]
+
+[node name="CharacterGonorrein" parent="Characters" instance=ExtResource( 15 )]
+position = Vector2( -267, 16 )
+voices = [ {
+"cue": "vo_gonorrein",
+"emotion": "",
+"variations": 3
+} ]
 
 [editable path="Props/FreeItems"]

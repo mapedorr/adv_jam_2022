@@ -66,6 +66,7 @@ func option_selected(opt: PopochiuDialogOption) -> void:
 				'Trapusinsiu(happy): #######!!!!'
 			]), 'completed')
 			
+			Globals.playable_popochius.append(C.player.script_name)
 			C.player.can_move = true
 			D.finish_dialog()
 			return

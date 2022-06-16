@@ -13,14 +13,15 @@ preload('res://addons/Popochiu/Engine/Objects/Dialog/PopochiuDialogOption.gd')
 func _ready() -> void:
 	if Engine.editor_hint: return
 	
-	if not can_move and Globals.read_pages.has(MY_PAGE):
+	if not can_move and Globals.playable_popochius.has(script_name):
 		can_move = true
 
 
 func _exit_tree() -> void:
 	if Engine.editor_hint: return
 	
-	if C.player.script_name != script_name:
+	if C.player.script_name != script_name\
+	and Globals.playable_popochius.has(script_name):
 		Globals.packed_popochius.append(script_name)
 
 
@@ -28,17 +29,24 @@ func _exit_tree() -> void:
 # When the node is clicked
 func on_interact() -> void:
 	if Globals.read_pages.has(MY_PAGE):
+		if not Globals.playable_popochius.has(script_name):
+			yield(E.run([C.walk_to_clicked()]), 'completed')
+		
 		yield(E.run([
 			'Gonorrein: ' + Utils.say_in_popochiu('oñiiiiii!', 'hi!')
 		]), 'completed')
 		
 		if not can_move:
 			D.show_dialog('IntroGonorrein')
+			
+			yield(D, 'dialog_finished')
+			
+			position = room.get_point('ArcadeJump')
+			
+			E.run(['Gonorrein: Lets go find CHIQUININÍN!'])
 			return
 	else:
-		E.run([
-			'Gonorrein: Grrrrrrrrr grrrrrrrrr grrrrrrrr!'
-		])
+		E.run(['Gonorrein: @@@@@@ @@@@@@!'])
 		return
 	
 	var choice: PopochiuDialogOption = yield(
@@ -65,9 +73,14 @@ func on_look() -> void:
 
 # When the node is clicked and there is an inventory item selected
 func on_item_used(item: PopochiuInventoryItem) -> void:
-	# Replace the call to .on_item_used(item) to implement your code. This only
-	# makes the default behavior to happen.
-	.on_item_used(item)
+	if item.script_name == 'Backpack' and C.player != self:
+		if Globals.playable_popochius.has(script_name):
+			Globals.packed_popochius.append(self.script_name)
+			self.room.remove_character(self)
+		else:
+			C.character_say(script_name, '@@@@@@@@@@@@@@!', false)
+	else:
+		C.character_say(script_name, 'Ouch!', false)
 
 
 # Use it to play the idle animation for the character
