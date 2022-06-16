@@ -5,29 +5,57 @@ extends PopochiuProp
 # the function until the sequence of events finishes.
 
 
+# ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ GODOT ░░░░
+func _ready() -> void:
+	if Engine.editor_hint: return
+	
+	if Globals.state.SYMBOL_ACTIVATED:
+		$CollisionPolygon2D.disabled = true
+		$Door.hide()
+
+
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ VIRTUAL ░░░░
 # When the node is clicked
 func on_interact() -> void:
-	# Replace the call to .on_interact() to implement your code. This only makes
-	# the default behavior to happen.
-	.on_interact()
+	if C.player.can_move:
+		yield(E.run([
+			C.walk_to_clicked(),
+			C.face_clicked(),
+		]), 'completed')
+	
+	E.run([
+		"Player: It doesn't move."
+	])
 
 
 # When the node is right clicked
 func on_look() -> void:
-	# Replace the call to .on_look() to implement your code. This only makes
-	# the default behavior to happen.
-	.on_look()
+	if C.player.can_move:
+		yield(E.run([
+			C.walk_to_clicked(),
+			C.face_clicked(),
+		]), 'completed')
+	
+	E.run([
+		'Player: A rock that looks like a door with an engraved symbol.'
+	])
 
 
 # When the node is clicked and there is an inventory item selected
-func on_item_used(item: PopochiuInventoryItem) -> void:
-	# Replace the call to .on_item_used(item) to implement your code. This only
-	# makes the default behavior to happen.
-	.on_item_used(item)
+func on_item_used(_item: PopochiuInventoryItem) -> void:
+	E.run(['Player: How?'])
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ PUBLIC ░░░░
 func open() -> void:
-	C.get_character('Marcianiu').enable()
+	yield(get_tree().create_timer(0.5), 'timeout')
+	
+	$Door.frame = 1
+	
+	yield(get_tree().create_timer(2.0), 'timeout')
+	
+	room.put_marcianiu_on_top()
+	C.get_character('Marcianiu').enable(false)
+	$CollisionPolygon2D.disabled = true
 	$Door.hide()
+	C.character_walk_to('Marcianiu', room.get_point('HideoutEntrance'), false)

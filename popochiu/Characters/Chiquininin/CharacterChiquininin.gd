@@ -4,13 +4,40 @@ extends PopochiuCharacter
 # Use yield(E.run([]), 'completed') if you want to pause the excecution of
 # the function until the sequence of events finishes.
 
+const MY_PAGE := Globals.PAGE_CODES.GODDIU_CHIQUINININ
+const PopochiuDialogOption :=\
+preload('res://addons/Popochiu/Engine/Objects/Dialog/PopochiuDialogOption.gd')
+
+
+# ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ GODOT ░░░░
+func _ready() -> void:
+	if Engine.editor_hint: return
+	
+	if not can_move and Globals.read_pages.has(MY_PAGE):
+		can_move = true
+
+
+func _exit_tree() -> void:
+	if C.player.script_name != script_name:
+		Globals.packed_popochius.append(script_name)
+
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ VIRTUAL ░░░░
 # When the node is clicked
 func on_interact() -> void:
-	# Replace the call to .on_interact() to implement your code. This only makes
-	# the default behavior to happen.
-	.on_interact()
+	var choice: PopochiuDialogOption = yield(
+		D.show_inline_dialog([
+			'I want to control you.',
+			'Hang on there little one.'
+		]), 'completed'
+	)
+	
+	match choice.id:
+		'Opt1':
+			C.player = self
+			E.run(["Player: I'm on it."])
+		_:
+			G.done()
 
 
 # When the node is right clicked

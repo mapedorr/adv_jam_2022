@@ -10,6 +10,7 @@ __meta__ = {
 "_edit_group_": true
 }
 description = "Marcianiu"
+walk_to_point = Vector2( 28, 8 )
 cursor = 8
 script_name = "Marcianiu"
 text_color = Color( 0.627451, 0.866667, 0.827451, 1 )
@@ -18,12 +19,11 @@ text_color = Color( 0.627451, 0.866667, 0.827451, 1 )
 polygon = PoolVector2Array( -2, -32, 2, -32, 3, -31, 3, -26, 5, -24, 8, -25, 10, -19, 10, -15, 3, -10, -3, -10, -10, -15, -10, -19, -8, -25, -5, -24, -3, -26, -3, -31 )
 
 [node name="BaselineHelper" type="Line2D" parent="."]
-visible = false
 points = PoolVector2Array( -10000, 0, 10000, 0 )
 width = 1.0
 
 [node name="WalkToHelper" type="Position2D" parent="."]
-visible = false
+position = Vector2( 28, 8 )
 __meta__ = {
 "_edit_group_": true
 }

@@ -9,16 +9,22 @@ export(Globals.PAGE_CODES) var target := 0
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ GODOT ░░░░
 func _ready() -> void:
-	if Globals.found_pages[target]:
+	if Engine.editor_hint: return
+	
+	if Globals.found_pages[target] or Globals.read_pages.has(target):
 		disable(false)
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ VIRTUAL ░░░░
 # When the node is clicked
 func on_interact() -> void:
+	if C.player.can_move:
+		yield(E.run([
+			C.walk_to_clicked(),
+			C.face_clicked(),
+		]), 'completed')
+	
 	yield(E.run([
-		C.walk_to_clicked(),
-		C.face_clicked(),
 		'Player(happy): A page of the book!!!',
 		disable()
 	]), 'completed')
@@ -29,13 +35,15 @@ func on_interact() -> void:
 
 # When the node is right clicked
 func on_look() -> void:
-	yield(E.run([
-		C.walk_to_clicked(),
-		C.face_clicked(),
-		'Player: Is a page of the book!'
-	]), 'completed')
+	if C.player.can_move:
+		yield(E.run([
+			C.walk_to_clicked(),
+			C.face_clicked(),
+		]), 'completed')
+	
+	E.run(['Player: Is a page of the book!'])
 
 
 # When the node is clicked and there is an inventory item selected
-func on_item_used(item: PopochiuInventoryItem) -> void:
+func on_item_used(_item: PopochiuInventoryItem) -> void:
 	C.player_say('What?', false)

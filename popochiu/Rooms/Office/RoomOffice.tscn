@@ -103,7 +103,7 @@ position = Vector2( -196, -56 )
 script = ExtResource( 14 )
 description = "Exit"
 walk_to_point = Vector2( 30, 56 )
-cursor = 1
+cursor = 4
 script_name = "Exit"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hotspots/Exit"]

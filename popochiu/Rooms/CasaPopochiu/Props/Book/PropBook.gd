@@ -7,6 +7,8 @@ extends PopochiuProp
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ GODOT ░░░░
 func _ready() -> void:
+	if Engine.editor_hint: return
+	
 	if Globals.state.BOOK_CRYSTAL_BROKEN:
 		description = 'book'
 		$Crystal.hide()

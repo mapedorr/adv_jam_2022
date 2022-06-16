@@ -5,13 +5,22 @@ extends PopochiuProp
 # the function until the sequence of events finishes.
 
 
+# ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ GODOT ░░░░
+func _ready() -> void:
+	if Engine.editor_hint: return
+	
+	if Globals.state.SYMBOL_ACTIVATED:
+		$Sprite.frame = 1
+
+
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ VIRTUAL ░░░░
 # When the node is clicked
 func on_interact() -> void:
-	yield(E.run([
-		C.walk_to_clicked(),
-		C.face_clicked(),
-	]), 'completed')
+	if C.player.can_move:
+		yield(E.run([
+			C.walk_to_clicked(),
+			C.face_clicked(),
+		]), 'completed')
 	
 	match $Sprite.frame:
 		0:
@@ -28,7 +37,8 @@ func on_interact() -> void:
 				]), 'completed')
 				
 				if Globals.state.SCEPTER_PUSHED:
-					$Sprite.frame = 2
+					Globals.state.SYMBOL_ACTIVATED = true
+					$Sprite.frame = 1
 					room.get_prop('Hideout').open()
 				else:
 					E.run([
@@ -49,10 +59,11 @@ func on_interact() -> void:
 
 # When the node is right clicked
 func on_look() -> void:
-	yield(E.run([
-		C.walk_to_clicked(),
-		C.face_clicked(),
-	]), 'completed')
+	if C.player.can_move:
+		yield(E.run([
+			C.walk_to_clicked(),
+			C.face_clicked(),
+		]), 'completed')
 	
 	match $Sprite.frame:
 		0:
@@ -68,5 +79,5 @@ func on_look() -> void:
 
 
 # When the node is clicked and there is an inventory item selected
-func on_item_used(item: PopochiuInventoryItem) -> void:
+func on_item_used(_item: PopochiuInventoryItem) -> void:
 	E.run(['Player: No can do.'])

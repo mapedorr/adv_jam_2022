@@ -7,6 +7,8 @@ extends PopochiuProp
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ GODOT ░░░░
 func _ready() -> void:
+	if Engine.editor_hint: return
+	
 	if Globals.state.SCEPTER_IN_PLACE:
 		$Sprite.frame = 1
 	elif Globals.state.SCEPTER_PUSHED:
@@ -18,10 +20,11 @@ func _ready() -> void:
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ VIRTUAL ░░░░
 # When the node is clicked
 func on_interact() -> void:
-	yield(E.run([
-		C.walk_to_clicked(),
-		C.face_clicked(),
-	]), 'completed')
+	if C.player.can_move:
+		yield(E.run([
+			C.walk_to_clicked(),
+			C.face_clicked(),
+		]), 'completed')
 	
 	match $Sprite.frame:
 		0:
@@ -29,7 +32,7 @@ func on_interact() -> void:
 				'Player: We have nothing to do in here.'
 			])
 		1:
-			if C.player.script_name != 'Gonorreín':
+			if C.player.script_name != 'Gonorrein':
 				E.run([
 					"Player: Can't push it!"
 				])
@@ -54,10 +57,11 @@ func on_interact() -> void:
 
 # When the node is right clicked
 func on_look() -> void:
-	yield(E.run([
-		C.walk_to_clicked(),
-		C.face_clicked(),
-	]), 'completed')
+	if C.player.can_move:
+		yield(E.run([
+			C.walk_to_clicked(),
+			C.face_clicked(),
+		]), 'completed')
 	
 	match $Sprite.frame:
 		0:
@@ -76,10 +80,11 @@ func on_look() -> void:
 
 # When the node is clicked and there is an inventory item selected
 func on_item_used(item: PopochiuInventoryItem) -> void:
-	yield(E.run([
-		C.walk_to_clicked(),
-		C.face_clicked(),
-	]), 'completed')
+	if C.player.can_move:
+		yield(E.run([
+			C.walk_to_clicked(),
+			C.face_clicked(),
+		]), 'completed')
 	
 	if item.script_name == 'Scepter':
 		Globals.state.SCEPTER_IN_PLACE = true
@@ -92,5 +97,5 @@ func on_item_used(item: PopochiuInventoryItem) -> void:
 		$Sprite.frame = 1
 	else:
 		E.run([
-			'Player: Nope.'
+			'Player: It does not fit.'
 		])

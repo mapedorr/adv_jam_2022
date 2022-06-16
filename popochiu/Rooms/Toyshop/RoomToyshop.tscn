@@ -101,7 +101,7 @@ polygon = PoolVector2Array( 25, -8.5, 22, -11.5, 22, -18.5, 24, -23.5, 27, -26.5
 script = ExtResource( 12 )
 description = "Exit"
 walk_to_point = Vector2( 0, 45 )
-cursor = 1
+cursor = 9
 script_name = "Exit"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hotspots/Exit"]

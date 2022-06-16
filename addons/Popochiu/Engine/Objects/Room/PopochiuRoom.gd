@@ -151,6 +151,7 @@ func get_walkable_area() -> Navigation2D:
 # of characters in ICharacter.gd.
 func on_room_exited() -> void:
 	set_process(false)
+	E.emit_signal('room_exited')
 	for c in $Characters.get_children():
 		$Characters.remove_child(c)
 

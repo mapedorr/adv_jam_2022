@@ -8,8 +8,14 @@ extends PopochiuHotspot
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ VIRTUAL ░░░░
 # When the node is clicked
 func on_interact() -> void:
-	yield(C.walk_to_clicked(false), 'completed')
-	E.goto_room('Map')
+	if C.player.can_move:
+		yield(C.walk_to_clicked(false), 'completed')
+		E.goto_room('Map')
+	else:
+		E.run([
+			"Player: I can't move...",
+			'Player: ' + Utils.say_in_popochiu('Use one of my epatius.', 'brothers')
+		])
 
 
 # When the node is right clicked

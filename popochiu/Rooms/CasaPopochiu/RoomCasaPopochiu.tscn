@@ -88,7 +88,7 @@ scale = Vector2( 2, 2 )
 script = ExtResource( 10 )
 description = "Exit"
 walk_to_point = Vector2( -6, 31 )
-cursor = 1
+cursor = 6
 script_name = "Door"
 texture = ExtResource( 11 )
 
@@ -97,7 +97,7 @@ polygon = PoolVector2Array( -15.5, 20.5, -13.5, -23.5, 14.5, -22.5, 16.5, 22.5 )
 
 [node name="Hotspots" type="Node2D" parent="."]
 
-[node name="Note" type="Area2D" parent="Hotspots" instance=ExtResource( 12 )]
+[node name="Note" parent="Hotspots" instance=ExtResource( 12 )]
 position = Vector2( -199, 4 )
 script = ExtResource( 15 )
 description = "Note"

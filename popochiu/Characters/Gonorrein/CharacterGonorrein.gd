@@ -5,19 +5,53 @@ extends PopochiuCharacter
 # the function until the sequence of events finishes.
 
 const MY_PAGE := Globals.PAGE_CODES.GONORREIN_PM
+const PopochiuDialogOption :=\
+preload('res://addons/Popochiu/Engine/Objects/Dialog/PopochiuDialogOption.gd')
+
+
+# ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ GODOT ░░░░
+func _ready() -> void:
+	if Engine.editor_hint: return
+	
+	if not can_move and Globals.read_pages.has(MY_PAGE):
+		can_move = true
+
+
+func _exit_tree() -> void:
+	if C.player.script_name != script_name:
+		Globals.packed_popochius.append(script_name)
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ VIRTUAL ░░░░
 # When the node is clicked
 func on_interact() -> void:
 	if Globals.read_pages.has(MY_PAGE):
-		E.run([
-			'Gonorrein: Hiiiiii!'
-		])
+		yield(E.run([
+			'Gonorrein: ' + Utils.say_in_popochiu('oñiiiiii!', 'hi!')
+		]), 'completed')
+		
+		if not can_move:
+			D.show_dialog('IntroGonorrein')
+			return
 	else:
 		E.run([
 			'Gonorrein: Grrrrrrrrr grrrrrrrrr grrrrrrrr!'
 		])
+		return
+	
+	var choice: PopochiuDialogOption = yield(
+		D.show_inline_dialog([
+			'I want to control you.',
+			'Nothing.'
+		]), 'completed'
+	)
+	
+	match choice.id:
+		'Opt1':
+			C.player = self
+			E.run(["Player: I'm on it."])
+		_:
+			G.done()
 
 
 # When the node is right clicked

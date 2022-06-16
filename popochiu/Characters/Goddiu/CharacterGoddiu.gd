@@ -5,12 +5,21 @@ extends PopochiuCharacter
 # the function until the sequence of events finishes.
 
 const MY_PAGE := Globals.PAGE_CODES.GODDIU_CHIQUINININ
+const PopochiuDialogOption :=\
+preload('res://addons/Popochiu/Engine/Objects/Dialog/PopochiuDialogOption.gd')
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ GODOT ░░░░
 func _ready() -> void:
+	if Engine.editor_hint: return
+	
 	if not can_move and Globals.read_pages.has(MY_PAGE):
 		can_move = true
+
+
+func _exit_tree() -> void:
+	if C.player.script_name != script_name:
+		Globals.packed_popochius.append(script_name)
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ VIRTUAL ░░░░
@@ -21,14 +30,28 @@ func on_interact() -> void:
 			'Goddiu: ' + Utils.say_in_popochiu('oñiiiiii!', 'hi!')
 		]), 'completed')
 		
-		if can_move:
-			pass
-		else:
+		if not can_move:
 			D.show_dialog('Intro')
+			return
 	else:
 		E.run([
 			'Goddiu: ******'
 		])
+		return
+	
+	var choice: PopochiuDialogOption = yield(
+		D.show_inline_dialog([
+			'I want to control you.',
+			'Nothing.'
+		]), 'completed'
+	)
+	
+	match choice.id:
+		'Opt1':
+			C.player = self
+			E.run(["Player: I'm on it."])
+		_:
+			G.done()
 
 
 # When the node is right clicked
@@ -48,6 +71,10 @@ func on_item_used(item: PopochiuInventoryItem) -> void:
 
 # Use it to play the idle animation for the character
 func play_idle() -> void:
+	$Sprite.flip_h = false
+	
+	if _looking_dir == 'l':
+		$Sprite.flip_h = true
 	$AnimationPlayer.play('RESET')
 
 

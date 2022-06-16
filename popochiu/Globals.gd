@@ -24,6 +24,8 @@ var state := {
 	LAIR_DISCOVERED = false, # false
 	SCEPTER_IN_PLACE = false, # false
 	SCEPTER_PUSHED = false, # false
+	SYMBOL_ACTIVATED = false, # false
+	FIRST_TRAPUSINSIU_CHAT = true, # true
 	
 }
 var found_pages := {
@@ -41,10 +43,16 @@ var found_pages := {
 	PAGE_CODES.LOCATIONS_2: false, # false
 }
 var read_pages := [
-#	PAGE_CODES.GODDIU_CHIQUINININ
+	PAGE_CODES.GODDIU_CHIQUINININ,
+	PAGE_CODES.POPSY_TRAPUSINSIU,
+	PAGE_CODES.GONORREIN_PM,
 ]
 var last_page := -1
-var packed_popochius := []
+var packed_popochius := [
+	'Popsy',
+	'Trapusinsiu',
+	'Gonorrein'
+]
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ PUBLIC ░░░░

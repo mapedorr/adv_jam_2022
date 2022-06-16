@@ -5,6 +5,7 @@ extends Node
 
 signal text_speed_changed(idx)
 signal language_changed
+signal room_exited(room)
 
 export(Array, Resource) var rooms = []
 export(Array, Resource) var characters = []

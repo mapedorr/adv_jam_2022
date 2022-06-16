@@ -20,6 +20,7 @@ func on_interact() -> void:
 func on_look() -> void:
 	if Globals.packed_popochius.empty(): return
 	
+	G.show_info()
 	yield(E.run(['Player: Which popochiu should go out?']), 'completed')
 	var options := Globals.packed_popochius.duplicate()
 	options.append('None')
@@ -29,6 +30,7 @@ func on_look() -> void:
 	if choice.text != 'None':
 		Globals.packed_popochius.erase(choice.text)
 		E.current_room.add_character(C.get_character(choice.text))
+		C.get_character(choice.text).position = C.player.position + Vector2(22.0, 16.0)
 		G.done()
 	else:
 		E.run(['Player: Ok by me!'])
@@ -46,3 +48,11 @@ func added_to_inventory() -> void:
 	# Replace the call to .added_to_inventory() to implement your code. This only
 	# makes the default behavior to happen.
 	.added_to_inventory()
+
+
+func get_description() -> String:
+	if I.active and I.active.script_name == script_name:
+		return 'Backpack'
+	
+	return 'Backpack with %d Popochius inside' % Globals.packed_popochius.size() +\
+	'\n(right click to take out a Popochiu)'

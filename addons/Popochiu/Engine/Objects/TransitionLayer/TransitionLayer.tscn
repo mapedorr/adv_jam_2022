@@ -148,7 +148,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 160, -0.25, 0, 0.25, 0, 160, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 320, -0.25, 0, 0.25, 0, 320, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 1 )
 }
 tracks/1/type = "bezier"
@@ -158,7 +158,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( -90, -0.25, 0, 0.25, 0, 90, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( -180, -0.25, 0, 0.25, 0, 180, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 1 )
 }
 tracks/2/type = "value"
@@ -183,7 +183,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 160, -0.25, 0, 0.25, 0, 160, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 320, -0.25, 0, 0.25, 0, 320, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 1 )
 }
 tracks/1/type = "bezier"
@@ -193,7 +193,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 90, -0.25, 0, 0.25, 0, 270, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 180, -0.25, 0, 0.25, 0, 540, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 1 )
 }
 tracks/2/type = "value"
@@ -224,7 +224,6 @@ anims/pass_down_out = SubResource( 4 )
 
 [node name="Fade" type="Sprite" parent="Transitions"]
 visible = false
-modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 320, 180 )
 scale = Vector2( 20, 20 )
 texture = ExtResource( 2 )

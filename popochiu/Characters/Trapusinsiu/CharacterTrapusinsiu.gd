@@ -5,19 +5,48 @@ extends PopochiuCharacter
 # the function until the sequence of events finishes.
 
 const MY_PAGE := Globals.PAGE_CODES.POPSY_TRAPUSINSIU
+const PopochiuDialogOption :=\
+preload('res://addons/Popochiu/Engine/Objects/Dialog/PopochiuDialogOption.gd')
+
+
+# ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ GODOT ░░░░
+func _exit_tree() -> void:
+	if C.player.script_name != script_name:
+		Globals.packed_popochius.append(script_name)
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ VIRTUAL ░░░░
 # When the node is clicked
 func on_interact() -> void:
 	if Globals.read_pages.has(MY_PAGE):
-		E.run([
-			'Trapusinsiu: Hiiiiii!'
-		])
+		yield(E.run([
+			'Trapusinsiu: ' + Utils.say_in_popochiu('oñiiiiii!', 'hi!')
+		]), 'completed')
+		
+		if Globals.state.FIRST_TRAPUSINSIU_CHAT:
+			Globals.state.FIRST_TRAPUSINSIU_CHAT = false
+			
+			D.show_dialog('TrapusinsiuIntro')
+			return
 	else:
 		E.run([
 			'Trapusinsiu: Prrrr prr prrrrrrrrrrrr'
 		])
+		return
+	
+	var choice: PopochiuDialogOption = yield(
+		D.show_inline_dialog([
+			'I want to control you.',
+			'Keep... staying still'
+		]), 'completed'
+	)
+	
+	match choice.id:
+		'Opt1':
+			C.player = self
+			E.run(["Player: I'm on it."])
+		_:
+			G.done()
 
 
 # When the node is right clicked
