@@ -1,5 +1,6 @@
 tool
 extends PopochiuRoom
+# warning-ignore-all:return_value_discarded
 
 const COLOR_BURN := Color('BD6868')
 
@@ -19,7 +20,14 @@ func on_room_entered() -> void:
 # What happens when the room changing transition finishes. At this point the room
 # is visible.
 func on_room_transition_finished() -> void:
-	yield(E.run([]), 'completed')
+	if visited_first_time:
+		Globals.connect('book_closed', self, '_cry_again')
+		
+		yield(E.run([
+			'Goddiu(sad): ******!',
+			'Popsy: $$$$$$!',
+			'Trapusinsiu: ######!',
+		]), 'completed')
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ PUBLIC ░░░░
@@ -27,4 +35,12 @@ func on_room_transition_finished() -> void:
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ PRIVATE ░░░░
-# You could put private functions here
+func _cry_again() -> void:
+	if Globals.read_pages.has(Globals.PAGE_CODES.GODDIU_CHIQUINININ):
+		Globals.disconnect('book_closed', self, '_cry_again')
+		
+		yield(E.run([
+			'Goddiu: ' + Utils.say_in_popochiu('ay doooooooooooo', 'cries'),
+			'Popsy: $$$$$$!!!',
+			'Trapusinsiu: ######!!!',
+		]), 'completed')

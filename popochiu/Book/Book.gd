@@ -18,7 +18,7 @@ onready var _dflt_left: Vector2 = _left.rect_position
 onready var _dflt_right: Vector2 = _right.rect_position
 
 
-# ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ métodos de Godot ░░░░
+# ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ GODOT ░░░░
 func _ready() -> void:
 	$Control.connect('gui_input', self, '_check_close')
 	$Control.connect('mouse_entered', Cursor, 'set_cursor', [Cursor.Type.USE])
@@ -28,7 +28,7 @@ func _ready() -> void:
 	_right.connect('pressed', self, '_next_page')
 	_right.connect('mouse_entered', Cursor, 'set_cursor', [Cursor.Type.USE])
 	
-	Globals.connect('show_book_requested', self, 'appear')
+	Globals.connect('book_requested', self, 'appear')
 	
 	$Control.hide()
 	set_process(false)
@@ -49,8 +49,8 @@ func _process(delta: float) -> void:
 		_switch = !_switch
 
 
-# ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ métodos públicos ░░░░
-func appear() -> void:
+# ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ PUBLIC ░░░░
+func appear(in_page: int) -> void:
 	target_color = E.current_room.COLOR_BURN
 	_color_burn.material.set_shader_param('color1', Color.white)
 	_page.rect_position.y -= 360.0
@@ -61,8 +61,11 @@ func appear() -> void:
 		if Globals.found_pages[page] == true:
 			_available_pages.append(page)
 	
-	self._current_page = _available_pages[0]\
-	if Globals.last_page == -1 else Globals.last_page
+	if in_page == -1:
+		self._current_page = _available_pages[0]\
+		if Globals.last_page == -1 else Globals.last_page
+	else:
+		self._current_page = _available_pages.find(in_page)
 	
 	$Control.show()
 	A.play('sfx_close_book', false, false)
@@ -102,9 +105,10 @@ func disappear() -> void:
 	set_process(false)
 	$Control.hide()
 	Cursor.set_cursor()
+	Globals.book_closed()
 
 
-# ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ set y get ░░░░
+# ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ SET/GET ░░░░
 func set_current_page(value: int) -> void:
 	_current_page = value
 	Globals.last_page = _current_page
@@ -112,8 +116,9 @@ func set_current_page(value: int) -> void:
 		_available_pages[_current_page]).pad_zeros(2)
 	)
 	
-	if not Globals.read_pages.has(_current_page):
-		Globals.read_pages.append(_current_page)
+	var page_code: int = _available_pages[_current_page]
+	if not Globals.read_pages.has(page_code):
+		Globals.read_pages.append(page_code)
 	
 	if $Control.visible:
 		randomize()
@@ -129,7 +134,7 @@ func set_current_page(value: int) -> void:
 		_right.self_modulate.a = 0.5
 
 
-# ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ métodos privados ░░░░
+# ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ PRIVATE ░░░░
 func _check_close(e: InputEvent) -> void:
 	var mouse_event: = e as InputEventMouseButton
 	if mouse_event and mouse_event.button_index == BUTTON_LEFT \
@@ -142,11 +147,11 @@ func _burn(value: Color) -> void:
 
 
 func _prev_page() -> void:
-	self._current_page = max(_current_page - 1, 0)
+	self._current_page = int(max(_current_page - 1, 0))
 
 
 func _next_page() -> void:
-	self._current_page = min(_current_page + 1, _available_pages.size())
+	self._current_page = int(min(_current_page + 1, _available_pages.size()))
 
 
 func _enable_buttons() -> void:

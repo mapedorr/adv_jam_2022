@@ -4,18 +4,25 @@ extends PopochiuCharacter
 # Use yield(E.run([]), 'completed') if you want to pause the excecution of
 # the function until the sequence of events finishes.
 
+const MY_PAGE := Globals.PAGE_CODES.POPSY_TRAPUSINSIU
+
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ VIRTUAL ░░░░
 # When the node is clicked
 func on_interact() -> void:
-	# Replace the call to .on_interact() to implement your code. This only makes
-	# the default behavior to happen.
-	.on_interact()
+	if Globals.read_pages.has(MY_PAGE):
+		E.run([
+			'Trapusinsiu: Hiiiiii!'
+		])
+	else:
+		E.run([
+			'Trapusinsiu: Prrrr prr prrrrrrrrrrrr'
+		])
 
 
 # When the node is right clicked
 func on_look() -> void:
-	C.player = self
+	pass
 
 
 # When the node is clicked and there is an inventory item selected

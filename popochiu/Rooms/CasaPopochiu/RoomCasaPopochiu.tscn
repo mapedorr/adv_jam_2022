@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://popochiu/Rooms/CasaPopochiu/RoomCasaPopochiu.gd" type="Script" id=1]
 [ext_resource path="res://popochiu/Rooms/CasaPopochiu/Props/Drawer/PropDrawer.gd" type="Script" id=2]
@@ -11,8 +11,10 @@
 [ext_resource path="res://popochiu/Rooms/CasaPopochiu/Props/Drawer/drawer.png" type="Texture" id=9]
 [ext_resource path="res://popochiu/Rooms/CasaPopochiu/Props/Door/PropDoor.gd" type="Script" id=10]
 [ext_resource path="res://popochiu/Rooms/CasaPopochiu/Props/Door/door.png" type="Texture" id=11]
+[ext_resource path="res://addons/Popochiu/Engine/Objects/Hotspot/PopochiuHotspot.tscn" type="PackedScene" id=12]
 [ext_resource path="res://popochiu/Characters/Popsy/CharacterPopsy.tscn" type="PackedScene" id=13]
 [ext_resource path="res://popochiu/Characters/Trapusinsiu/CharacterTrapusinsiu.tscn" type="PackedScene" id=14]
+[ext_resource path="res://popochiu/Rooms/CasaPopochiu/Hotspots/Note/HotspotNote.gd" type="Script" id=15]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( -170, 115, -229, 53, -206, 43, -146, 62, 123, 127, -68, 59, -65, 38, 171, 48, 209, 94 )
@@ -41,7 +43,7 @@ texture = ExtResource( 4 )
 position = Vector2( -217, -22 )
 scale = Vector2( 2, 2 )
 script = ExtResource( 5 )
-description = "Book"
+description = "Crystal"
 walk_to_point = Vector2( 30, 50 )
 cursor = 1
 script_name = "Book"
@@ -52,7 +54,7 @@ position = Vector2( 2.5, -1 )
 texture = ExtResource( 7 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Book"]
-polygon = PoolVector2Array( -1.5, 9, 1.5, 9, 6.5, 3, 4.5, -8, 0.5, -8, -3.5, -3 )
+polygon = PoolVector2Array( -7.5, 10, 3.5, 12, 12.5, 4, 12.5, -12, 2, -14, -7.5, -5 )
 
 [node name="Drawer" parent="Props" instance=ExtResource( 3 )]
 position = Vector2( -111, 27 )
@@ -64,6 +66,18 @@ walk_to_point = Vector2( 20, 22 )
 cursor = 1
 script_name = "Drawer"
 texture = ExtResource( 9 )
+
+[node name="BaselineHelper" parent="Props/Drawer" index="0"]
+visible = false
+position = Vector2( 0, 13 )
+
+[node name="WalkToHelper" parent="Props/Drawer" index="1"]
+visible = false
+position = Vector2( 20, 22 )
+
+[node name="Sprite" parent="Props/Drawer" index="2"]
+texture = ExtResource( 9 )
+hframes = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Drawer"]
 polygon = PoolVector2Array( -16, 15, -19, 12.5, -20, -12.5, 14.5, -16, 16.5, -14, 19, 12.5 )
@@ -82,6 +96,16 @@ texture = ExtResource( 11 )
 polygon = PoolVector2Array( -15.5, 20.5, -13.5, -23.5, 14.5, -22.5, 16.5, 22.5 )
 
 [node name="Hotspots" type="Node2D" parent="."]
+
+[node name="Note" type="Area2D" parent="Hotspots" instance=ExtResource( 12 )]
+position = Vector2( -199, 4 )
+script = ExtResource( 15 )
+description = "Note"
+cursor = 5
+script_name = "Note"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hotspots/Note"]
+polygon = PoolVector2Array( -7, 15, -7, -5, 5, -15, 5, 4 )
 
 [node name="Regions" type="Node2D" parent="."]
 
@@ -112,3 +136,5 @@ position = Vector2( 94, 86 )
 
 [node name="CharacterTrapusinsiu" parent="Characters" instance=ExtResource( 14 )]
 position = Vector2( -1, 52 )
+
+[editable path="Props/Drawer"]

@@ -1,7 +1,6 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://popochiu/Rooms/Office/RoomOffice.gd" type="Script" id=1]
-[ext_resource path="res://addons/Popochiu/Engine/Objects/Prop/PopochiuProp.gd" type="Script" id=2]
 [ext_resource path="res://addons/Popochiu/Engine/Objects/Prop/PopochiuProp.tscn" type="PackedScene" id=3]
 [ext_resource path="res://popochiu/Rooms/Office/Props/bg.png" type="Texture" id=4]
 [ext_resource path="res://popochiu/Rooms/Office/Props/Freezer/PropFreezer.gd" type="Script" id=5]
@@ -30,12 +29,8 @@ limit_bottom = 0.0
 
 [node name="Props" type="Node2D" parent="."]
 
-[node name="Bg" type="Area2D" parent="Props" instance=ExtResource( 3 )]
+[node name="Bg" parent="Props" instance=ExtResource( 3 )]
 scale = Vector2( 2, 2 )
-script = ExtResource( 2 )
-__meta__ = {
-"_editor_description_": ""
-}
 description = "Bg"
 clickable = false
 baseline = -90
@@ -43,13 +38,10 @@ cursor = 1
 script_name = "Bg"
 texture = ExtResource( 4 )
 
-[node name="Freezer" type="Area2D" parent="Props" instance=ExtResource( 3 )]
+[node name="Freezer" parent="Props" instance=ExtResource( 3 )]
 position = Vector2( 16, -29 )
 scale = Vector2( 2, 2 )
 script = ExtResource( 5 )
-__meta__ = {
-"_editor_description_": ""
-}
 description = "New model"
 baseline = 19
 walk_to_point = Vector2( 34, 22 )
@@ -60,15 +52,12 @@ texture = ExtResource( 6 )
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Freezer"]
 polygon = PoolVector2Array( -26, 17, -28, -17, -24, -24, -16, -24, 21, -18, 25, -11, 27, 19, 17, 24 )
 
-[node name="Translator" type="Area2D" parent="Props" instance=ExtResource( 3 )]
+[node name="Translator" parent="Props" instance=ExtResource( 3 )]
 visible = false
 position = Vector2( 19, 106 )
 scale = Vector2( 2, 2 )
 input_pickable = false
 script = ExtResource( 7 )
-__meta__ = {
-"_editor_description_": ""
-}
 description = "Translator"
 walk_to_point = Vector2( 0, -10 )
 cursor = 1
@@ -78,13 +67,10 @@ texture = ExtResource( 8 )
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Translator"]
 polygon = PoolVector2Array( -7, 1, -7, -2, -3, -5, 3, -5, 7, -2, 7, 1, 4, 3, -4, 3 )
 
-[node name="Desk" type="Area2D" parent="Props" instance=ExtResource( 3 )]
+[node name="Desk" parent="Props" instance=ExtResource( 3 )]
 position = Vector2( 34, 88 )
 scale = Vector2( 2, 2 )
 script = ExtResource( 9 )
-__meta__ = {
-"_editor_description_": ""
-}
 description = "Desk"
 baseline = 11
 walk_to_point = Vector2( 20, 20 )
@@ -95,13 +81,10 @@ texture = ExtResource( 10 )
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Desk"]
 polygon = PoolVector2Array( -33, 13.5, -35, -10.5, 13, -19.5, 35, -11.5, 34, 11.5, -12, 19.5, -18, 19.5 )
 
-[node name="Note" type="Area2D" parent="Props" instance=ExtResource( 3 )]
+[node name="Note" parent="Props" instance=ExtResource( 3 )]
 position = Vector2( 37, 66 )
 scale = Vector2( 2, 2 )
 script = ExtResource( 11 )
-__meta__ = {
-"_editor_description_": ""
-}
 description = "Note"
 baseline = 22
 walk_to_point = Vector2( 19, 31 )
@@ -115,7 +98,7 @@ polygon = PoolVector2Array( -8, -0.5, -2, 2.5, 8, 0.5, 8, -0.5, 2, -3.5, -8, -1.
 
 [node name="Hotspots" type="Node2D" parent="."]
 
-[node name="Exit" type="Area2D" parent="Hotspots" instance=ExtResource( 12 )]
+[node name="Exit" parent="Hotspots" instance=ExtResource( 12 )]
 position = Vector2( -196, -56 )
 script = ExtResource( 14 )
 description = "Exit"

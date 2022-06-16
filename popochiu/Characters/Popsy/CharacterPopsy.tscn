@@ -13,6 +13,7 @@ description = "Popsy"
 cursor = 8
 script_name = "Popsy"
 text_color = Color( 0.388235, 0.486275, 0.560784, 1 )
+can_move = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -6, -19, -1.5, -22, 2, -22, 6, -19, 12, -15, 13, -9, 9, -5, 5, -4, -5, -4, -9, -5, -13, -9, -12, -15 )
@@ -44,3 +45,4 @@ texture = ExtResource( 2 )
 
 [node name="DialogPos" type="Position2D" parent="."]
 visible = false
+position = Vector2( 0, -24 )

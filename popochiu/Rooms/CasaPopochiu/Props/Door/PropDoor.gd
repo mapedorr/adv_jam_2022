@@ -8,6 +8,10 @@ extends PopochiuProp
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ VIRTUAL ░░░░
 # When the node is clicked
 func on_interact() -> void:
+	if not C.player.can_move:
+		E.run([G.display('You are not controlling any character!')])
+		return
+	
 	yield(E.run([C.walk_to_clicked()]), 'completed')
 	
 	E.goto_room('Map')

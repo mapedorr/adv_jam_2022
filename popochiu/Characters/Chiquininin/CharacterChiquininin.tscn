@@ -13,6 +13,7 @@ description = "Chiquininin"
 cursor = 8
 script_name = "Chiquininin"
 text_color = Color( 0.529412, 0.760784, 0.576471, 1 )
+can_move = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -3, -16, 3, -16, 7, -13, 8, -8, 6, -4, 3, -2, -3, -2, -6, -4, -8, -8, -7, -13 )
@@ -43,4 +44,4 @@ position = Vector2( 0, -8 )
 texture = ExtResource( 2 )
 
 [node name="DialogPos" type="Position2D" parent="."]
-visible = false
+position = Vector2( 0, -17.5 )

@@ -1,6 +1,8 @@
 extends Node
+# warning-ignore-all:unused_signal
 
-signal show_book_requested
+signal book_requested(page)
+signal book_closed
 
 enum PAGE_CODES {
 	COVER,
@@ -13,32 +15,42 @@ enum PAGE_CODES {
 	GONORREIN_PM,
 	OTHER_CREATURES,
 	ITEMS,
-	LOCATIONS
+	LOCATIONS_1,
+	LOCATIONS_2,
 }
 
-const STATE := {
-	LAIR_DISCOVERED = false # false
+var state := {
+	BOOK_CRYSTAL_BROKEN = false, # false
+	LAIR_DISCOVERED = false, # false
+	SCEPTER_IN_PLACE = false, # false
+	SCEPTER_PUSHED = false, # false
+	
 }
-
 var found_pages := {
-	0: true, # true
-	1: false, # false
-	2: false, # false
-	3: true, # true
-	4: true, # true
-	5: true, # true
-	6: false, # false
-	7: false, # false
-	8: false, # false
-	9: true, # true
-	10: true, # true
-	11: false, # false
+	PAGE_CODES.COVER: true, # true
+	PAGE_CODES.CREDITS: false, # false
+	PAGE_CODES.TOC: false, # false
+	PAGE_CODES.STORY: true, # true
+	PAGE_CODES.GI: true, # true
+	PAGE_CODES.GODDIU_CHIQUINININ: true, # true
+	PAGE_CODES.POPSY_TRAPUSINSIU: false, # false
+	PAGE_CODES.GONORREIN_PM: false, # false
+	PAGE_CODES.OTHER_CREATURES: false, # false
+	PAGE_CODES.ITEMS: true, # true
+	PAGE_CODES.LOCATIONS_1: true, # true
+	PAGE_CODES.LOCATIONS_2: false, # false
 }
-var read_pages := []
+var read_pages := [
+#	PAGE_CODES.GODDIU_CHIQUINININ
+]
 var last_page := -1
 var packed_popochius := []
 
-# Cave: 8BBDE6
 
-func show_book() -> void:
-	emit_signal('show_book_requested')
+# ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ PUBLIC ░░░░
+func show_book(page := -1) -> void:
+	emit_signal('book_requested', page)
+
+
+func book_closed() -> void:
+	emit_signal('book_closed')

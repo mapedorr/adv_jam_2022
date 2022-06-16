@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://popochiu/InventoryItems/IceCream/InventoryIceCream.gd" type="Script" id=1]
+[ext_resource path="res://popochiu/InventoryItems/IceCream/ice_cream.png" type="Texture" id=2]
+
+[node name="InventoryIceCream" type="TextureRect"]
+mouse_filter = 0
+size_flags_vertical = 4
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+description = "Ice cream"
+script_name = "IceCream"
+cursor = 10

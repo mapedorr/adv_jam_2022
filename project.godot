@@ -101,6 +101,7 @@ D="*res://addons/Popochiu/Engine/Interfaces/IDialog.gd"
 G="*res://addons/Popochiu/Engine/Interfaces/IGraphicInterface.gd"
 A="*res://addons/Popochiu/Engine/AudioManager/AudioManager.tscn"
 Globals="*res://popochiu/Globals.gd"
+Utils="*res://popochiu/Utils.gd"
 
 [display]
 

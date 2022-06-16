@@ -8,20 +8,65 @@ extends PopochiuProp
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ VIRTUAL ░░░░
 # When the node is clicked
 func on_interact() -> void:
-	# Replace the call to .on_interact() to implement your code. This only makes
-	# the default behavior to happen.
-	.on_interact()
+	yield(E.run([
+		C.walk_to_clicked(),
+		C.face_clicked(),
+	]), 'completed')
+	
+	match $Sprite.frame:
+		0:
+			if C.player.script_name == 'Trapusinsiu':
+				yield(E.run([
+					'Player: I remember this symbol.',
+					'Player: Marcianiu tought me how to activate it.',
+					'Player: ñiñiñi ñiñi ñiñiñiñi...',
+					'Player: ñiñi ñiñiñiñiñiñiñi ñiñiñiñi...',
+					E.play_transition(TransitionLayer.PASS_DOWN_IN, 1.0),
+					E.wait(2),
+					E.play_transition(TransitionLayer.PASS_DOWN_OUT, 1.0),
+					'Player: ñiñiñiñiñiñiñiñiñi.',
+				]), 'completed')
+				
+				if Globals.state.SCEPTER_PUSHED:
+					$Sprite.frame = 2
+					room.get_prop('Hideout').open()
+				else:
+					E.run([
+						'Player: What?',
+						"Player: I'm sure this is the right thing to say...",
+						"Player: But it didn't work...",
+						'Player: Something must be missing.'
+					])
+			else:
+				E.run([
+					"Player: I don't know what to do here."
+				])
+		1:
+			E.run([
+				'Player: It is already activated...'
+			])
 
 
 # When the node is right clicked
 func on_look() -> void:
-	# Replace the call to .on_look() to implement your code. This only makes
-	# the default behavior to happen.
-	.on_look()
+	yield(E.run([
+		C.walk_to_clicked(),
+		C.face_clicked(),
+	]), 'completed')
+	
+	match $Sprite.frame:
+		0:
+			if C.player.script_name == 'Trapusinsiu':
+				E.run([
+					'Player: I remember this symbol.',
+					'Player: Marcianiu tought me how to activate it.'
+				])
+			else:
+				E.run(['Player: What does this mean...?'])
+		1:
+			E.run(['Player: Awesome!'])
 
 
 # When the node is clicked and there is an inventory item selected
 func on_item_used(item: PopochiuInventoryItem) -> void:
-	# Replace the call to .on_item_used(item) to implement your code. This only
-	# makes the default behavior to happen.
-	.on_item_used(item)
+	E.run(['Player: No can do.'])

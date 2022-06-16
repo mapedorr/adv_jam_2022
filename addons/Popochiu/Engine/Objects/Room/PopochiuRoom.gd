@@ -92,7 +92,7 @@ func _unhandled_input(event):
 			if I.active: I.set_active_item()
 		return
 
-	if is_instance_valid(C.player):
+	if is_instance_valid(C.player) and C.player.can_move:
 		C.player.walk(get_local_mouse_position(), false)
 
 

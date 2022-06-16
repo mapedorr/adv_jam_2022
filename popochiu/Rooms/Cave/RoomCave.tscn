@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://popochiu/Rooms/Cave/RoomCave.gd" type="Script" id=1]
 [ext_resource path="res://popochiu/Characters/Marcianiu/CharacterMarcianiu.tscn" type="PackedScene" id=2]
@@ -13,6 +13,8 @@
 [ext_resource path="res://popochiu/Rooms/Cave/Props/Hideout/hideout_door.png" type="Texture" id=11]
 [ext_resource path="res://addons/Popochiu/Engine/Objects/Hotspot/PopochiuHotspot.tscn" type="PackedScene" id=12]
 [ext_resource path="res://popochiu/Rooms/Cave/Hotspots/Exit/HotspotExit.gd" type="Script" id=13]
+[ext_resource path="res://popochiu/Rooms/Cave/Props/Page/PropPage.gd" type="Script" id=14]
+[ext_resource path="res://popochiu/Rooms/Cave/Props/Page/page.png" type="Texture" id=15]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 142, 97, 213, 175, 77, 176, 8, 119, 7, 60, -98, 44, -150, 13, -88, -9, -31, 8, 62, 8, 126, 22, 199, 64, 193, 20 )
@@ -102,6 +104,22 @@ texture = ExtResource( 10 )
 position = Vector2( 2.5, -0.5 )
 texture = ExtResource( 11 )
 hframes = 2
+
+[node name="Page" type="Area2D" parent="Props" instance=ExtResource( 3 )]
+position = Vector2( 48, 41 )
+script = ExtResource( 14 )
+__meta__ = {
+"_editor_description_": ""
+}
+description = "Page"
+walk_to_point = Vector2( 12, -8 )
+cursor = 1
+script_name = "Page"
+texture = ExtResource( 15 )
+target = 7
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Page"]
+polygon = PoolVector2Array( -8, 1, -2, 4, 0, 4, 8, 0, 8, -1, 2, -4, 0, -4, -8, 0 )
 
 [node name="Hotspots" type="Node2D" parent="."]
 
