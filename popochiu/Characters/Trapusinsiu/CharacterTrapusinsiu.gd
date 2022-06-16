@@ -11,6 +11,8 @@ preload('res://addons/Popochiu/Engine/Objects/Dialog/PopochiuDialogOption.gd')
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ GODOT ░░░░
 func _exit_tree() -> void:
+	if Engine.editor_hint: return
+	
 	if C.player.script_name != script_name:
 		Globals.packed_popochius.append(script_name)
 

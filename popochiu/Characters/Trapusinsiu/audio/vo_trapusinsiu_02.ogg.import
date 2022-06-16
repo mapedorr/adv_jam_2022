@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/vo_trapusinsiu_02.ogg-a80554835d92d77a9985acf5eb2e3136.oggstr"
+
+[deps]
+
+source_file="res://popochiu/Characters/Trapusinsiu/audio/vo_trapusinsiu_02.ogg"
+dest_files=[ "res://.import/vo_trapusinsiu_02.ogg-a80554835d92d77a9985acf5eb2e3136.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

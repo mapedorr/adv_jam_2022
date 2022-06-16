@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/vo_gonorrein_03.ogg-b59d7a37a1bec931f80eb982c7c745ac.oggstr"
+
+[deps]
+
+source_file="res://popochiu/Characters/Gonorrein/audio/vo_gonorrein_03.ogg"
+dest_files=[ "res://.import/vo_gonorrein_03.ogg-b59d7a37a1bec931f80eb982c7c745ac.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

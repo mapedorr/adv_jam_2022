@@ -13,6 +13,11 @@ description = "Chiquininin"
 cursor = 8
 script_name = "Chiquininin"
 text_color = Color( 0.529412, 0.760784, 0.576471, 1 )
+voices = [ {
+"cue": "vo_chiquininin",
+"emotion": "",
+"variations": 3
+} ]
 can_move = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
@@ -44,4 +49,5 @@ position = Vector2( 0, -8 )
 texture = ExtResource( 2 )
 
 [node name="DialogPos" type="Position2D" parent="."]
+visible = false
 position = Vector2( 0, -17.5 )

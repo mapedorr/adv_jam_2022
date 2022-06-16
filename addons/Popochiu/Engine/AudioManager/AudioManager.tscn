@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://addons/Popochiu/Engine/AudioManager/AudioManager.gd" type="Script" id=1]
 [ext_resource path="res://popochiu/Characters/Goddiu/audio/VoGoddiu01.tres" type="Resource" id=2]
@@ -7,11 +7,20 @@
 [ext_resource path="res://popochiu/Book/audio/SfxCloseBook.tres" type="Resource" id=5]
 [ext_resource path="res://popochiu/Book/audio/SfxTurnPage01.tres" type="Resource" id=6]
 [ext_resource path="res://popochiu/Book/audio/SfxTurnPage02.tres" type="Resource" id=7]
+[ext_resource path="res://popochiu/Characters/Popsy/audio/VoPopsy01.tres" type="Resource" id=8]
+[ext_resource path="res://popochiu/Characters/Popsy/audio/VoPopsy02.tres" type="Resource" id=9]
+[ext_resource path="res://popochiu/Characters/Popsy/audio/VoPopsy03.tres" type="Resource" id=10]
+[ext_resource path="res://popochiu/Characters/Trapusinsiu/audio/VoTrapusinsiu01.tres" type="Resource" id=11]
+[ext_resource path="res://popochiu/Characters/Trapusinsiu/audio/VoTrapusinsiu02.tres" type="Resource" id=12]
+[ext_resource path="res://popochiu/Characters/Trapusinsiu/audio/VoTrapusinsiu03.tres" type="Resource" id=13]
+[ext_resource path="res://popochiu/Characters/Gonorrein/audio/VoGonorrein01.tres" type="Resource" id=14]
+[ext_resource path="res://popochiu/Characters/Gonorrein/audio/VoGonorrein02.tres" type="Resource" id=15]
+[ext_resource path="res://popochiu/Characters/Gonorrein/audio/VoGonorrein03.tres" type="Resource" id=16]
 
 [node name="AudioManager" type="Node"]
 script = ExtResource( 1 )
 sfx_cues = [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ]
-vo_cues = [ ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 4 ) ]
+vo_cues = [ ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 14 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 8 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ]
 
 [node name="Positional" type="Node" parent="."]
 

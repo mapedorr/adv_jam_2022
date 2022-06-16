@@ -18,6 +18,8 @@ func _ready() -> void:
 
 
 func _exit_tree() -> void:
+	if Engine.editor_hint: return
+	
 	if C.player.script_name != script_name:
 		Globals.packed_popochius.append(script_name)
 
@@ -75,7 +77,8 @@ func play_idle() -> void:
 	
 	if _looking_dir == 'l':
 		$Sprite.flip_h = true
-	$AnimationPlayer.play('RESET')
+	
+	$AnimationPlayer.play('idle')
 
 
 # Use it to play the walk animation for the character
@@ -86,7 +89,15 @@ func play_walk(_target_pos: Vector2) -> void:
 
 # Use it to play the talk animation for the character
 func play_talk() -> void:
-	pass
+	$Sprite.flip_h = false
+	
+	if _looking_dir == 'l':
+		$Sprite.flip_h = true
+	
+	if emotion == 'sad':
+		$AnimationPlayer.play('cry')
+	else:
+		$AnimationPlayer.play('talk')
 
 
 # Use it to play the grab animation for the character

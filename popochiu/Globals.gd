@@ -39,7 +39,7 @@ var found_pages := {
 	PAGE_CODES.GONORREIN_PM: false, # false
 	PAGE_CODES.OTHER_CREATURES: false, # false
 	PAGE_CODES.ITEMS: true, # true
-	PAGE_CODES.LOCATIONS_1: true, # true
+	PAGE_CODES.LOCATIONS_1: false, # true
 	PAGE_CODES.LOCATIONS_2: false, # false
 }
 var read_pages := [

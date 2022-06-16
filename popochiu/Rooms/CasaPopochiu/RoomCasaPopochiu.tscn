@@ -133,8 +133,18 @@ voices = [ {
 
 [node name="CharacterPopsy" parent="Characters" instance=ExtResource( 13 )]
 position = Vector2( 94, 86 )
+voices = [ {
+"cue": "vo_popsy",
+"emotion": "",
+"variations": 3
+} ]
 
 [node name="CharacterTrapusinsiu" parent="Characters" instance=ExtResource( 14 )]
 position = Vector2( -1, 52 )
+voices = [ {
+"cue": "vo_trapusinsiu",
+"emotion": "",
+"variations": 3
+} ]
 
 [editable path="Props/Drawer"]

@@ -20,13 +20,13 @@ func on_room_entered() -> void:
 # What happens when the room changing transition finishes. At this point the room
 # is visible.
 func on_room_transition_finished() -> void:
-	if visited_first_time:
+	if visited_first_time and not I.is_item_in_inventory('Book'):
 		Globals.connect('book_closed', self, '_cry_again')
 		
 		yield(E.run([
 			'Goddiu(sad): ******!',
-			'Popsy: $$$$$$!',
-			'Trapusinsiu: ######!',
+			'Popsy(sad): $$$$$$!',
+			'Trapusinsiu(sad): ######!',
 		]), 'completed')
 
 
