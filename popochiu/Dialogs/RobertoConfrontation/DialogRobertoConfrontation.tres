@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://popochiu/Dialogs/RobertoConfrontation/DialogRobertoConfrontation.gd" type="Script" id=1]
+[ext_resource path="res://addons/Popochiu/Engine/Objects/Dialog/PopochiuDialogOption.gd" type="Script" id=2]
+
+[sub_resource type="Resource" id=1]
+resource_name = "Opt1"
+script = ExtResource( 2 )
+id = "Opt1"
+text = "Where is Chiquininín?"
+visible = true
+
+[resource]
+resource_name = "RobertoConfrontation"
+script = ExtResource( 1 )
+options = [ SubResource( 1 ) ]
+script_name = "RobertoConfrontation"

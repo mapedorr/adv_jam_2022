@@ -35,14 +35,16 @@ const MAIN_OFFICE := 5
 
 var state := {
 	BOOK_CRYSTAL_BROKEN = false, # false
-	LAIR_DISCOVERED = false, # false
 	SCEPTER_IN_PLACE = false, # false
 	SCEPTER_PUSHED = false, # false
 	SYMBOL_ACTIVATED = false, # false
 	FIRST_TRAPUSINSIU_CHAT = true, # true
 	LIGHT_ROOM_ON = false, # false
 	LIGHT_ROOM_COLOR = BLUE_LIGHT, # BLUE_LIGHT
-	PUSHED_DESKS = []
+	PUSHED_DESKS = [],
+	LAIR_DISCOVERED = true, # false
+	PUSHED_SAFEBOX = true, # false
+	CHIQUINININ_FREED = false, # false
 }
 var found_pages := {
 	PageCodes.COVER: true, # true

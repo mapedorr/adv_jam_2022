@@ -8,23 +8,31 @@ extends PopochiuCharacter
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ VIRTUAL ░░░░
 # When the node is clicked
 func on_interact() -> void:
-	# Replace the call to .on_interact() to implement your code. This only makes
-	# the default behavior to happen.
-	.on_interact()
+	E.run([
+		"Player: We'd better not approach without having something to protect ourselves with."
+	])
 
 
 # When the node is right clicked
 func on_look() -> void:
-	# Replace the call to .on_look() to implement your code. This only makes
-	# the default behavior to happen.
-	.on_look()
+	E.run([
+		'Player: He is... disgusting',
+		'Roberto: Hey!!!! I heard that!!!'
+	])
 
 
 # When the node is clicked and there is an inventory item selected
 func on_item_used(item: PopochiuInventoryItem) -> void:
-	# Replace the call to .on_item_used(item) to implement your code. This only
-	# makes the default behavior to happen.
-	.on_item_used(item)
+	if item.script_name == 'Knife':
+		E.run([
+			C.walk_to_clicked(),
+			# TODO: Hacer algo medio animado...
+			C.get_character('Roberto').disable()
+		])
+	else:
+		E.run([
+			"Player: Hitting him with it won't do any good."
+		])
 
 
 # Use it to play the idle animation for the character

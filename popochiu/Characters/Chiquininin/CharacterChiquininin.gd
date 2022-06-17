@@ -28,6 +28,10 @@ func _exit_tree() -> void:
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ VIRTUAL ░░░░
 # When the node is clicked
 func on_interact() -> void:
+	if not Globals.playable_popochius.has(script_name):
+		yield(E.run([C.walk_to_clicked()]), 'completed')
+		return
+	
 	var choice: PopochiuDialogOption = yield(
 		D.show_inline_dialog([
 			'I want to control you.',

@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://popochiu/Rooms/Lair/RoomLair.gd" type="Script" id=1]
+[ext_resource path="res://popochiu/Characters/Roberto/CharacterRoberto.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/Popochiu/Engine/Objects/Prop/PopochiuProp.tscn" type="PackedScene" id=3]
 [ext_resource path="res://popochiu/Rooms/Lair/Props/bg.png" type="Texture" id=4]
 [ext_resource path="res://popochiu/Rooms/Lair/Props/Cover/PropCover.gd" type="Script" id=5]
@@ -9,6 +10,7 @@
 [ext_resource path="res://popochiu/Rooms/Lair/Props/SafeBox/safe_box.png" type="Texture" id=8]
 [ext_resource path="res://addons/Popochiu/Engine/Objects/Hotspot/PopochiuHotspot.tscn" type="PackedScene" id=9]
 [ext_resource path="res://popochiu/Rooms/Lair/Hotspots/Exit/HotspotExit.gd" type="Script" id=10]
+[ext_resource path="res://popochiu/Characters/Chiquininin/CharacterChiquininin.tscn" type="PackedScene" id=11]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( -56, 40, -107, -13, 1, -92, 258, -68, 270, 131, -6, 165, -256, 165, -176, 83, -292, 76, -225, 42 )
@@ -23,6 +25,8 @@ limit_right = 0.0
 limit_top = 0.0
 limit_bottom = 0.0
 
+[node name="Tween" type="Tween" parent="."]
+
 [node name="Props" type="Node2D" parent="."]
 
 [node name="Bg" parent="Props" instance=ExtResource( 3 )]
@@ -35,8 +39,10 @@ script_name = "Bg"
 texture = ExtResource( 4 )
 
 [node name="Cover" parent="Props" instance=ExtResource( 3 )]
+visible = false
 position = Vector2( -162, 0 )
 scale = Vector2( 2, 2 )
+input_pickable = false
 script = ExtResource( 5 )
 description = "Cover"
 baseline = -90
@@ -66,7 +72,7 @@ scale = Vector2( 2, 2 )
 script = ExtResource( 7 )
 description = "SafeBox"
 baseline = 28
-walk_to_point = Vector2( 40, 12 )
+walk_to_point = Vector2( 54, 32 )
 cursor = 1
 script_name = "SafeBox"
 texture = ExtResource( 8 )
@@ -91,7 +97,7 @@ polygon = PoolVector2Array( -40, 23, -42, -31, 32, -33, 47, 23 )
 [node name="Points" type="Node2D" parent="."]
 
 [node name="Entrance" type="Position2D" parent="Points"]
-position = Vector2( -51, 131 )
+position = Vector2( -76, 140 )
 
 [node name="WalkableAreas" type="Node2D" parent="."]
 
@@ -101,5 +107,16 @@ position = Vector2( -51, 131 )
 navpoly = SubResource( 1 )
 
 [node name="Characters" type="Node2D" parent="."]
+
+[node name="CharacterRoberto" parent="Characters" instance=ExtResource( 2 )]
+position = Vector2( 126, 5 )
+
+[node name="CharacterChiquininin" parent="Characters" instance=ExtResource( 11 )]
+position = Vector2( -148, 44 )
+voices = [ {
+"cue": "vo_chiquininin",
+"emotion": "",
+"variations": 3
+} ]
 
 [editable path="Props/Cover"]

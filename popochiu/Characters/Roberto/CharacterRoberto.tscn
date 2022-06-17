@@ -4,6 +4,7 @@
 [ext_resource path="res://popochiu/Characters/Roberto/roberto.png" type="Texture" id=2]
 
 [node name="CharacterRoberto" type="Area2D"]
+scale = Vector2( 2, 2 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
@@ -42,4 +43,5 @@ position = Vector2( 0, -17 )
 texture = ExtResource( 2 )
 
 [node name="DialogPos" type="Position2D" parent="."]
+visible = false
 position = Vector2( 0, -38 )

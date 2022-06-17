@@ -8,6 +8,9 @@ extends PopochiuHotspot
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ VIRTUAL ░░░░
 # When the node is clicked
 func on_interact() -> void:
+	if not C.player.can_move: 
+		return
+	
 	yield(E.run([C.walk_to_clicked()]), 'completed')
 	E.goto_room('Map')
 
