@@ -154,7 +154,6 @@ func _menu_item_pressed(id: int) -> void:
 				'[Popochiu] Could not put item "%s" on start' % name
 			)
 			
-			prints('¿Está o no?', name in main_dock.get_popochiu().items_on_start)
 			self.is_on_start = name in main_dock.get_popochiu().items_on_start
 		MenuOptions.DELETE:
 			_remove_object()

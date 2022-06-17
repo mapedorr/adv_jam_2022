@@ -19,6 +19,9 @@ enum PAGE_CODES {
 	LOCATIONS_2,
 }
 
+const BLUE_LIGHT := '00f3ff'
+const PINK_LIGHT := 'eaaded'
+
 var state := {
 	BOOK_CRYSTAL_BROKEN = false, # false
 	LAIR_DISCOVERED = false, # false
@@ -26,6 +29,8 @@ var state := {
 	SCEPTER_PUSHED = false, # false
 	SYMBOL_ACTIVATED = false, # false
 	FIRST_TRAPUSINSIU_CHAT = true, # true
+	LIGHT_ROOM_ON = false, # false
+	LIGHT_ROOM_COLOR = BLUE_LIGHT, # BLUE_LIGHT
 }
 var found_pages := {
 	PAGE_CODES.COVER: true, # true
@@ -38,7 +43,7 @@ var found_pages := {
 	PAGE_CODES.GONORREIN_PM: false, # false
 	PAGE_CODES.OTHER_CREATURES: false, # false
 	PAGE_CODES.ITEMS: true, # true
-	PAGE_CODES.LOCATIONS_1: false, # true
+	PAGE_CODES.LOCATIONS_1: true, # true
 	PAGE_CODES.LOCATIONS_2: false, # false
 }
 var read_pages := [

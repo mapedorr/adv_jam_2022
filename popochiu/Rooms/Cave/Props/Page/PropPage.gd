@@ -47,3 +47,9 @@ func on_look() -> void:
 # When the node is clicked and there is an inventory item selected
 func on_item_used(_item: PopochiuInventoryItem) -> void:
 	C.player_say('What?', false)
+
+
+# ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ PUBLIC ░░░░
+func appear() -> void:
+	if not Globals.found_pages[target] and not Globals.read_pages.has(target):
+		enable(false)

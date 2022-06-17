@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://popochiu/Rooms/LightRoom/RoomLightRoom.gd" type="Script" id=1]
+[ext_resource path="res://addons/Popochiu/Engine/Objects/Prop/PopochiuProp.gd" type="Script" id=2]
 [ext_resource path="res://addons/Popochiu/Engine/Objects/Prop/PopochiuProp.tscn" type="PackedScene" id=3]
 [ext_resource path="res://popochiu/Rooms/LightRoom/Props/bg.png" type="Texture" id=4]
 [ext_resource path="res://popochiu/Rooms/LightRoom/Props/Switch/PropSwitch.gd" type="Script" id=5]
@@ -9,11 +10,46 @@
 [ext_resource path="res://popochiu/Rooms/LightRoom/Props/Lamp/lamp.png" type="Texture" id=8]
 [ext_resource path="res://popochiu/Rooms/LightRoom/Props/Exit/PropExit.gd" type="Script" id=9]
 [ext_resource path="res://popochiu/Rooms/LightRoom/Props/Exit/exit.png" type="Texture" id=10]
+[ext_resource path="res://popochiu/Rooms/Cave/Props/Page/PropPage.gd" type="Script" id=11]
+[ext_resource path="res://popochiu/Rooms/Cave/Props/Page/page.png" type="Texture" id=12]
+[ext_resource path="res://popochiu/Rooms/LightRoom/Props/light.png" type="Texture" id=13]
+[ext_resource path="res://popochiu/Rooms/LightRoom/Props/over.png" type="Texture" id=14]
 
 [sub_resource type="NavigationPolygon" id=1]
-vertices = PoolVector2Array( -3, 8, 48, 17, -4, 94, -102, 65 )
+vertices = PoolVector2Array( -3, 8, 125, 32, 54, 111, -102, 65 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
-outlines = [ PoolVector2Array( -102, 65, -4, 94, 48, 17, -3, 8 ) ]
+outlines = [ PoolVector2Array( -102, 65, 54, 111, 125, 32, -3, 8 ) ]
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+uniform vec4 color1: hint_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform vec4 color2: hint_color = vec4(1.0, 1.0, 1.0, 1.0);
+
+vec4 color_burn(vec4 base, vec4 blend){
+	return 1.0 - (1.0 - base) / blend;
+}
+
+vec4 color_dodge(vec4 base, vec4 blend){
+	return base / (1.0 - blend);
+}
+
+vec4 hard_light(vec4 base, vec4 blend){
+	vec4 limit = step(0.5, blend);
+	return mix(2.0 * base * blend, 1.0 - 2.0 * (1.0 - base) * (1.0 - blend), limit);
+}
+
+
+void fragment()
+{
+	COLOR = color_burn(texture(SCREEN_TEXTURE, SCREEN_UV), color1);
+}
+"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+shader_param/color1 = Color( 0, 0.952941, 1, 1 )
+shader_param/color2 = Color( 1, 1, 1, 1 )
 
 [node name="RoomLightRoom" type="Node2D"]
 script = ExtResource( 1 )
@@ -33,6 +69,32 @@ baseline = -90
 cursor = 1
 script_name = "Bg"
 texture = ExtResource( 4 )
+
+[node name="BaselineHelper" parent="Props/Bg" index="0"]
+visible = false
+position = Vector2( 0, -90 )
+
+[node name="WalkToHelper" parent="Props/Bg" index="1"]
+visible = false
+
+[node name="Sprite" parent="Props/Bg" index="2"]
+texture = ExtResource( 4 )
+hframes = 2
+frame = 1
+
+[node name="Over" type="Area2D" parent="Props" instance=ExtResource( 3 )]
+scale = Vector2( 2, 2 )
+script = ExtResource( 2 )
+__meta__ = {
+"_editor_description_": ""
+}
+description = "Over"
+clickable = false
+baseline = -90
+cursor = 1
+script_name = "Over"
+always_on_top = true
+texture = ExtResource( 14 )
 
 [node name="Switch" parent="Props" instance=ExtResource( 3 )]
 position = Vector2( 38, -11 )
@@ -82,9 +144,10 @@ position = Vector2( -20, 16 )
 [node name="Sprite" parent="Props/Lamp" index="2"]
 texture = ExtResource( 8 )
 hframes = 3
+frame = 1
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Lamp"]
-polygon = PoolVector2Array( -6.5, 18, 2.5, 20, 6.5, 17, 5.5, 15, 1.5, 14, 1.5, -11, 0.5, -12, -1.5, -12, -2.5, -11, -2.5, 14, -3.5, 14 )
+polygon = PoolVector2Array( -6.5, 18, 2.5, 20, 6.5, 17, 5.5, 15, 1.5, 14, 1.5, -11, 0.5, -13, 2.5, -15, 2.5, -18, 0.5, -20, -1.5, -20, -3.5, -18, -3.5, -15, -1.5, -13, -2.5, -11, -2.5, 14, -3.5, 14 )
 
 [node name="Exit" parent="Props" instance=ExtResource( 3 )]
 modulate = Color( 1, 1, 1, 0.247059 )
@@ -99,6 +162,21 @@ texture = ExtResource( 10 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Exit"]
 polygon = PoolVector2Array( -15.5, 23.5, -16.5, -33.5, 17.5, -25.5, 19, 35 )
+
+[node name="Page" type="Area2D" parent="Props" instance=ExtResource( 3 )]
+position = Vector2( 50, 89 )
+script = ExtResource( 11 )
+__meta__ = {
+"_editor_description_": ""
+}
+description = "Page"
+cursor = 1
+script_name = "Page"
+texture = ExtResource( 12 )
+target = 10
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Page"]
+polygon = PoolVector2Array( -8, 1, -8, 0, 0, -4, 2, -4, 8, -1, 8, 0, 0, 4, -2, 4 )
 
 [node name="Hotspots" type="Node2D" parent="."]
 
@@ -118,5 +196,12 @@ navpoly = SubResource( 1 )
 
 [node name="Characters" type="Node2D" parent="."]
 
+[node name="Light" type="Sprite" parent="."]
+material = SubResource( 3 )
+scale = Vector2( 2, 2 )
+z_index = 3
+texture = ExtResource( 13 )
+
+[editable path="Props/Bg"]
 [editable path="Props/Switch"]
 [editable path="Props/Lamp"]

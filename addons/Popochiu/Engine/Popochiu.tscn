@@ -40,7 +40,7 @@ inventory_items = [ ExtResource( 9 ), ExtResource( 18 ), ExtResource( 19 ), ExtR
 dialogs = [ ExtResource( 30 ), ExtResource( 31 ) ]
 skip_cutscene_time = 0.25
 text_speeds = [ 0.05, 0.01, 0.0 ]
-items_on_start = [ "LilChipper", "Book", "Backpack", "Scepter", "Translator" ]
+items_on_start = [ "LilChipper", "Book", "Backpack", "Translator", "Bulb" ]
 inventory_always_visible = true
 
 [node name="Tween" type="Tween" parent="."]
