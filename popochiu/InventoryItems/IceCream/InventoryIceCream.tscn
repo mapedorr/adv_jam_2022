@@ -8,6 +8,6 @@ mouse_filter = 0
 size_flags_vertical = 4
 texture = ExtResource( 2 )
 script = ExtResource( 1 )
-description = "Ice cream"
+description = "Corozo + Passion fruit + Lemon pie"
 script_name = "IceCream"
 cursor = 10

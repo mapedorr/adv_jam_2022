@@ -8,20 +8,33 @@ extends PopochiuProp
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ VIRTUAL ░░░░
 # When the node is clicked
 func on_interact() -> void:
-	# Replace the call to .on_interact() to implement your code. This only makes
-	# the default behavior to happen.
-	.on_interact()
+	if not C.player.can_move:
+		return
+	
+	yield(E.run([
+		C.walk_to_clicked(),
+		C.face_clicked(),
+	]), 'completed')
+	
+	if Globals.office != Globals.MAIN_OFFICE:
+		E.run([G.display('Mr. Popsy\nThe new freezer model is in the C.C. Salitre Plaza office.\n\nPlease give it a look and let us know if you approves its massive production.\n--The freezer makers.')])
+	else:
+		E.run([G.display('Mr. Popsy\nPlease take a look on the new freezer model.\n\nLet us know if you approves its massive production.\n--The freezer makers.')])
 
 
 # When the node is right clicked
 func on_look() -> void:
-	# Replace the call to .on_look() to implement your code. This only makes
-	# the default behavior to happen.
-	.on_look()
+	if not C.player.can_move:
+		return
+	
+	yield(E.run([
+		C.walk_to_clicked(),
+		C.face_clicked(),
+		'Player: A note for %s.' %\
+		('me' if C.player.script_name == 'Popsy' else 'Popsy')
+	]), 'completed')
 
 
 # When the node is clicked and there is an inventory item selected
-func on_item_used(item: PopochiuInventoryItem) -> void:
-	# Replace the call to .on_item_used(item) to implement your code. This only
-	# makes the default behavior to happen.
-	.on_item_used(item)
+func on_item_used(_item: PopochiuInventoryItem) -> void:
+	E.run(['Player: That will not work.'])

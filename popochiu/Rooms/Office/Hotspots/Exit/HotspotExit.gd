@@ -8,7 +8,7 @@ extends PopochiuHotspot
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ VIRTUAL ░░░░
 # When the node is clicked
 func on_interact() -> void:
-	yield(C.walk_to_clicked(false), 'completed')
+	yield(E.run([C.walk_to_clicked()]), 'completed')
 	E.goto_room('Map')
 
 

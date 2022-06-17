@@ -58,8 +58,8 @@ func option_selected(opt: PopochiuDialogOption) -> void:
 			
 			opt.turn_off()
 			
-			Globals.found_pages[Globals.PAGE_CODES.OTHER_CREATURES] = true
-			Globals.show_book(Globals.PAGE_CODES.OTHER_CREATURES)
+			Globals.found_pages[Globals.PageCodes.OTHER_CREATURES] = true
+			Globals.show_book(Globals.PageCodes.OTHER_CREATURES)
 			yield(Globals, 'book_closed')
 			
 			if get_option('Opt5').used:
@@ -75,8 +75,8 @@ func option_selected(opt: PopochiuDialogOption) -> void:
 			
 			opt.turn_off()
 			
-			Globals.found_pages[Globals.PAGE_CODES.POPSY_TRAPUSINSIU] = true
-			Globals.show_book(Globals.PAGE_CODES.POPSY_TRAPUSINSIU)
+			Globals.found_pages[Globals.PageCodes.POPSY_TRAPUSINSIU] = true
+			Globals.show_book(Globals.PageCodes.POPSY_TRAPUSINSIU)
 			yield(Globals, 'book_closed')
 			
 			if get_option('Opt4').used:

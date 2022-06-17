@@ -4,7 +4,7 @@ extends Node
 signal book_requested(page)
 signal book_closed
 
-enum PAGE_CODES {
+enum PageCodes {
 	COVER,
 	CREDITS,
 	TOC,
@@ -21,6 +21,17 @@ enum PAGE_CODES {
 
 const BLUE_LIGHT := '00f3ff'
 const PINK_LIGHT := 'eaaded'
+const OFFICES := [
+	'C.C. Av. Chile',
+	'Cl. 53b 25 21',
+	'Ak. 68 66c 90',
+	'Cl. 118 19a 59',
+	'Cl. 26 62 49 Isla 1-06',
+	'C.C. Salitre Plaza',
+	'Cl. 80 59 79',
+]
+const TRANSLATOR_OFFICE := 2
+const MAIN_OFFICE := 5
 
 var state := {
 	BOOK_CRYSTAL_BROKEN = false, # false
@@ -31,34 +42,41 @@ var state := {
 	FIRST_TRAPUSINSIU_CHAT = true, # true
 	LIGHT_ROOM_ON = false, # false
 	LIGHT_ROOM_COLOR = BLUE_LIGHT, # BLUE_LIGHT
+	PUSHED_DESKS = []
 }
 var found_pages := {
-	PAGE_CODES.COVER: true, # true
-	PAGE_CODES.CREDITS: false, # false
-	PAGE_CODES.TOC: false, # false
-	PAGE_CODES.STORY: true, # true
-	PAGE_CODES.GI: true, # true
-	PAGE_CODES.GODDIU_CHIQUINININ: true, # true
-	PAGE_CODES.POPSY_TRAPUSINSIU: false, # false
-	PAGE_CODES.GONORREIN_PM: false, # false
-	PAGE_CODES.OTHER_CREATURES: false, # false
-	PAGE_CODES.ITEMS: true, # true
-	PAGE_CODES.LOCATIONS_1: true, # true
-	PAGE_CODES.LOCATIONS_2: false, # false
+	PageCodes.COVER: true, # true
+	PageCodes.CREDITS: false, # false
+	PageCodes.TOC: true, # true (aún no estoy seguro...)
+	PageCodes.STORY: true, # true
+	PageCodes.GI: true, # true
+	PageCodes.GODDIU_CHIQUINININ: true, # true
+	PageCodes.POPSY_TRAPUSINSIU: true, # false
+	PageCodes.GONORREIN_PM: true, # false
+	PageCodes.OTHER_CREATURES: true, # false
+	PageCodes.ITEMS: true, # true
+	PageCodes.LOCATIONS_1: true, # true
+	PageCodes.LOCATIONS_2: false, # false
 }
 var read_pages := [
-	PAGE_CODES.GODDIU_CHIQUINININ,
-#	PAGE_CODES.POPSY_TRAPUSINSIU,
-	PAGE_CODES.GONORREIN_PM,
+	PageCodes.GODDIU_CHIQUINININ,
+	PageCodes.POPSY_TRAPUSINSIU,
+	PageCodes.GONORREIN_PM,
 ]
 var last_page := -1
 var packed_popochius := [
 #	'Goddiu',
-#	'Popsy',
-#	'Trapusinsiu',
-#	'Gonorrein',
+	'Popsy',
+	'Trapusinsiu',
+	'Gonorrein',
 ]
-var playable_popochius := []
+var playable_popochius := [
+	'Goddiu',
+	'Popsy',
+	'Trapusinsiu',
+	'Gonorrein',
+]
+var office := 0
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ PUBLIC ░░░░

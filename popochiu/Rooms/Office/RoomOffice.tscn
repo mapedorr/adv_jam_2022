@@ -27,6 +27,8 @@ limit_right = 0.0
 limit_top = 0.0
 limit_bottom = 0.0
 
+[node name="Tween" type="Tween" parent="."]
+
 [node name="Props" type="Node2D" parent="."]
 
 [node name="Bg" parent="Props" instance=ExtResource( 3 )]
@@ -53,10 +55,8 @@ texture = ExtResource( 6 )
 polygon = PoolVector2Array( -26, 17, -28, -17, -24, -24, -16, -24, 21, -18, 25, -11, 27, 19, 17, 24 )
 
 [node name="Translator" parent="Props" instance=ExtResource( 3 )]
-visible = false
 position = Vector2( 19, 106 )
 scale = Vector2( 2, 2 )
-input_pickable = false
 script = ExtResource( 7 )
 description = "Translator"
 walk_to_point = Vector2( 0, -10 )
@@ -79,7 +79,7 @@ script_name = "Desk"
 texture = ExtResource( 10 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Desk"]
-polygon = PoolVector2Array( -33, 13.5, -35, -10.5, 13, -19.5, 35, -11.5, 34, 11.5, -12, 19.5, -18, 19.5 )
+polygon = PoolVector2Array( -33, 13.5, -35, -10.5, -11, -15, 1, -17, 4, -15.5, -8.5, -13, -3, -7.5, 13, -10.5, 1.7176, -17.3846, 13, -19.5, 35, -11.5, 34, 11.5, -12, 19.5, -18, 19.5 )
 
 [node name="Note" parent="Props" instance=ExtResource( 3 )]
 position = Vector2( 37, 66 )
@@ -114,7 +114,7 @@ polygon = PoolVector2Array( -30, 46, -36, -24, -20, -48, -10, -52, 12, -52, 26, 
 [node name="Points" type="Node2D" parent="."]
 
 [node name="Entrance" type="Position2D" parent="Points"]
-position = Vector2( -85, 42 )
+position = Vector2( -153, 9 )
 
 [node name="WalkableAreas" type="Node2D" parent="."]
 

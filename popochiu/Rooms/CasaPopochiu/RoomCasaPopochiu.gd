@@ -36,7 +36,7 @@ func on_room_transition_finished() -> void:
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ PRIVATE ░░░░
 func _cry_again() -> void:
-	if Globals.read_pages.has(Globals.PAGE_CODES.GODDIU_CHIQUINININ):
+	if Globals.read_pages.has(Globals.PageCodes.GODDIU_CHIQUINININ):
 		Globals.disconnect('book_closed', self, '_cry_again')
 		
 		yield(E.run([

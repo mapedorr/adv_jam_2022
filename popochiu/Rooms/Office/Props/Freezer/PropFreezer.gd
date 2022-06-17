@@ -4,24 +4,88 @@ extends PopochiuProp
 # Use yield(E.run([]), 'completed') if you want to pause the excecution of
 # the function until the sequence of events finishes.
 
+const PopochiuDialogOption :=\
+preload('res://addons/Popochiu/Engine/Objects/Dialog/PopochiuDialogOption.gd')
+
+
+# ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ GODOT ░░░░
+func _ready() -> void:
+	enable(false)
+	
+	if Globals.office != Globals.MAIN_OFFICE:
+		disable(false)
+
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ VIRTUAL ░░░░
 # When the node is clicked
 func on_interact() -> void:
-	# Replace the call to .on_interact() to implement your code. This only makes
-	# the default behavior to happen.
-	.on_interact()
+	if not C.player.can_move:
+		return
+	
+	yield(E.run([
+		C.walk_to_clicked(),
+		C.face_clicked(),
+	]), 'completed')
+	
+	if C.player.script_name == 'Popsy':
+		yield(E.run([
+			'Player: Which ice cream flavor should I make.',
+		]), 'completed')
+		
+		var choice: PopochiuDialogOption = yield(
+			D.show_inline_dialog([
+				'Brownie + Camu camu + Asaí',
+				'Corozo + Passion fruit + Lemon pie',
+				'Lemon grass + Vanilla + Grapes',
+			]), 'completed'
+		)
+		
+		var target_item := 'IceCream'
+		match choice.id:
+			'Opt1':
+				target_item = 'IceCream2'
+			'Opt3':
+				target_item = 'IceCream3'
+		
+		if I.is_item_in_inventory(target_item):
+			E.run([
+				'Player: We already have one of those.',
+				"Player: I'll make another one once we finish that one.",
+			])
+		else:
+			E.run([
+				I.add_item(target_item),
+				'Player: %s ice cream done.' % choice.text,
+				"Player: You're welcome."
+			])
+	else:
+		yield(E.run([
+			'Player: I like how it looks.',
+			'Player: Sadly... it is empty.'
+		]), 'completed')
 
 
 # When the node is right clicked
 func on_look() -> void:
-	# Replace the call to .on_look() to implement your code. This only makes
-	# the default behavior to happen.
-	.on_look()
+	if C.player.script_name == 'Popsy':
+		yield(E.run([
+			C.walk_to_clicked(),
+			C.face_clicked(),
+			'Player: mmmmm.....',
+			'...',
+			'Player: Like it.',
+			'Player: Now will be able to compete with La Conchita.'
+		]), 'completed')
+	else:
+		yield(E.run([
+			C.face_clicked(),
+			'Player: That freezer rocks!'
+		]), 'completed')
 
 
 # When the node is clicked and there is an inventory item selected
-func on_item_used(item: PopochiuInventoryItem) -> void:
-	# Replace the call to .on_item_used(item) to implement your code. This only
-	# makes the default behavior to happen.
-	.on_item_used(item)
+func on_item_used(_item: PopochiuInventoryItem) -> void:
+	yield(E.run([
+		C.face_clicked(),
+		'Player: Emmm....... No.',
+	]), 'completed')

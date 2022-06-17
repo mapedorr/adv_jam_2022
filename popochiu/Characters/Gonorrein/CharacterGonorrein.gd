@@ -4,7 +4,7 @@ extends PopochiuCharacter
 # Use yield(E.run([]), 'completed') if you want to pause the excecution of
 # the function until the sequence of events finishes.
 
-const MY_PAGE := Globals.PAGE_CODES.GONORREIN_PM
+const MY_PAGE := Globals.PageCodes.GONORREIN_PM
 const PopochiuDialogOption :=\
 preload('res://addons/Popochiu/Engine/Objects/Dialog/PopochiuDialogOption.gd')
 

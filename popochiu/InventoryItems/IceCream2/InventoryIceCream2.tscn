@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://popochiu/InventoryItems/IceCream2/InventoryIceCream2.gd" type="Script" id=1]
+[ext_resource path="res://popochiu/InventoryItems/IceCream2/ice_cream_2.png" type="Texture" id=2]
+
+[node name="InventoryIceCream2" type="TextureRect"]
+mouse_filter = 0
+size_flags_vertical = 4
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+description = "Brownie + Camu camu + Asaí"
+script_name = "IceCream2"
+cursor = 10

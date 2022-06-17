@@ -37,6 +37,9 @@ func on_interact() -> void:
 	yield(E.run([
 		'Marcianiu: I say hello to you ' + C.player.description
 	]), 'completed')
+	
+	# TODO: Mostrar el diálogo donde se habla de lo que está pasando y en el que
+	# Marcianiu pide un helado especial a cambio de ayuda.
 
 
 # When the node is right clicked
@@ -77,12 +80,19 @@ func on_item_used(item: PopochiuInventoryItem) -> void:
 			])
 		return
 	
-	if not I.is_item_in_inventory('Translator'):
-		E.run([
-			"Marcianiu: I don't want it...",
-			'...',
-			'Marcianiu: But thanks for the offer.'
-		])
+	if I.is_item_in_inventory('Translator'):
+		if item.script_name == 'IceCream2' or item.script_name == 'IceCream3':
+			E.run([
+				'Marcianiu: I will eat it because I like ice cream a lot.',
+				I.remove_item(item.script_name),
+				"Marcianiu: But I'll help you only if you bring me my favorite one."
+			])
+		else:
+			E.run([
+				"Marcianiu: I don't want it...",
+				'...',
+				'Marcianiu: But thanks for the offer.'
+			])
 	else:
 		E.run([
 			'Marcianiu: Ñiñiñiñiñi ñiñiñi ñiñiñiñiñiñi ñiñiñiñiñiñi'

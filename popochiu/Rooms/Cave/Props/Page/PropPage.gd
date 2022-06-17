@@ -4,7 +4,7 @@ extends PopochiuProp
 # Use yield(E.run([]), 'completed') if you want to pause the excecution of
 # the function until the sequence of events finishes.
 
-export(Globals.PAGE_CODES) var target := 0
+export(Globals.PageCodes) var target := 0
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ GODOT ░░░░

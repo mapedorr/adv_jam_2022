@@ -4,14 +4,19 @@ extends PopochiuCharacter
 # Use yield(E.run([]), 'completed') if you want to pause the excecution of
 # the function until the sequence of events finishes.
 
-const MY_PAGE := Globals.PAGE_CODES.POPSY_TRAPUSINSIU
+const MY_PAGE := Globals.PageCodes.POPSY_TRAPUSINSIU
 const PopochiuDialogOption :=\
 preload('res://addons/Popochiu/Engine/Objects/Dialog/PopochiuDialogOption.gd')
+
+var _offices_options := []
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ GODOT ░░░░
 func _ready() -> void:
 	if Engine.editor_hint: return
+	
+	_offices_options = Globals.OFFICES.duplicate()
+	_offices_options.append('Lets stay here')
 	
 	if not can_move and Globals.read_pages.has(MY_PAGE):
 		can_move = true
@@ -46,7 +51,8 @@ func on_interact() -> void:
 	var choice: PopochiuDialogOption = yield(
 		D.show_inline_dialog([
 			'I want to control you.',
-			"Let's go to one of your offices."
+			"Let's go to one of your offices.",
+			'Never mind.'
 		]), 'completed'
 	)
 	
@@ -54,8 +60,21 @@ func on_interact() -> void:
 		'Opt1':
 			C.player = self
 			E.run(["Player: I'm on it."])
-		_:
+			return
+		'Opt3':
 			G.done()
+			return
+	
+	var _marked := _offices_options.duplicate()
+	_marked[Globals.office] += ' (CURRENT)'
+	choice = yield(D.show_inline_dialog(_marked), 'completed')
+	
+	if choice.id == ('Opt' + str(_offices_options.size())):
+		E.run(['Popsy: Ok.'])
+		return
+	
+	Globals.office = int(choice.id) - 1
+	E.goto_room('Office')
 
 
 # When the node is right clicked
