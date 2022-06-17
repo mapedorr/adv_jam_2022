@@ -17,6 +17,7 @@ enum PageCodes {
 	ITEMS,
 	LOCATIONS_1,
 	LOCATIONS_2,
+	LOCATIONS_3,
 }
 
 const BLUE_LIGHT := '00f3ff'
@@ -42,9 +43,9 @@ var state := {
 	LIGHT_ROOM_ON = false, # false
 	LIGHT_ROOM_COLOR = BLUE_LIGHT, # BLUE_LIGHT
 	PUSHED_DESKS = [],
-	ROBERTO_KILLED = true, # false
-	LAIR_DISCOVERED = true, # false
-	PUSHED_SAFEBOX = true, # false
+	ROBERTO_KILLED = false, # false
+	LAIR_DISCOVERED = false, # false
+	PUSHED_SAFEBOX = false, # false
 	CHIQUINININ_FREED = false, # false
 }
 var found_pages := {
@@ -54,34 +55,35 @@ var found_pages := {
 	PageCodes.STORY: true, # true
 	PageCodes.GI: true, # true
 	PageCodes.GODDIU_CHIQUINININ: true, # true
-	PageCodes.POPSY_TRAPUSINSIU: true, # false
-	PageCodes.GONORREIN_PM: true, # false
-	PageCodes.OTHER_CREATURES: true, # false
+	PageCodes.POPSY_TRAPUSINSIU: false, # false
+	PageCodes.GONORREIN_PM: false, # false
+	PageCodes.OTHER_CREATURES: false, # false
 	PageCodes.ITEMS: true, # true
 	PageCodes.LOCATIONS_1: true, # true
-	PageCodes.LOCATIONS_2: false, # false
+	PageCodes.LOCATIONS_2: true, # false
+	PageCodes.LOCATIONS_3: false, # false
 }
 var read_pages := [
-	PageCodes.GODDIU_CHIQUINININ,
-	PageCodes.POPSY_TRAPUSINSIU,
-	PageCodes.GONORREIN_PM,
+#	PageCodes.GODDIU_CHIQUINININ,
+#	PageCodes.POPSY_TRAPUSINSIU,
+#	PageCodes.GONORREIN_PM,
 ]
 var last_page := -1
 var packed_popochius := [
 #	'Goddiu',
-	'Popsy',
-	'Trapusinsiu',
-	'Gonorrein',
+#	'Popsy',
+#	'Trapusinsiu',
+#	'Gonorrein',
 ]
 var playable_popochius := [
-	'Goddiu',
-	'Popsy',
-	'Trapusinsiu',
-	'Gonorrein',
-	'Chiquininin'
+#	'Goddiu',
+#	'Popsy',
+#	'Trapusinsiu',
+#	'Gonorrein',
+#	'Chiquininin'
 ]
 var office := 0
-var in_roberto_dialog := false
+var in_roberto_dialog := false # false
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ PUBLIC ░░░░

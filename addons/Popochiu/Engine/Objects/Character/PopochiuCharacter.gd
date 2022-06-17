@@ -208,20 +208,26 @@ func _translate() -> void:
 func _get_vo_cue(emotion := '') -> String:
 	for v in voices:
 		if v.emotion.to_lower() == emotion.to_lower():
-			var cue_name: String = v.cue
-			
-			if v.variations:
-				if not v.has('not_played') or v.not_played.empty():
-					v['not_played'] = range(v.variations)
-				
-				var idx: int = (v['not_played'] as Array).pop_at(
-					U.get_random_array_idx(v['not_played'])
-				)
-				
-				cue_name += '_' + str(idx + 1).pad_zeros(2)
-			
-			return cue_name
-	return ''
+			return _get_random_cue_name(v)
+	
+	# Use the fallback voice:
+	return _get_random_cue_name(voices[0])
+
+
+func _get_random_cue_name(v: Dictionary) -> String:
+	var cue_name: String = v.cue
+	
+	if v.variations:
+		if not v.has('not_played') or v.not_played.empty():
+			v['not_played'] = range(v.variations)
+		
+		var idx: int = (v['not_played'] as Array).pop_at(
+			U.get_random_array_idx(v['not_played'])
+		)
+		
+		cue_name += '_' + str(idx + 1).pad_zeros(2)
+	
+	return cue_name
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ VIRTUAL ░░░░

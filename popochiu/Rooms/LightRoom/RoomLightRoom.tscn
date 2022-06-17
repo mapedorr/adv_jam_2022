@@ -1,7 +1,6 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://popochiu/Rooms/LightRoom/RoomLightRoom.gd" type="Script" id=1]
-[ext_resource path="res://addons/Popochiu/Engine/Objects/Prop/PopochiuProp.gd" type="Script" id=2]
 [ext_resource path="res://addons/Popochiu/Engine/Objects/Prop/PopochiuProp.tscn" type="PackedScene" id=3]
 [ext_resource path="res://popochiu/Rooms/LightRoom/Props/bg.png" type="Texture" id=4]
 [ext_resource path="res://popochiu/Rooms/LightRoom/Props/Switch/PropSwitch.gd" type="Script" id=5]
@@ -82,12 +81,8 @@ texture = ExtResource( 4 )
 hframes = 2
 frame = 1
 
-[node name="Over" type="Area2D" parent="Props" instance=ExtResource( 3 )]
+[node name="Over" parent="Props" instance=ExtResource( 3 )]
 scale = Vector2( 2, 2 )
-script = ExtResource( 2 )
-__meta__ = {
-"_editor_description_": ""
-}
 description = "Over"
 clickable = false
 baseline = -90
@@ -163,17 +158,14 @@ texture = ExtResource( 10 )
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Exit"]
 polygon = PoolVector2Array( -15.5, 23.5, -16.5, -33.5, 17.5, -25.5, 19, 35 )
 
-[node name="Page" type="Area2D" parent="Props" instance=ExtResource( 3 )]
+[node name="Page" parent="Props" instance=ExtResource( 3 )]
 position = Vector2( 50, 89 )
 script = ExtResource( 11 )
-__meta__ = {
-"_editor_description_": ""
-}
 description = "Page"
 cursor = 1
 script_name = "Page"
 texture = ExtResource( 12 )
-target = 10
+target = 12
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Page"]
 polygon = PoolVector2Array( -8, 1, -8, 0, 0, -4, 2, -4, 8, -1, 8, 0, 0, 4, -2, 4 )

@@ -47,7 +47,7 @@ polygon = PoolVector2Array( -8, 10, -8, 2, -9, 2, -9, -6, -1, -10, 1, -10, 9, -6
 [node name="CasaPopochiu" parent="Hotspots" instance=ExtResource( 4 )]
 position = Vector2( -226, 59 )
 script = ExtResource( 5 )
-description = "CasaPopochiu"
+description = "Casa Popochiu"
 cursor = 1
 script_name = "CasaPopochiu"
 
