@@ -30,6 +30,7 @@ points = PoolVector2Array( -10000, 0, 10000, 0 )
 width = 1.0
 
 [node name="WalkToHelper" type="Position2D" parent="."]
+visible = false
 position = Vector2( 29.5, -13.5 )
 __meta__ = {
 "_edit_group_": true

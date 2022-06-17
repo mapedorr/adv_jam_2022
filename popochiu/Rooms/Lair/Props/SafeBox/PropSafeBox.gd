@@ -11,6 +11,8 @@ preload('res://addons/Popochiu/Engine/Objects/Dialog/PopochiuDialogOption.gd')
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ GODOT ░░░░
 func _ready() -> void:
+	if Engine.editor_hint: return
+	
 	if Globals.state.PUSHED_SAFEBOX:
 		position += DISPLACEMENT
 

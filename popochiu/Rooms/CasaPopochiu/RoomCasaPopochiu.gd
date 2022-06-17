@@ -15,6 +15,16 @@ const COLOR_BURN := Color('BD6868')
 func on_room_entered() -> void:
 	if C.player.last_room == 'Map':
 		C.player.position = get_point('Entrance')
+	
+	if Globals.playable_popochius.has('Popsy'):
+		remove_character(C.get_character('Popsy'))
+	
+	if Globals.playable_popochius.has('Trapusinsiu'):
+		remove_character(C.get_character('Trapusinsiu'))
+	
+	if Globals.state.CHIQUINININ_FREED\
+	and not Globals.found_pages[Globals.PageCodes.CREDITS]:
+		place_popochius()
 
 
 # What happens when the room changing transition finishes. At this point the room
@@ -28,10 +38,66 @@ func on_room_transition_finished() -> void:
 			'Popsy(sad): $$$$$$!',
 			'Trapusinsiu(sad): ######!',
 		]), 'completed')
+	elif Globals.state.CHIQUINININ_FREED\
+	and not Globals.found_pages[Globals.PageCodes.CREDITS]:
+		yield(E.run([
+			'Goddiu: Thanks for helping us find Chiquininín.',
+			'Gonorrein: ' + Utils.say_in_popochiu(
+				'Popsy washed him and now he smells like a Popochiu chiquitíu.',
+				'baby'
+			),
+			"Trapusinsiu: We will keep Marcianiu's knife to defend ourselves against the Robertos.",
+			"Popsy: It's a pity I can't give you an ice cream.",
+			"Popsy: Because we're in different worlds...",
+			'Goddiu: Chiquininín, you should say thank you.',
+			'Chiquininin(happy): Thank you so much invisible one!!!',
+			'Chiquininin: I found this in the place where Roberto locked me up.',
+			"Chiquininin: I think it's from that book you carry.",
+		]), 'completed')
+		
+		Globals.found_pages[Globals.PageCodes.CREDITS] = true
+		Globals.show_book(Globals.PageCodes.CREDITS)
+		yield(Globals, 'book_closed')
+		
+		yield(E.run([
+			'Goddiu(happy): iiiiii!!!!',
+			'Popsy(happy): iiiiii!!!!',
+			'Trapusinsiu(happy): iiiiii!!!!',
+			'Gonorrein(happy): iiiiii!!!!',
+			'Chiquininin(happy): iiiiii!!!!',
+			'...',
+			'Chiquininin: Now what?',
+			"Gonorrein: I don't know.",
+			"Goddiu: I'm hungry.",
+			"Trapusinsiu: Me too.",
+			"Popsy: I wonder what will be our next adventure.",
+			"Gonorrein: Mine will be in the Toyshop... I have a game to finish.",
+		]), 'completed')
+		
+		for c in $Characters.get_children():
+			if c.script_name == 'Trapusinsiu': continue
+			c.can_move = true
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ PUBLIC ░░░░
-# You could put public functions here
+func place_popochius() -> void:
+	C.player.can_move = false
+	
+	for c in C.characters:
+		if not get_point(c.script_name):
+			continue
+		
+		c.can_move = false
+		c.position = get_point(c.script_name)
+		
+		if c.script_name != C.player.script_name:
+			add_character(c)
+	
+	C.get_character('Goddiu').face_right(false)
+	C.get_character('Trapusinsiu').face_right(false)
+	C.get_character('Popsy').face_left(false)
+	C.get_character('Gonorrein').face_left(false)
+	Globals.packed_popochius.clear()
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ PRIVATE ░░░░

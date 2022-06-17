@@ -26,7 +26,8 @@ func _exit_tree() -> void:
 	if Engine.editor_hint: return
 	
 	if C.player.script_name != script_name\
-	and Globals.playable_popochius.has(script_name):
+	and Globals.playable_popochius.has(script_name)\
+	and not Globals.packed_popochius.has(script_name):
 		Globals.packed_popochius.append(script_name)
 
 

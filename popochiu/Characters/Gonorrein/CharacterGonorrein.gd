@@ -21,7 +21,8 @@ func _exit_tree() -> void:
 	if Engine.editor_hint: return
 	
 	if C.player.script_name != script_name\
-	and Globals.playable_popochius.has(script_name):
+	and Globals.playable_popochius.has(script_name)\
+	and not Globals.packed_popochius.has(script_name):
 		Globals.packed_popochius.append(script_name)
 
 
@@ -87,7 +88,10 @@ func on_item_used(item: PopochiuInventoryItem) -> void:
 
 # Use it to play the idle animation for the character
 func play_idle() -> void:
-	pass
+	$Sprite.flip_h = false
+	
+	if _looking_dir == 'l':
+		$Sprite.flip_h = true
 
 
 # Use it to play the walk animation for the character

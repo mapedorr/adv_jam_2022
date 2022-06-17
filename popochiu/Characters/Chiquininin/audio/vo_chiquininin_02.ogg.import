@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/vo_chiquininin_02.ogg-461e918ffeedd13e5bd89cf813fada6b.oggstr"
+
+[deps]
+
+source_file="res://popochiu/Characters/Chiquininin/audio/vo_chiquininin_02.ogg"
+dest_files=[ "res://.import/vo_chiquininin_02.ogg-461e918ffeedd13e5bd89cf813fada6b.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

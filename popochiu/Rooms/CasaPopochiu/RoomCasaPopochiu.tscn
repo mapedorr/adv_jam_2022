@@ -114,6 +114,21 @@ polygon = PoolVector2Array( -7, 15, -7, -5, 5, -15, 5, 4 )
 [node name="Entrance" type="Position2D" parent="Points"]
 position = Vector2( 155, 56 )
 
+[node name="Chiquininin" type="Position2D" parent="Points"]
+position = Vector2( 0, 102 )
+
+[node name="Gonorrein" type="Position2D" parent="Points"]
+position = Vector2( 63, 102 )
+
+[node name="Popsy" type="Position2D" parent="Points"]
+position = Vector2( 137, 102 )
+
+[node name="Trapusinsiu" type="Position2D" parent="Points"]
+position = Vector2( -59, 102 )
+
+[node name="Goddiu" type="Position2D" parent="Points"]
+position = Vector2( -128, 102 )
+
 [node name="WalkableAreas" type="Node2D" parent="."]
 
 [node name="Navigation2D" type="Navigation2D" parent="WalkableAreas"]

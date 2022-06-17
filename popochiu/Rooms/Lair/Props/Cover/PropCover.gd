@@ -7,26 +7,51 @@ extends PopochiuProp
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ GODOT ░░░░
 func _ready() -> void:
+	if Engine.editor_hint: return
+	
 	disable(false)
 	
 	if Globals.state.PUSHED_SAFEBOX:
 		enable(false)
+	
+	if Globals.state.CHIQUINININ_FREED:
+		$Sprite.frame = 1
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ VIRTUAL ░░░░
 # When the node is clicked
 func on_interact() -> void:
-	# Replace the call to .on_interact() to implement your code. This only makes
-	# the default behavior to happen.
-	.on_interact()
+	if not C.player.can_move:
+		return
+	
+	yield(E.run([
+		C.walk_to_clicked(),
+		C.face_clicked(),
+	]), 'completed')
+	
+	if Globals.state.CHIQUINININ_FREED:
+		E.run([
+			'Player: Still smells like poop.'
+		])
+	else:
+		E.run([
+			'Player: We need a key to open this.',
+			'Player: Chiquininín must be inside.',
+		])
 
 
 # When the node is right clicked
 func on_look() -> void:
-	E.run([
-		C.face_clicked(),
-		'Player: Chiquininin must be inside that... thing.'
-	])
+	if Globals.state.CHIQUINININ_FREED:
+		E.run([
+			C.face_clicked(),
+			'Player: What an awkward place to hide a Popochiu.'
+		])
+	else:
+		E.run([
+			C.face_clicked(),
+			'Player: Chiquininin must be inside that... thing.'
+		])
 
 
 # When the node is clicked and there is an inventory item selected
@@ -54,8 +79,12 @@ func on_item_used(item: PopochiuInventoryItem) -> void:
 			'Player: DEAD!?',
 			'...',
 			C.get_character('Chiquininin').play_wakeup(),
-			'Chiquininin(happy): ' + Utils.say_in_popochiu('iiiiiiiiiiiiiiiiiiiiiiiiiiii!!!!', 'laughs super happy')
+			'Chiquininin(happy): ' + Utils.say_in_popochiu('iiiiiiiiiiiiiiiiiiiiiiiiiiii!!!!', 'laughs super happy'),
+			'Chiquininin(happy): I pooped...!',
+			'Chiquininin(happy): Several times.',
 		]), 'completed')
+		
+		Globals.playable_popochius.append('Chiquininin')
 		
 		E.goto_room('CasaPopochiu')
 	else:

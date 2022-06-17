@@ -40,6 +40,7 @@ func on_item_used(item: PopochiuInventoryItem) -> void:
 			'Goddiu: Look! He threw a key!',
 		]), 'completed')
 		
+		Globals.state.ROBERTO_KILLED = true
 		Globals.in_roberto_dialog = false
 		E.current_room.free_characters()
 	else:
