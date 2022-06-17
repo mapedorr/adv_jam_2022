@@ -10,9 +10,10 @@ __meta__ = {
 "_edit_group_": true
 }
 description = "Roberto"
+walk_to_point = Vector2( -20, 4 )
 cursor = 8
 script_name = "Roberto"
-text_color = Color( 0.670588, 0.34902, 0.490196, 1 )
+text_color = Color( 0.478431, 0.478431, 0.6, 1 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -5, -34, 5, -34, 15, -30, 19, -30, 21, -22, 19, -14, 16, -14, 14, -15, 12, -9, 6, -6, -6, -6, -12, -9, -14, -15, -16, -14, -19, -14, -21, -22, -19, -30, -15, -30 )
@@ -23,7 +24,7 @@ points = PoolVector2Array( -10000, 0, 10000, 0 )
 width = 1.0
 
 [node name="WalkToHelper" type="Position2D" parent="."]
-visible = false
+position = Vector2( -20, 4 )
 __meta__ = {
 "_edit_group_": true
 }

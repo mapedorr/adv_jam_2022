@@ -28,6 +28,8 @@ func _exit_tree() -> void:
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ VIRTUAL ░░░░
 # When the node is clicked
 func on_interact() -> void:
+	if Globals.in_roberto_dialog: return
+	
 	if Globals.read_pages.has(MY_PAGE):
 		if not Globals.playable_popochius.has(script_name):
 			yield(E.run([C.walk_to_clicked()]), 'completed')
@@ -101,4 +103,8 @@ func play_talk() -> void:
 
 # Use it to play the grab animation for the character
 func play_grab() -> void:
+	pass
+
+
+func play_knife() -> void:
 	pass

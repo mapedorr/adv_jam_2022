@@ -85,3 +85,12 @@ func play_talk() -> void:
 # Use it to play the grab animation for the character
 func play_grab() -> void:
 	pass
+
+
+func play_asleep() -> void:
+	pass
+
+
+func play_wakeup() -> void:
+	yield()
+	yield(get_tree().create_timer(0.2), 'timeout')

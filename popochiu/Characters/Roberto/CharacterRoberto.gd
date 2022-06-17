@@ -24,11 +24,24 @@ func on_look() -> void:
 # When the node is clicked and there is an inventory item selected
 func on_item_used(item: PopochiuInventoryItem) -> void:
 	if item.script_name == 'Knife':
-		E.run([
+		C.player = C.get_character('Gonorrein')
+		C.player.play_knife()
+		
+		yield(E.run([
 			C.walk_to_clicked(),
+			"Gonorrein: Die monster. You don't belong in this world.",
 			# TODO: Hacer algo medio animado...
-			C.get_character('Roberto').disable()
-		])
+			'Roberto: Oh my #$!@*...!',
+			C.get_character('Roberto').disable(),
+			I.set_active_item(),
+			# TODO: Sonido de popó de LBA2...
+			# TODO: Sonido de llave cayendo al suelo.
+			E.current_room.get_prop('Key').enable(),
+			'Goddiu: Look! He threw a key!',
+		]), 'completed')
+		
+		Globals.in_roberto_dialog = false
+		E.current_room.free_characters()
 	else:
 		E.run([
 			"Player: Hitting him with it won't do any good."

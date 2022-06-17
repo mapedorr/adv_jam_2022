@@ -21,6 +21,8 @@ func _exit_tree() -> void:
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ VIRTUAL ░░░░
 # When the node is clicked
 func on_interact() -> void:
+	if Globals.in_roberto_dialog: return
+	
 	if Globals.read_pages.has(MY_PAGE):
 		yield(E.run([
 			'Trapusinsiu: ' + Utils.say_in_popochiu('oñiiiiii!', 'hi!')

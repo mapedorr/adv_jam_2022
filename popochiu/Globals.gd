@@ -43,7 +43,7 @@ var state := {
 	LIGHT_ROOM_COLOR = BLUE_LIGHT, # BLUE_LIGHT
 	PUSHED_DESKS = [],
 	LAIR_DISCOVERED = true, # false
-	PUSHED_SAFEBOX = true, # false
+	PUSHED_SAFEBOX = false, # false
 	CHIQUINININ_FREED = false, # false
 }
 var found_pages := {
@@ -79,6 +79,7 @@ var playable_popochius := [
 	'Gonorrein',
 ]
 var office := 0
+var in_roberto_dialog := false
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ PUBLIC ░░░░

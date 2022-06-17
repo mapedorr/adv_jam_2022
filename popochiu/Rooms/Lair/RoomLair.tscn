@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://popochiu/Rooms/Lair/RoomLair.gd" type="Script" id=1]
 [ext_resource path="res://popochiu/Characters/Roberto/CharacterRoberto.tscn" type="PackedScene" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://addons/Popochiu/Engine/Objects/Hotspot/PopochiuHotspot.tscn" type="PackedScene" id=9]
 [ext_resource path="res://popochiu/Rooms/Lair/Hotspots/Exit/HotspotExit.gd" type="Script" id=10]
 [ext_resource path="res://popochiu/Characters/Chiquininin/CharacterChiquininin.tscn" type="PackedScene" id=11]
+[ext_resource path="res://popochiu/Rooms/Lair/Props/Key/PropKey.gd" type="Script" id=12]
+[ext_resource path="res://popochiu/Rooms/Lair/Props/Key/key.png" type="Texture" id=13]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( -56, 40, -107, -13, 1, -92, 258, -68, 270, 131, -6, 165, -256, 165, -176, 83, -292, 76, -225, 42 )
@@ -80,6 +82,20 @@ texture = ExtResource( 8 )
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/SafeBox"]
 polygon = PoolVector2Array( -34, 28, -10.5, 48.5, 34, 32.5, 30, -10.5, 8.5, -24.5, -31, -9 )
 
+[node name="Key" parent="Props" instance=ExtResource( 3 )]
+position = Vector2( 155, 4 )
+scale = Vector2( 2, 2 )
+script = ExtResource( 12 )
+description = "Key"
+cursor = 1
+script_name = "Key"
+texture = ExtResource( 13 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Key"]
+position = Vector2( -77.5, -2 )
+scale = Vector2( 0.5, 0.5 )
+polygon = PoolVector2Array( 140, 5, 160, 11, 164, 11, 168, 9, 166, 5, 148, 1, 148, -3, 142, -3, 140, -1 )
+
 [node name="Hotspots" type="Node2D" parent="."]
 
 [node name="Exit" parent="Hotspots" instance=ExtResource( 9 )]
@@ -98,6 +114,15 @@ polygon = PoolVector2Array( -40, 23, -42, -31, 32, -33, 47, 23 )
 
 [node name="Entrance" type="Position2D" parent="Points"]
 position = Vector2( -76, 140 )
+
+[node name="Entrance2" type="Position2D" parent="Points"]
+position = Vector2( -143, 125 )
+
+[node name="Entrance3" type="Position2D" parent="Points"]
+position = Vector2( 9, 126 )
+
+[node name="Entrance4" type="Position2D" parent="Points"]
+position = Vector2( 82, 121 )
 
 [node name="WalkableAreas" type="Node2D" parent="."]
 

@@ -33,6 +33,8 @@ func _exit_tree() -> void:
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ VIRTUAL ░░░░
 # When the node is clicked
 func on_interact() -> void:
+	if Globals.in_roberto_dialog: return
+	
 	if Globals.read_pages.has(MY_PAGE):
 		yield(E.run([
 			'Popsy: ' + Utils.say_in_popochiu('oñiiiiii!', 'hi!')
@@ -65,6 +67,11 @@ func on_interact() -> void:
 			G.done()
 			return
 	
+	if E.current_room.script_name == 'Lair'\
+	and not Globals.state.CHIQUINININ_FREED:
+		E.run(['Popsy: We can not leave until we find Chiquininín.'])
+		return
+	
 	var _marked := _offices_options.duplicate()
 	_marked[Globals.office] += ' (CURRENT)'
 	choice = yield(D.show_inline_dialog(_marked), 'completed')
@@ -96,7 +103,10 @@ func on_item_used(item: PopochiuInventoryItem) -> void:
 
 # Use it to play the idle animation for the character
 func play_idle() -> void:
-	pass
+	$Sprite.flip_h = false
+	
+	if _looking_dir == 'r':
+		$Sprite.flip_h = true
 
 
 # Use it to play the walk animation for the character

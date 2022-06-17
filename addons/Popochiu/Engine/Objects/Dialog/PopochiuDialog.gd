@@ -30,6 +30,20 @@ func get_option(opt_id: String) -> PopochiuDialogOption:
 	return null
 
 
+func turn_on_options(ids: Array) -> void:
+	for id in ids:
+		var opt: PopochiuDialogOption = get_option(id)
+		if opt:
+			opt.turn_on()
+
+
+func turn_off_options(ids: Array) -> void:
+	for id in ids:
+		var opt: PopochiuDialogOption = get_option(id)
+		if opt:
+			opt.turn_off()
+
+
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ PRIVATE ░░░░
 func _show_options() -> void:
 	D.emit_signal('dialog_options_requested', options)

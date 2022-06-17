@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=4 format=2]
+[gd_resource type="Resource" load_steps=10 format=2]
 
 [ext_resource path="res://popochiu/Dialogs/RobertoConfrontation/DialogRobertoConfrontation.gd" type="Script" id=1]
 [ext_resource path="res://addons/Popochiu/Engine/Objects/Dialog/PopochiuDialogOption.gd" type="Script" id=2]
@@ -10,8 +10,50 @@ id = "Opt1"
 text = "Where is Chiquininín?"
 visible = true
 
+[sub_resource type="Resource" id=2]
+resource_name = "Opt2"
+script = ExtResource( 2 )
+id = "Opt2"
+text = "We all know you Robertos are mean."
+visible = false
+
+[sub_resource type="Resource" id=3]
+resource_name = "Opt3"
+script = ExtResource( 2 )
+id = "Opt3"
+text = "We have sensory evidence that you were in Casa Popochiu last night."
+visible = false
+
+[sub_resource type="Resource" id=4]
+resource_name = "Opt4"
+script = ExtResource( 2 )
+id = "Opt4"
+text = "We aren't sure... but..."
+visible = false
+
+[sub_resource type="Resource" id=5]
+resource_name = "Opt5"
+script = ExtResource( 2 )
+id = "Opt5"
+text = "Marcianiu told us what to do in this cases."
+visible = false
+
+[sub_resource type="Resource" id=6]
+resource_name = "Opt6"
+script = ExtResource( 2 )
+id = "Opt6"
+text = "Cry until someone hears us and comes to help."
+visible = false
+
+[sub_resource type="Resource" id=7]
+resource_name = "Opt7"
+script = ExtResource( 2 )
+id = "Opt7"
+text = "We won't move from here until you get tired and bored."
+visible = false
+
 [resource]
 resource_name = "RobertoConfrontation"
 script = ExtResource( 1 )
-options = [ SubResource( 1 ) ]
+options = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ]
 script_name = "RobertoConfrontation"

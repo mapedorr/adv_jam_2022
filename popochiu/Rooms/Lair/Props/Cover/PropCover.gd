@@ -41,6 +41,22 @@ func on_item_used(item: PopochiuInventoryItem) -> void:
 	
 	if item.script_name == 'Key':
 		$Sprite.frame = 1
+		Globals.state.CHIQUINININ_FREED = true
+		
+		I.remove_item('Key', false)
+		C.get_character('Chiquininin').play_asleep()
 		C.get_character('Chiquininin').enable(false)
+		
+		yield(E.run([
+			'Player: Yeeeeeeey!!!!',
+			'Player: Oh my! That smell... may be he is...',
+			'...',
+			'Player: DEAD!?',
+			'...',
+			C.get_character('Chiquininin').play_wakeup(),
+			'Chiquininin(happy): ' + Utils.say_in_popochiu('iiiiiiiiiiiiiiiiiiiiiiiiiiii!!!!', 'laughs super happy')
+		]), 'completed')
+		
+		E.goto_room('CasaPopochiu')
 	else:
 		E.run(['Player: No.'])

@@ -94,7 +94,9 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_released('popochiu-skip'):
 		cutscene_skipped = true
-		$TransitionLayer.play_transition('pass_down_in', skip_cutscene_time)
+		$TransitionLayer.play_transition(
+			TransitionLayer.PASS_DOWN_IN, skip_cutscene_time
+		)
 		yield($TransitionLayer, 'transition_finished')
 		G.emit_signal('continue_clicked')
 
