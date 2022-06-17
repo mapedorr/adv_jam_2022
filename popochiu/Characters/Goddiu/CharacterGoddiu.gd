@@ -40,7 +40,7 @@ func on_interact() -> void:
 			return
 	else:
 		E.run([
-			'Goddiu: ******'
+			'Goddiu: Dabu dabudabu dabudabu'
 		])
 		return
 	

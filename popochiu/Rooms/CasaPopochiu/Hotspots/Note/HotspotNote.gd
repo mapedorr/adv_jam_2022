@@ -8,18 +8,17 @@ extends PopochiuHotspot
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ VIRTUAL ░░░░
 # When the node is clicked
 func on_interact() -> void:
-	E.run([G.display('Break the crystal in case you lose control!!!')])
+	E.run([G.display("Take the book if you don't have control!!!")])
 
 
 # When the node is right clicked
 func on_look() -> void:
-	# Replace the call to .on_look() to implement your code. This only makes
-	# the default behavior to happen.
-	.on_look()
+	if C.player.can_move:
+		E.run(['Player: It is a note'])
+	else:
+		E.run([G.display("Take the book if you don't have control!!!")])
 
 
 # When the node is clicked and there is an inventory item selected
 func on_item_used(item: PopochiuInventoryItem) -> void:
-	# Replace the call to .on_item_used(item) to implement your code. This only
-	# makes the default behavior to happen.
-	.on_item_used(item)
+	E.run(['Player: Nope.'])

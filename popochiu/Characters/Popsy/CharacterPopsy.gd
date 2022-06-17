@@ -41,13 +41,14 @@ func on_interact() -> void:
 			'Popsy: ' + Utils.say_in_popochiu('oñiiiiii!', 'hi!')
 		]), 'completed')
 		
-		if not can_move:
+		if Globals.state.FIRST_POPSY_CHAT:
+			Globals.state.FIRST_POPSY_CHAT = false
+			
 			D.show_dialog('PopsyIntro')
 			return
 	else:
 		E.run([
-			'Popsy: $$$$$ $$$$$$$ $$$$$$'
-#			'Popsy: Bahbah bah bahbah bahbahbah'
+			'Popsy: Bahbah bah bahbah bahbahbah'
 		])
 		return
 	
@@ -97,7 +98,7 @@ func on_item_used(item: PopochiuInventoryItem) -> void:
 			Globals.packed_popochius.append(self.script_name)
 			self.room.remove_character(self)
 		else:
-			C.character_say(script_name, '$$$$$$$$$$$$!', false)
+			C.character_say(script_name, 'bah bah bah bah!', false)
 	else:
 		C.character_say(script_name, 'Ouch!', false)
 

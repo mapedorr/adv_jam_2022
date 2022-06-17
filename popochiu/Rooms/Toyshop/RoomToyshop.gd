@@ -24,7 +24,10 @@ func on_room_entered() -> void:
 # What happens when the room changing transition finishes. At this point the room
 # is visible.
 func on_room_transition_finished() -> void:
-	if not Globals.playable_popochius.has('Gonorrein'):
+	if not Globals.playable_popochius.has('Gonorrein')\
+	and not Globals.state.SAW_GONORREIN:
+		Globals.state.SAW_GONORREIN = true
+		
 		yield(E.run([
 			C.player.face_left(),
 			'Player: Oh! There is Gonorreín!',

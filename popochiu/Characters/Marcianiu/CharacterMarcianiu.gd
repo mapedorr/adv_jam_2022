@@ -18,6 +18,10 @@ func _ready() -> void:
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ VIRTUAL ░░░░
 # When the node is clicked
 func on_interact() -> void:
+	if I.is_item_in_inventory('Knife'):
+		E.run(['Player: We have nothing to ask him.'])
+		return
+	
 	if C.player.can_move:
 		yield(E.run([
 			C.walk_to_clicked(),
@@ -35,11 +39,10 @@ func on_interact() -> void:
 		return
 	
 	yield(E.run([
-		'Marcianiu: I say hello to you ' + C.player.description
+		'Marcianiu: I say hello to you %s!' % C.player.description
 	]), 'completed')
 	
-	# TODO: Mostrar el diálogo donde se habla de lo que está pasando y en el que
-	# Marcianiu pide un helado especial a cambio de ayuda.
+	D.show_dialog('MarcianiuChat')
 
 
 # When the node is right clicked

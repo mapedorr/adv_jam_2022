@@ -1,0 +1,31 @@
+[gd_resource type="Resource" load_steps=6 format=2]
+
+[ext_resource path="res://popochiu/Dialogs/TrapusinsiuIntro/DialogTrapusinsiuIntro.gd" type="Script" id=1]
+[ext_resource path="res://addons/Popochiu/Engine/Objects/Dialog/PopochiuDialogOption.gd" type="Script" id=2]
+
+[sub_resource type="Resource" id=1]
+resource_name = "Opt1"
+script = ExtResource( 2 )
+id = "Opt1"
+text = "And you are?"
+visible = true
+
+[sub_resource type="Resource" id=2]
+resource_name = "Opt2"
+script = ExtResource( 2 )
+id = "Opt2"
+text = "Any clues as to the whereabouts of Chiquininín?"
+visible = true
+
+[sub_resource type="Resource" id=3]
+resource_name = "Opt3"
+script = ExtResource( 2 )
+id = "Opt3"
+text = "Want to be on the find-Chiquininín-team?"
+visible = false
+
+[resource]
+resource_name = "TrapusinsiuIntro"
+script = ExtResource( 1 )
+options = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ) ]
+script_name = "TrapusinsiuIntro"

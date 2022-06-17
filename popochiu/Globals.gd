@@ -36,10 +36,13 @@ const MAIN_OFFICE := 5
 
 var state := {
 	BOOK_CRYSTAL_BROKEN = false, # false
+	SAW_GONORREIN = false, # false
+	FIRST_TRAPUSINSIU_CHAT = true, # true
+	FIRST_POPSY_CHAT = true, # true
 	SCEPTER_IN_PLACE = false, # false
 	SCEPTER_PUSHED = false, # false
 	SYMBOL_ACTIVATED = false, # false
-	FIRST_TRAPUSINSIU_CHAT = true, # true
+	FIRST_MARCIANIU_CHAT = true, # true
 	LIGHT_ROOM_ON = false, # false
 	LIGHT_ROOM_COLOR = BLUE_LIGHT, # BLUE_LIGHT
 	PUSHED_DESKS = [],

@@ -19,6 +19,9 @@ func on_interact() -> void:
 # When the item is right clicked in the inventory
 func on_look() -> void:
 	if Globals.packed_popochius.empty(): return
+	if E.current_room.script_name == 'Map':
+		E.run([G.display("Can't take out Popochius here.")])
+		return
 	
 	G.show_info()
 	yield(E.run(['Player: Which popochiu should go out?']), 'completed')

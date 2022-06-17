@@ -16,6 +16,9 @@ func on_room_entered() -> void:
 	if C.player.last_room == 'Map':
 		C.player.position = get_point('Entrance')
 	
+	if Globals.playable_popochius.has('Goddiu'):
+		remove_character(C.get_character('Goddiu'))
+	
 	if Globals.playable_popochius.has('Popsy'):
 		remove_character(C.get_character('Popsy'))
 	
@@ -34,9 +37,9 @@ func on_room_transition_finished() -> void:
 		Globals.connect('book_closed', self, '_cry_again')
 		
 		yield(E.run([
-			'Goddiu(sad): ******!',
-			'Popsy(sad): $$$$$$!',
-			'Trapusinsiu(sad): ######!',
+			'Goddiu(sad): Dabu dabudabu dabu!',
+			'Popsy(sad): Bah bahbahbah bah!',
+			'Trapusinsiu(sad): Hmmmm hmhmhm hmm hmmmm!',
 		]), 'completed')
 	elif Globals.state.CHIQUINININ_FREED\
 	and not Globals.found_pages[Globals.PageCodes.CREDITS]:
@@ -107,6 +110,6 @@ func _cry_again() -> void:
 		
 		yield(E.run([
 			'Goddiu: ' + Utils.say_in_popochiu('ay doooooooooooo', 'cries'),
-			'Popsy: $$$$$$!!!',
-			'Trapusinsiu: ######!!!',
+			'Popsy: Bah bahbahbah!!!',
+			'Trapusinsiu: Hmm hmmmhmmm hm hm hm hm!!!',
 		]), 'completed')

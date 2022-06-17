@@ -36,8 +36,7 @@ func on_interact() -> void:
 			return
 	else:
 		E.run([
-			'Trapusinsiu: ##### ###### ###########'
-#			'Trapusinsiu: Prrrr prr prrrrrrrrrrrr'
+			'Trapusinsiu: Hmhmhm hm hmhmhmhmm hmm'
 		])
 		return
 	
@@ -68,7 +67,7 @@ func on_item_used(item: PopochiuInventoryItem) -> void:
 			Globals.packed_popochius.append(self.script_name)
 			self.room.remove_character(self)
 		else:
-			C.character_say(script_name, '###############!', false)
+			C.character_say(script_name, 'Hmmm hmmhmmm hmmm hm!', false)
 	else:
 		C.character_say(script_name, 'Ouch!', false)
 

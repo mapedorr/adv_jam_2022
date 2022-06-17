@@ -8,9 +8,13 @@ signal character_spoke(character, message)
 signal character_grab_done(character)
 signal player_changed
 
+const POINTER := preload('res://popochiu/Characters/Pointer.tscn')
+
 var player: PopochiuCharacter = null setget set_player
 var characters := []
 var camera_owner: PopochiuCharacter = null
+
+onready var _pointer := POINTER.instance()
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ PUBLIC ░░░░
@@ -146,7 +150,17 @@ chr_name: String, emotion: String, is_in_queue := true) -> void:
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ SET & GET ░░░░
 func set_player(value: PopochiuCharacter) -> void:
+	if is_instance_valid(player) and player.has_node('Pointer'):
+		player.remove_child(_pointer)
+	
 	player = value
 	camera_owner = value
 	
+	if is_instance_valid(_pointer):
+		player.add_child(_pointer)
+		_pointer.position.y = 4
+		_pointer.play('default')
+	
 	emit_signal('player_changed')
+	
+	

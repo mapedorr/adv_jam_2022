@@ -25,13 +25,13 @@ func option_selected(opt: PopochiuDialogOption) -> void:
 		'Opt2':
 			yield(E.run([
 				'Goddiu: Chiquinín is missing!!!',
-				'Popsy(sad): $$$$$$$$!',
-				'Trapusinsiu(sad): ########!',
+				'Popsy(sad): bah bah!',
+				'Trapusinsiu(sad): hmmmm hmmmmm!',
 				'Goddiu: Last night I heard some noises.',
 				"Goddiu: And this morning, after I woke up, I didn't see him anywhere.",
 				"Goddiu: I asked Popsy and Trapusinsiu... but they don't know where he is either.",
-				'Popsy: $$$ $$$$',
-				'Trapusinsiu: ### #####',
+				'Popsy: bah bahbahbah bah',
+				'Trapusinsiu: hmm hmmhmmmhmm hmmmmmm',
 			]), 'completed')
 			
 			opt.turn_off()
@@ -43,8 +43,8 @@ func option_selected(opt: PopochiuDialogOption) -> void:
 				'Goddiu: And worst of all...',
 				'...',
 				'Goddiu: HE MAY EVEN HAVE POOPED IN HIS PANTS!!!',
-				'Popsy(sad): $$$$$$$$$!!!',
-				'Trapusinsiu(sad): ########!!!',
+				'Popsy(sad): bahbah bahbah!!!',
+				'Trapusinsiu(sad): hmmmm hmmhmmmhmhmhmm hmmm!!!',
 			]), 'completed')
 			
 			opt.turn_off()
@@ -62,8 +62,8 @@ func option_selected(opt: PopochiuDialogOption) -> void:
 			yield(E.run([
 				'Goddiu: Of course!',
 				"Goddiu(happy): Let's go find Chiquininín!!!",
-				'Popsy(happy): $$$$$$!!!!!',
-				'Trapusinsiu(happy): #######!!!!'
+				'Popsy(happy): BAHBAHBAHBAH!!!!!',
+				'Trapusinsiu(happy): HMMMHMHMHMHMMMHM!!!!'
 			]), 'completed')
 			
 			Globals.playable_popochius.append(C.player.script_name)

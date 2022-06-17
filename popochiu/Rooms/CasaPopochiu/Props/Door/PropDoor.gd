@@ -12,6 +12,10 @@ func on_interact() -> void:
 		E.run([G.display('You are not controlling any character!')])
 		return
 	
+	if not I.is_item_in_inventory('Backpack'):
+		E.run(['Player: We can not leave without the backpack.'])
+		return
+	
 	yield(E.run([C.walk_to_clicked()]), 'completed')
 	
 	E.goto_room('Map')
