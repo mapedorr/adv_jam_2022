@@ -21,6 +21,7 @@ export var use_translations := false
 export var items_on_start := []
 export var inventory_limit := 0
 export var inventory_always_visible := false
+export var toolbar_always_visible := false
 
 var in_run := false
 # Used to prevent going to another room when there is one being loaded

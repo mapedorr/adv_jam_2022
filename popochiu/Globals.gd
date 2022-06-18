@@ -85,7 +85,7 @@ var playable_popochius := [
 #	'Gonorrein',
 #	'Chiquininin'
 ]
-var office := 0
+var office := MAIN_OFFICE
 var in_roberto_dialog := false # false
 
 

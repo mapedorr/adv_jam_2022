@@ -15,7 +15,7 @@ func start() -> void:
 func option_selected(opt: PopochiuDialogOption) -> void:
 	match opt.id:
 		'Opt1':
-			yield(E.run([
+			yield(E.run_cutscene([
 				'Goddiu: Yes, I am.',
 				'Goddiu: And those are Popsy and Trapusinsiu',
 				'Goddiu: ' + Utils.say_in_popochiu('My epatius', 'brothers')
@@ -23,7 +23,7 @@ func option_selected(opt: PopochiuDialogOption) -> void:
 			
 			opt.turn_off()
 		'Opt2':
-			yield(E.run([
+			yield(E.run_cutscene([
 				'Goddiu: Chiquinín is missing!!!',
 				'Popsy(sad): bah bah!',
 				'Trapusinsiu(sad): hmmmm hmmmmm!',
@@ -37,7 +37,7 @@ func option_selected(opt: PopochiuDialogOption) -> void:
 			opt.turn_off()
 			get_option('Opt3').turn_on()
 		'Opt3':
-			yield(E.run([
+			yield(E.run_cutscene([
 				'Goddiu: ' + Utils.say_in_popochiu('He is our younger epatí.', 'brother'),
 				"Goddiu: I'm sure he's very scared and crying.",
 				'Goddiu: And worst of all...',
@@ -50,7 +50,7 @@ func option_selected(opt: PopochiuDialogOption) -> void:
 			opt.turn_off()
 			get_option('Opt4').turn_on()
 		'Opt4':
-			yield(E.run([
+			yield(E.run_cutscene([
 				'Goddiu: Yes please!',
 				"Goddiu: Don't know where is Gonorreín either...",
 				'Goddiu: But he can take care of himself.'
@@ -59,7 +59,7 @@ func option_selected(opt: PopochiuDialogOption) -> void:
 			opt.turn_off()
 			get_option('Opt5').turn_on()
 		'Opt5':
-			yield(E.run([
+			yield(E.run_cutscene([
 				'Goddiu: Of course!',
 				"Goddiu(happy): Let's go find Chiquininín!!!",
 				'Popsy(happy): BAHBAHBAHBAH!!!!!',

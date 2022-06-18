@@ -55,8 +55,10 @@ texture = ExtResource( 6 )
 polygon = PoolVector2Array( -26, 17, -28, -17, -24, -24, -16, -24, 21, -18, 25, -11, 27, 19, 17, 24 )
 
 [node name="Translator" parent="Props" instance=ExtResource( 3 )]
+visible = false
 position = Vector2( 19, 106 )
 scale = Vector2( 2, 2 )
+input_pickable = false
 script = ExtResource( 7 )
 description = "Translator"
 walk_to_point = Vector2( 0, -10 )

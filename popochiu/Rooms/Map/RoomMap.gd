@@ -12,6 +12,9 @@ const COLOR_BURN := Color('9e5476')
 # What happens when Popochiu loads the room. At this point the room is in the
 # tree but it is not visible
 func on_room_entered() -> void:
+	if visited_first_time:
+		A.play_music('mx_popochius', 0.0, 0.0, false)
+	
 	if not Globals.state.LAIR_DISCOVERED:
 		get_prop('Lair').disable(false)
 

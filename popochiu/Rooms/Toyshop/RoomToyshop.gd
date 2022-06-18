@@ -17,8 +17,13 @@ func on_room_entered() -> void:
 	else:
 		C.player.position = get_point('Entrance')
 	
-	if Globals.playable_popochius.has('Gonorrein'):
+	if Globals.playable_popochius.has('Gonorrein')\
+	and not C.player.script_name == 'Gonorrein':
+		C.get_character('Gonorrein').is_playing = false
 		remove_character(C.get_character('Gonorrein'))
+	else:
+		C.get_character('Gonorrein').is_playing = true
+		C.get_character('Gonorrein').play_idle()
 
 
 # What happens when the room changing transition finishes. At this point the room

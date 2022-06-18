@@ -211,6 +211,9 @@ func _get_vo_cue(emotion := '') -> String:
 			return _get_random_cue_name(v)
 	
 	# Use the fallback voice:
+	if voices.empty():
+		return ''
+	
 	return _get_random_cue_name(voices[0])
 
 

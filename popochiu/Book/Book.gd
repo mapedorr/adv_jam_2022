@@ -12,6 +12,7 @@ onready var _color_burn: TextureRect = find_node('ColorBurn')
 onready var _page: TextureRect = find_node('Page')
 onready var _left: TextureButton = find_node('Left')
 onready var _right: TextureButton = find_node('Right')
+onready var _over: TextureRect = find_node('Over')
 # Defaults
 onready var _page_target_pos: Vector2 = _page.rect_position
 onready var _dflt_left: Vector2 = _left.rect_position
@@ -115,6 +116,18 @@ func set_current_page(value: int) -> void:
 	_page.texture = load('res://popochiu/Book/sprites/%s.png' % str(
 		_available_pages[_current_page]).pad_zeros(2)
 	)
+	
+	if E.current_room.script_name == 'LightRoom'\
+	and Globals.state.LIGHT_ROOM_COLOR == Globals.PINK_LIGHT:
+		if _available_pages[_current_page] == Globals.PageCodes.CREDITS:
+			_over.texture = load('res://popochiu/Book/sprites/%s_over.png' % str(
+				_available_pages[_current_page]).pad_zeros(2)
+			)
+		elif _available_pages[_current_page] == Globals.PageCodes.LOCATIONS_1:
+			Globals.state.LAIR_DISCOVERED = true
+			_over.texture = load('res://popochiu/Book/sprites/%s_over.png' % str(
+				_available_pages[_current_page]).pad_zeros(2)
+			)
 	
 	var page_code: int = _available_pages[_current_page]
 	if not Globals.read_pages.has(page_code):

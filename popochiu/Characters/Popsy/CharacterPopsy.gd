@@ -109,17 +109,29 @@ func play_idle() -> void:
 	
 	if _looking_dir == 'r':
 		$Sprite.flip_h = true
+	
+	$AnimationPlayer.play('idle')
 
 
 # Use it to play the walk animation for the character
 # target_pos can be used to know the movement direction
 func play_walk(target_pos: Vector2) -> void:
-	.play_walk(target_pos)
+	$AnimationPlayer.play('walk')
 
 
 # Use it to play the talk animation for the character
 func play_talk() -> void:
-	pass
+	$Sprite.flip_h = false
+	
+	if _looking_dir == 'r':
+		$Sprite.flip_h = true
+	
+	if emotion == 'sad':
+		$AnimationPlayer.play('cry')
+	elif emotion == 'happy':
+		$AnimationPlayer.play('happy')
+	else:
+		$AnimationPlayer.play('talk')
 
 
 # Use it to play the grab animation for the character

@@ -8,6 +8,8 @@ const MY_PAGE := Globals.PageCodes.GONORREIN_PM
 const PopochiuDialogOption :=\
 preload('res://addons/Popochiu/Engine/Objects/Dialog/PopochiuDialogOption.gd')
 
+var is_playing := false
+
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ GODOT ░░░░
 func _ready() -> void:
@@ -44,12 +46,13 @@ func on_interact() -> void:
 			
 			yield(D, 'dialog_finished')
 			
+			is_playing = false
 			position = room.get_point('ArcadeJump')
 			
 			E.run(['Gonorrein: Lets go find CHIQUININÍN!'])
 			return
 	else:
-		E.run(['Gonorrein: @@@@@@ @@@@@@!'])
+		E.run(['Gonorrein(back): Grrrr grrrrr grrr grrrrrr!'])
 		return
 	
 	var choice: PopochiuDialogOption = yield(
@@ -81,9 +84,7 @@ func on_item_used(item: PopochiuInventoryItem) -> void:
 			Globals.packed_popochius.append(self.script_name)
 			self.room.remove_character(self)
 		else:
-			C.character_say(script_name, '@@@@@@@@@@@@@@!', false)
-	else:
-		C.character_say(script_name, 'Ouch!', false)
+			E.run(['Gonorrein(back): Grrrr grrrr grrrr!'])
 
 
 # Use it to play the idle animation for the character
@@ -92,17 +93,36 @@ func play_idle() -> void:
 	
 	if _looking_dir == 'l':
 		$Sprite.flip_h = true
+	
+	if not is_playing:
+		$AnimationPlayer.play('idle')
+	else:
+		$AnimationPlayer.play('back')
 
 
 # Use it to play the walk animation for the character
 # target_pos can be used to know the movement direction
 func play_walk(target_pos: Vector2) -> void:
-	.play_walk(target_pos)
+	$AnimationPlayer.play('walk')
 
 
 # Use it to play the talk animation for the character
 func play_talk() -> void:
-	pass
+	$Sprite.flip_h = false
+	
+	if _looking_dir == 'l':
+		$Sprite.flip_h = true
+	
+	if emotion == 'sad':
+		$AnimationPlayer.play('cry')
+	elif emotion == 'happy':
+		$AnimationPlayer.play('happy')
+	elif emotion == 'back':
+		$AnimationPlayer.play('back')
+	elif emotion == 'knife':
+		$AnimationPlayer.play('knife')
+	else:
+		$AnimationPlayer.play('talk')
 
 
 # Use it to play the grab animation for the character
@@ -110,5 +130,9 @@ func play_grab() -> void:
 	pass
 
 
-func play_knife() -> void:
-	pass
+func play_kill() -> void:
+	yield()
+	
+	$AnimationPlayer.play('kill')
+	
+	yield($AnimationPlayer, 'animation_finished')

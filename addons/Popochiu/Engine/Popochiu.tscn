@@ -48,6 +48,7 @@ skip_cutscene_time = 0.25
 text_speeds = [ 0.05, 0.01, 0.0 ]
 items_on_start = [ "LilChipper" ]
 inventory_always_visible = true
+toolbar_always_visible = true
 
 [node name="Tween" type="Tween" parent="."]
 

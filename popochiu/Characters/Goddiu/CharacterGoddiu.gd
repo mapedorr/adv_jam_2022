@@ -99,6 +99,8 @@ func play_talk() -> void:
 	
 	if emotion == 'sad':
 		$AnimationPlayer.play('cry')
+	elif emotion == 'happy':
+		$AnimationPlayer.play('happy')
 	else:
 		$AnimationPlayer.play('talk')
 

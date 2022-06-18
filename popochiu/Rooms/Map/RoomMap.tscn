@@ -12,6 +12,7 @@
 [ext_resource path="res://popochiu/Rooms/Map/Props/Lair/lair.png" type="Texture" id=10]
 
 [node name="RoomMap" type="Node2D"]
+position = Vector2( 0, 24 )
 script = ExtResource( 1 )
 script_name = "Map"
 has_player = false

@@ -25,12 +25,11 @@ func on_look() -> void:
 func on_item_used(item: PopochiuInventoryItem) -> void:
 	if item.script_name == 'Knife':
 		C.player = C.get_character('Gonorrein')
-		C.player.play_knife()
 		
 		yield(E.run([
 			C.walk_to_clicked(),
-			"Gonorrein: Die monster. You don't belong in this world.",
-			# TODO: Hacer algo medio animado...
+			"Gonorrein(knife): Die monster. You don't belong in this world.",
+			C.player.play_kill(),
 			'Roberto: Oh my #$!@*...!',
 			C.get_character('Roberto').disable(),
 			I.set_active_item(),
