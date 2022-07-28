@@ -13,7 +13,6 @@ export var hover: Color = Color.white
 
 var current_options := []
 
-
 onready var _panel: Container = find_node('Panel')
 onready var _options: Container = find_node('Options')
 

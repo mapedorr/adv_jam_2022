@@ -2,7 +2,7 @@
 
 [ext_resource path="res://addons/Popochiu/Engine/Objects/GraphicInterface/Resources/PopochiuTheme.tres" type="Theme" id=1]
 [ext_resource path="res://addons/Popochiu/Engine/Objects/GraphicInterface/InfoBar/InfoBar.gd" type="Script" id=2]
-[ext_resource path="res://addons/Popochiu/Engine/Objects/GraphicInterface/Resources/DynamicFonts/MonkeyIsland-outline-16.tres" type="DynamicFont" id=3]
+[ext_resource path="res://addons/Popochiu/Engine/Objects/GraphicInterface/Resources/DynamicFonts/MonkeyIsland-outline-24.tres" type="DynamicFont" id=3]
 
 [node name="InfoBar" type="Label"]
 anchor_top = 1.0

@@ -24,6 +24,9 @@
 [node name="GraphicInterface" type="CanvasLayer"]
 layer = 10
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 5.0 ]
+}
 
 [node name="Tween" type="Tween" parent="."]
 
@@ -43,22 +46,23 @@ margin_top = 107.0
 margin_right = 224.0
 margin_bottom = 120.0
 theme = ExtResource( 2 )
+text = "[wave]Los diálogos[/wave]"
 
 [node name="DisplayBox" parent="MainContainer" instance=ExtResource( 11 )]
 
 [node name="Inventory" parent="MainContainer" instance=ExtResource( 4 )]
 margin_left = 4.0
 margin_top = 2.0
-margin_right = 636.0
+margin_right = 318.0
 margin_bottom = 26.0
 
 [node name="DialogMenu" parent="MainContainer" instance=ExtResource( 5 )]
 
 [node name="Toolbar" parent="MainContainer" instance=ExtResource( 6 )]
-margin_left = -86.0
-margin_top = 3.0
-margin_right = -4.0
-margin_bottom = 27.0
+margin_left = -176.0
+margin_top = 5.0
+margin_right = -94.0
+margin_bottom = 29.0
 
 [node name="ClickHandler" type="Button" parent="MainContainer"]
 anchor_right = 1.0

@@ -32,6 +32,7 @@ margin_left = -320.0
 margin_right = -238.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 74, 21 )
+rect_scale = Vector2( 2, 2 )
 custom_styles/panel = SubResource( 1 )
 script = ExtResource( 2 )
 
